@@ -13,7 +13,6 @@ This project provides a containerized web API for calculating thermodynamic prop
 - RESTful API for thermodynamic calculations
 - Support for various flash calculations:
   - PT-Flash (Pressure-Temperature)
-  - PH-Flash (Pressure-Enthalpy)
 - Support for pure fluids and mixtures
 - Property calculations including:
   - Density, enthalpy, entropy
@@ -27,9 +26,6 @@ This project provides a containerized web API for calculating thermodynamic prop
 
 ### `/calculate` (PT-Flash)
 Calculate thermodynamic properties based on pressure and temperature.
-
-### `/ph_flash` (PH-Flash)
-Calculate thermodynamic properties based on pressure and enthalpy.
 
 ## Installation
 
