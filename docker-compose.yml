@@ -10,4 +10,6 @@ services:
       - LD_LIBRARY_PATH=/app
       - REFPROP_ROOT=/app
       - PYTHONPATH=/app
+    volumes:
+      - ./API:/app/API
     restart: unless-stopped

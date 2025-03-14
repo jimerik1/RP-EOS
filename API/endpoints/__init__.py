@@ -7,7 +7,6 @@ ph_flash_bp = Blueprint('ph_flash', __name__)
 # List of all blueprints to register with the app
 blueprints = [
     calculate_bp,
-    ph_flash_bp,
     # Add new blueprints here as you create them
 ]
 
