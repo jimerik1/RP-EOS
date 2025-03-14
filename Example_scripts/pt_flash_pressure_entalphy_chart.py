@@ -7,7 +7,7 @@ import time
 import sys
 
 # API endpoint
-api_url = "http://localhost:5051/calculate"  # Modify this if your API is hosted elsewhere
+api_url = "http://localhost:5051/pt_flash"  # Modify this if your API is hosted elsewhere
 
 # Configure the request payload for CO2
 payload = {

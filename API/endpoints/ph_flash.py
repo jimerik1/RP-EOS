@@ -4,10 +4,10 @@ import sys
 import traceback
 from typing import List, Dict, Any
 
-from API.endpoints import calculate_bp
+from API.endpoints import ph_flash_bp
 from API.refprop_setup import RP
 from API.unit_converter import UnitConverter
-from API.utils.helpers import get_phase
+from API.utils.helpers import get_phase, convert_for_json
 
 def validate_composition(composition: List[Dict[str, Any]]) -> bool:
     """Validate composition data"""
@@ -24,14 +24,14 @@ def setup_mixture(composition: List[Dict[str, Any]]) -> List[float]:
         raise ValueError(f"Error setting up mixture: {herr}")
     return z
 
-def calculate_properties(z: List[float], T: float, P: float, units_system: str = 'SI') -> Dict[str, Any]:
+def calculate_properties_ph(z: List[float], P: float, h: float, units_system: str = 'SI') -> Dict[str, Any]:
     """
-    Calculate fluid properties at given temperature and pressure with specified unit system.
+    Calculate fluid properties at given pressure and enthalpy with specified unit system.
     
     Args:
         z: Composition array
-        T: Temperature in K
         P: Pressure in bar
+        h: Enthalpy in J/mol
         units_system: Unit system to use ('SI' or 'CGS')
     
     Returns:
@@ -46,10 +46,10 @@ def calculate_properties(z: List[float], T: float, P: float, units_system: str =
     # Convert pressure to kPa for REFPROP
     P_kpa = P * 100  # bar to kPa
     
-    # Get basic thermodynamic properties
-    D, Dl, Dv, x, y, q, e, h, s, Cv, Cp, w, ierr, herr = RP.TPFLSHdll(T, P_kpa, z)
+    # Get basic thermodynamic properties using PH flash
+    T, D, Dl, Dv, x, y, q, e, s, Cv, Cp, w, ierr, herr = RP.PHFLSHdll(P_kpa, h, z)
     if ierr > 0:
-        raise ValueError(f"Error in TPFLSHdll: {herr}")
+        raise ValueError(f"Error in PHFLSHdll: {herr}")
     
     # Get transport properties
     eta, tcx, ierr, herr = RP.TRNPRPdll(T, D, z)
@@ -125,13 +125,13 @@ def calculate_properties(z: List[float], T: float, P: float, units_system: str =
     
     return properties
 
-@calculate_bp.route('/pt_flash', methods=['POST'])
-def calculate():
+@ph_flash_bp.route('/ph_flash', methods=['POST'])
+def ph_flash():
     try:
         data = request.get_json(force=True)
         # Validate that required fields exist
-        required_fields = ['composition', 'pressure_range', 'temperature_range', 
-                           'pressure_resolution', 'temperature_resolution', 'properties']
+        required_fields = ['composition', 'pressure_range', 'enthalpy_range', 
+                          'pressure_resolution', 'enthalpy_resolution', 'properties']
         units_system = data.get('units_system', 'SI')  # Default to SI if not specified
 
         for field in required_fields:
@@ -144,35 +144,37 @@ def calculate():
         z = setup_mixture(data['composition'])
 
         # Debug log the inputs before performing Fortran calls
-        print("Received request with temperature range:", data["temperature_range"],
+        print("Received request with enthalpy range:", data["enthalpy_range"],
               "and pressure range:", data["pressure_range"])
 
-        T_range = np.arange(
-            float(data['temperature_range']['from']) + 273.15,
-            float(data['temperature_range']['to']) + 273.15 + float(data['temperature_resolution']),
-            float(data['temperature_resolution'])
-        )
+        # Create arrays for pressure and enthalpy values
         P_range = np.arange(
             float(data['pressure_range']['from']),
             float(data['pressure_range']['to']) + float(data['pressure_resolution']),
             float(data['pressure_resolution'])
         )
+        
+        h_range = np.arange(
+            float(data['enthalpy_range']['from']),
+            float(data['enthalpy_range']['to']) + float(data['enthalpy_resolution']),
+            float(data['enthalpy_resolution'])
+        )
 
         results = []
         idx = 0
-        for T in T_range:
-            for P in P_range:
+        for P in P_range:
+            for h in h_range:
                 try:
-                    props = calculate_properties(z, float(T), float(P), units_system)
+                    props = calculate_properties_ph(z, float(P), float(h), units_system)
                     filtered_props = {k: v for k, v in props.items() 
-                                   if k in data['properties'] or k in ['temperature', 'pressure']}
+                                   if k in data['properties'] or k in ['temperature', 'pressure', 'enthalpy']}
                     results.append({
                         'index': idx,
                         **filtered_props
                     })
                     idx += 1
                 except Exception as fe:
-                    print(f"Error processing T={T}, P={P}: {fe}", file=sys.stderr)
+                    print(f"Error processing P={P}, h={h}: {fe}", file=sys.stderr)
                     continue
 
         return jsonify({'results': results})

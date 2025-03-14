@@ -1,12 +1,13 @@
 from flask import Blueprint
 
 # Create blueprints - only define them here
-calculate_bp = Blueprint('calculate', __name__)
+calculate_bp = Blueprint('pt_flash', __name__)
 ph_flash_bp = Blueprint('ph_flash', __name__)
 
 # List of all blueprints to register with the app
 blueprints = [
     calculate_bp,
+    ph_flash_bp,
     # Add new blueprints here as you create them
 ]
 
