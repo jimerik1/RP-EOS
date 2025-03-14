@@ -1,0 +1,5 @@
+mkdir -p FORTRAN FLUIDS MIXTURES
+touch FORTRAN/.gitkeep
+touch FLUIDS/.gitkeep
+touch MIXTURES/.gitkeep
+

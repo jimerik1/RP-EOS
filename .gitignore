@@ -1,8 +1,11 @@
-# Create a .gitignore file
 cat > .gitignore << 'EOF'
-# Exclude FORTRAN directory
-/FORTRAN/
-/FORTRAN/**
+# Exclude contents of specific directories but keep the directories themselves
+/FORTRAN/*
+/FLUIDS/*
+/MIXTURES/*
+
+# But keep the directory structure by including .gitkeep files
+!/*/.gitkeep
 
 # Exclude compiled files
 *.so

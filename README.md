@@ -1,3 +1,4 @@
+# Create README.md file (if needed)
 cat > README.md << 'EOF'
 # Span-Wagner EOS API
 
@@ -43,12 +44,4 @@ Calculate thermodynamic properties based on pressure and enthalpy.
 ## Usage Examples
 
 See the included test scripts for examples of how to interact with the API and visualize the results.
-
-## License
-
-[Specify your license here]
-
-## Acknowledgments
-
-This project utilizes REFPROP for thermodynamic calculations.
 EOF
