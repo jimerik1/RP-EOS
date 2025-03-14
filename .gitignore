@@ -1,3 +1,4 @@
+# Modify your .gitignore file to include README.md files
 cat > .gitignore << 'EOF'
 # Exclude contents of specific directories but keep the directories themselves
 /FORTRAN/*
@@ -6,6 +7,9 @@ cat > .gitignore << 'EOF'
 
 # But keep the directory structure by including .gitkeep files
 !/*/.gitkeep
+
+# Also include README.md files in all directories
+!/**/README.md
 
 # Exclude compiled files
 *.so
