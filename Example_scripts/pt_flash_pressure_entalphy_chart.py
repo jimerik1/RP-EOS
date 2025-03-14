@@ -12,8 +12,8 @@ api_url = "http://localhost:5051/pt_flash"  # Modify this if your API is hosted 
 # Configure the request payload for CO2
 payload = {
     "composition": [
-    {"fluid": "CO2", "fraction": 0.9000},
-    {"fluid": "NITROGEN", "fraction": 0.1}
+    {"fluid": "CO2", "fraction": 1.000},
+    {"fluid": "NITROGEN", "fraction": 0.0}
 
     ],
     "pressure_range": {

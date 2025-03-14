@@ -4,7 +4,7 @@ import sys
 import traceback
 from typing import List, Dict, Any
 
-from API.endpoints import calculate_bp
+from API.endpoints import pt_flash_bp
 from API.refprop_setup import RP
 from API.unit_converter import UnitConverter
 from API.utils.helpers import get_phase
@@ -125,8 +125,8 @@ def calculate_properties(z: List[float], T: float, P: float, units_system: str =
     
     return properties
 
-@calculate_bp.route('/pt_flash', methods=['POST'])
-def calculate():
+@pt_flash_bp.route('/pt_flash', methods=['POST'])
+def pt_flash():
     try:
         data = request.get_json(force=True)
         # Validate that required fields exist
