@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  refprop:
+    build: .
+    container_name: refprop-app
+    ports:
+      - "5051:5000"   # Maps host port 5051 to container port 5000
+    environment:
+      - LD_LIBRARY_PATH=/app
+      - REFPROP_ROOT=/app
+      - PYTHONPATH=/app
+    restart: unless-stopped

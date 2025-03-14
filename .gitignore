@@ -1,0 +1,45 @@
+# Create a .gitignore file
+cat > .gitignore << 'EOF'
+# Exclude FORTRAN directory
+/FORTRAN/
+/FORTRAN/**
+
+# Exclude compiled files
+*.so
+*.o
+*.a
+*.dll
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Docker and environment files
+.env
+.venv
+.dockerignore
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+EOF
