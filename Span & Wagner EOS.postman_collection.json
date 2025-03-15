@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"CO2\", \"fraction\": 0.7},\n    {\"fluid\": \"N2\", \"fraction\": 0.3}\n  ],\n  \"pressure_range\": {\n    \"from\": 10,\n    \"to\": 50\n  },\n  \"temperature_range\": {\n    \"from\": -20,\n    \"to\": 30\n  },\n  \"pressure_resolution\": 10,\n  \"temperature_resolution\": 5,\n  \"properties\": [\n    \"density\",\n    \"enthalpy\",\n    \"entropy\",\n    \"sound_speed\",\n    \"viscosity\",\n    \"thermal_conductivity\",\n    \"phase\"\n  ],\n  \"units_system\": \"SI\"\n}",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"CO2\", \"fraction\": 0.7},\n    {\"fluid\": \"N2\", \"fraction\": 0.3}\n  ],\n  \"variables\": {\n    \"pressure\": {\n      \"range\": {\"from\": 10, \"to\": 50},\n      \"resolution\": 10\n    },\n    \"temperature\": {\n      \"range\": {\"from\": -20, \"to\": 30},\n      \"resolution\": 5\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"density\",\n      \"enthalpy\",\n      \"entropy\",\n      \"sound_speed\",\n      \"viscosity\",\n      \"thermal_conductivity\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\"\n  }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -56,7 +56,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"METHANE\", \"fraction\": 0.85},\n    {\"fluid\": \"ETHANE\", \"fraction\": 0.1},\n    {\"fluid\": \"PROPANE\", \"fraction\": 0.05}\n  ],\n  \"pressure_range\": {\n    \"from\": 5,\n    \"to\": 50\n  },\n  \"enthalpy_range\": {\n    \"from\": 300,\n    \"to\": 800\n  },\n  \"pressure_resolution\": 5,\n  \"enthalpy_resolution\": 50,\n  \"properties\": [\n    \"temperature\",\n    \"density\",\n    \"vapor_fraction\",\n    \"entropy\",\n    \"cp\",\n    \"cv\",\n    \"sound_speed\",\n    \"phase\"\n  ],\n  \"units_system\": \"SI\"\n}",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"METHANE\", \"fraction\": 0.85},\n    {\"fluid\": \"ETHANE\", \"fraction\": 0.1},\n    {\"fluid\": \"PROPANE\", \"fraction\": 0.05}\n  ],\n  \"variables\": {\n    \"pressure\": {\n      \"range\": {\"from\": 5, \"to\": 50},\n      \"resolution\": 5\n    },\n    \"enthalpy\": {\n      \"range\": {\"from\": 300, \"to\": 800},\n      \"resolution\": 50\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"temperature\",\n      \"density\",\n      \"vapor_fraction\",\n      \"entropy\",\n      \"cp\",\n      \"cv\",\n      \"sound_speed\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\"\n  }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -93,7 +93,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"METHANE\", \"fraction\": 0.85},\n    {\"fluid\": \"ETHANE\", \"fraction\": 0.1},\n    {\"fluid\": \"PROPANE\", \"fraction\": 0.05}\n  ],\n  \"temperature_range\": {\n    \"from\": -50,\n    \"to\": 50\n  },\n  \"entropy_range\": {\n    \"from\": 160,\n    \"to\": 240\n  },\n  \"temperature_resolution\": 10,\n  \"entropy_resolution\": 20,\n  \"properties\": [\n    \"pressure\",\n    \"density\",\n    \"vapor_fraction\",\n    \"enthalpy\",\n    \"cp\",\n    \"cv\",\n    \"sound_speed\",\n    \"phase\"\n  ],\n  \"units_system\": \"SI\"\n}",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"METHANE\", \"fraction\": 0.85},\n    {\"fluid\": \"ETHANE\", \"fraction\": 0.1},\n    {\"fluid\": \"PROPANE\", \"fraction\": 0.05}\n  ],\n  \"variables\": {\n    \"temperature\": {\n      \"range\": {\"from\": -50, \"to\": 50},\n      \"resolution\": 10\n    },\n    \"entropy\": {\n      \"range\": {\"from\": 160, \"to\": 240},\n      \"resolution\": 20\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"pressure\",\n      \"density\",\n      \"vapor_fraction\",\n      \"enthalpy\",\n      \"cp\",\n      \"cv\",\n      \"sound_speed\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\"\n  }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -130,7 +130,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"CO2\", \"fraction\": 0.5},\n    {\"fluid\": \"METHANE\", \"fraction\": 0.5}\n  ],\n  \"temperature_range\": {\n    \"from\": -80,\n    \"to\": 50\n  },\n  \"temperature_resolution\": 2,\n  \"desired_curve\": \"both\"\n}",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"CO2\", \"fraction\": 0.5},\n    {\"fluid\": \"METHANE\", \"fraction\": 0.5}\n  ],\n  \"variables\": {\n    \"temperature\": {\n      \"range\": {\"from\": -80, \"to\": 50},\n      \"resolution\": 2\n    }\n  },\n  \"calculation\": {\n    \"curve_type\": \"both\"\n  }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -167,7 +167,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"NITROGEN\", \"fraction\": 0.2},\n    {\"fluid\": \"OXYGEN\", \"fraction\": 0.8}\n  ],\n  \"pressure_range\": {\n    \"from\": 10,\n    \"to\": 200\n  },\n  \"pressure_resolution\": 5,\n  \"desired_curve\": \"both\"\n}",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"NITROGEN\", \"fraction\": 0.2},\n    {\"fluid\": \"OXYGEN\", \"fraction\": 0.8}\n  ],\n  \"variables\": {\n    \"pressure\": {\n      \"range\": {\"from\": 10, \"to\": 200},\n      \"resolution\": 5\n    }\n  },\n  \"calculation\": {\n    \"curve_type\": \"both\"\n  }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -186,6 +186,43 @@
 					"port": "5051",
 					"path": [
 						"phase_envelope_ph"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Specific point calculation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"WATER\", \"fraction\": 1.0}\n  ],\n  \"variables\": {\n    \"pressure\": {\n      \"range\": {\"from\": 1.01325, \"to\": 1.01325},\n      \"resolution\": 1\n    },\n    \"temperature\": {\n      \"range\": {\"from\": 4, \"to\": 4},\n      \"resolution\": 1\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"density\",\n      \"phase\"\n    ],\n    \"units_system\": \"CGS\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5051/pt_flash?Content-Type=application/json",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5051",
+					"path": [
+						"pt_flash"
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
 					]
 				}
 			},

@@ -75,6 +75,8 @@ def calculate_properties_ph(z: List[float], P: float, h: float, units_system: st
     # Calculate compressibility factor
     Z = P_kpa / (D * 8.31446261815324 * T)
     
+    wmm_kg = wmm / 1000  # Convert g/mol to kg/mol
+
     # Build raw properties dictionary
     raw_properties = {
         'density': D,
@@ -97,10 +99,10 @@ def calculate_properties_ph(z: List[float], P: float, h: float, units_system: st
         'isothermal_compressibility': -1/D * dDdP,
         'volume_expansivity': 1/D * dDdT,
         'dp_dt_saturation': dPdT,
-        'joule_thomson_coefficient': (T*dDdT/dDdP - 1)/Cp,
-        'kinematic_viscosity': eta/D,
-        'thermal_diffusivity': tcx/(D*Cp),
-        'prandtl_number': Cp*eta/tcx,
+        'joule_thomson_coefficient': (T*dDdT/dDdP - 1)/(Cp * 100),  # Convert to K/bar
+        'kinematic_viscosity': (eta * 1e-6) / (D * wmm / 1000) * 10000,
+        'thermal_diffusivity': tcx / (D * Cp) * 10000,  # Convert to cm²/s
+        'prandtl_number': (Cp / wmm_kg) * (eta * 1e-6) / tcx,
         'temperature': T - 273.15,  # Convert to Celsius
         'pressure': P
     }
@@ -129,37 +131,63 @@ def calculate_properties_ph(z: List[float], P: float, h: float, units_system: st
 def ph_flash():
     try:
         data = request.get_json(force=True)
-        # Validate that required fields exist
-        required_fields = ['composition', 'pressure_range', 'enthalpy_range', 
-                          'pressure_resolution', 'enthalpy_resolution', 'properties']
-        units_system = data.get('units_system', 'SI')  # Default to SI if not specified
-
+        
+        # Validate the new structure
+        required_fields = ['composition', 'variables']
         for field in required_fields:
             if field not in data:
                 return jsonify({'error': f'Missing field: {field}'}), 400
+                
+        # Check if required variables exist
+        variables = data.get('variables', {})
+        if 'pressure' not in variables or 'enthalpy' not in variables:
+            return jsonify({'error': 'Missing pressure or enthalpy variables'}), 400
 
+        # Extract calculation settings
+        calculation = data.get('calculation', {})
+        properties = calculation.get('properties', [])
+        units_system = calculation.get('units_system', 'SI')  # Default to SI
+        
+        if not properties:
+            return jsonify({'error': 'No properties specified for calculation'}), 400
+
+        # Validate composition
         if not validate_composition(data['composition']):
             return jsonify({'error': 'Invalid composition - fractions must sum to 1'}), 400
 
+        # Setup mixture
         z = setup_mixture(data['composition'])
 
-        # Debug log the inputs before performing Fortran calls
-        print("Received request with enthalpy range:", data["enthalpy_range"],
-              "and pressure range:", data["pressure_range"])
+        # Extract range and resolution parameters
+        pressure_range = variables['pressure'].get('range', {})
+        enthalpy_range = variables['enthalpy'].get('range', {})
+        pressure_resolution = variables['pressure'].get('resolution')
+        enthalpy_resolution = variables['enthalpy'].get('resolution')
+        
+        # Validate required parameters exist
+        if not all([pressure_range.get('from'), pressure_range.get('to'), 
+                   enthalpy_range.get('from'), enthalpy_range.get('to'),
+                   pressure_resolution, enthalpy_resolution]):
+            return jsonify({'error': 'Missing range or resolution parameters'}), 400
 
-        # Create arrays for pressure and enthalpy values
+        # Debug log
+        print("Received request with enthalpy range:", enthalpy_range,
+              "and pressure range:", pressure_range)
+
+        # Create arrays for calculations
         P_range = np.arange(
-            float(data['pressure_range']['from']),
-            float(data['pressure_range']['to']) + float(data['pressure_resolution']),
-            float(data['pressure_resolution'])
+            float(pressure_range['from']),
+            float(pressure_range['to']) + float(pressure_resolution),
+            float(pressure_resolution)
         )
         
         h_range = np.arange(
-            float(data['enthalpy_range']['from']),
-            float(data['enthalpy_range']['to']) + float(data['enthalpy_resolution']),
-            float(data['enthalpy_resolution'])
+            float(enthalpy_range['from']),
+            float(enthalpy_range['to']) + float(enthalpy_resolution),
+            float(enthalpy_resolution)
         )
 
+        # The rest of the function remains the same
         results = []
         idx = 0
         for P in P_range:
@@ -167,7 +195,7 @@ def ph_flash():
                 try:
                     props = calculate_properties_ph(z, float(P), float(h), units_system)
                     filtered_props = {k: v for k, v in props.items() 
-                                   if k in data['properties'] or k in ['temperature', 'pressure', 'enthalpy']}
+                                   if k in properties or k in ['temperature', 'pressure', 'enthalpy']}
                     results.append({
                         'index': idx,
                         **filtered_props

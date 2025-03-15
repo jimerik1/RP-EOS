@@ -74,6 +74,10 @@ def calculate_properties_ts(z: List[float], T: float, s: float, units_system: st
     # Calculate compressibility factor
     Z = P / (D * 8.31446261815324 * T)
     
+    # Get molecular weight for conversions
+    wmm_kg = wmm / 1000  # Convert g/mol to kg/mol
+
+    
     # Build raw properties dictionary
     raw_properties = {
         'density': D,
@@ -96,10 +100,10 @@ def calculate_properties_ts(z: List[float], T: float, s: float, units_system: st
         'isothermal_compressibility': -1/D * dDdP,
         'volume_expansivity': 1/D * dDdT,
         'dp_dt_saturation': dPdT,
-        'joule_thomson_coefficient': (T*dDdT/dDdP - 1)/Cp,
-        'kinematic_viscosity': eta/D,
-        'thermal_diffusivity': tcx/(D*Cp),
-        'prandtl_number': Cp*eta/tcx,
+        'joule_thomson_coefficient': (T*dDdT/dDdP - 1)/(Cp * 100),  # Convert to K/bar
+        'kinematic_viscosity': (eta * 1e-6) / (D * wmm / 1000) * 10000,
+        'thermal_diffusivity': tcx / (D * Cp) * 10000,  # Convert to cm²/s
+        'prandtl_number': (Cp / wmm_kg) * (eta * 1e-6) / tcx,
         'temperature': T - 273.15,  # Convert to Celsius
         'pressure': P / 100  # Convert kPa to bar
     }
@@ -128,37 +132,63 @@ def calculate_properties_ts(z: List[float], T: float, s: float, units_system: st
 def ts_flash():
     try:
         data = request.get_json(force=True)
-        # Validate that required fields exist
-        required_fields = ['composition', 'temperature_range', 'entropy_range', 
-                          'temperature_resolution', 'entropy_resolution', 'properties']
-        units_system = data.get('units_system', 'SI')  # Default to SI if not specified
-
+        
+        # Validate the new structure
+        required_fields = ['composition', 'variables']
         for field in required_fields:
             if field not in data:
                 return jsonify({'error': f'Missing field: {field}'}), 400
+                
+        # Check if required variables exist
+        variables = data.get('variables', {})
+        if 'temperature' not in variables or 'entropy' not in variables:
+            return jsonify({'error': 'Missing temperature or entropy variables'}), 400
 
+        # Extract calculation settings
+        calculation = data.get('calculation', {})
+        properties = calculation.get('properties', [])
+        units_system = calculation.get('units_system', 'SI')  # Default to SI
+        
+        if not properties:
+            return jsonify({'error': 'No properties specified for calculation'}), 400
+
+        # Validate composition
         if not validate_composition(data['composition']):
             return jsonify({'error': 'Invalid composition - fractions must sum to 1'}), 400
 
+        # Setup mixture
         z = setup_mixture(data['composition'])
 
-        # Debug log the inputs before performing Fortran calls
-        print("Received request with temperature range:", data["temperature_range"],
-              "and entropy range:", data["entropy_range"])
+        # Extract range and resolution parameters
+        temperature_range = variables['temperature'].get('range', {})
+        entropy_range = variables['entropy'].get('range', {})
+        temperature_resolution = variables['temperature'].get('resolution')
+        entropy_resolution = variables['entropy'].get('resolution')
+        
+        # Validate required parameters exist
+        if not all([temperature_range.get('from'), temperature_range.get('to'), 
+                   entropy_range.get('from'), entropy_range.get('to'),
+                   temperature_resolution, entropy_resolution]):
+            return jsonify({'error': 'Missing range or resolution parameters'}), 400
 
-        # Create arrays for temperature and entropy values
+        # Debug log
+        print("Received request with temperature range:", temperature_range,
+              "and entropy range:", entropy_range)
+
+        # Create arrays for calculations
         T_range = np.arange(
-            float(data['temperature_range']['from']) + 273.15,  # Convert from °C to K
-            float(data['temperature_range']['to']) + 273.15 + float(data['temperature_resolution']),
-            float(data['temperature_resolution'])
+            float(temperature_range['from']) + 273.15,  # Convert from °C to K
+            float(temperature_range['to']) + 273.15 + float(temperature_resolution),
+            float(temperature_resolution)
         )
         
         s_range = np.arange(
-            float(data['entropy_range']['from']),
-            float(data['entropy_range']['to']) + float(data['entropy_resolution']),
-            float(data['entropy_resolution'])
+            float(entropy_range['from']),
+            float(entropy_range['to']) + float(entropy_resolution),
+            float(entropy_resolution)
         )
 
+        # Calculate properties
         results = []
         idx = 0
         for T in T_range:
@@ -166,7 +196,7 @@ def ts_flash():
                 try:
                     props = calculate_properties_ts(z, float(T), float(s), units_system)
                     filtered_props = {k: v for k, v in props.items() 
-                                   if k in data['properties'] or k in ['temperature', 'pressure', 'entropy']}
+                                   if k in properties or k in ['temperature', 'pressure', 'entropy']}
                     results.append({
                         'index': idx,
                         **filtered_props

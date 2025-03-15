@@ -58,29 +58,32 @@ api_results = []
 
 # Make API calls for each temperature point
 for temp in ref_df['Temperature']:
+    # Replace this payload structure
     payload = {
         "composition": [
             {"fluid": "CO2", "fraction": 1.0}
         ],
-        "pressure_range": {
-            "from": PRESSURE_BAR,
-            "to": PRESSURE_BAR
+        "variables": {
+            "pressure": {
+                "range": {"from": PRESSURE_BAR, "to": PRESSURE_BAR},
+                "resolution": 1
+            },
+            "temperature": {
+                "range": {"from": temp, "to": temp},
+                "resolution": 1
+            }
         },
-        "temperature_range": {
-            "from": temp,
-            "to": temp
-        },
-        "pressure_resolution": 1,
-        "temperature_resolution": 1,
-        "properties": [
-            "density", 
-            "viscosity", 
-            "cp", 
-            "thermal_conductivity", 
-            "prandtl_number",
-            "phase"
-        ],
-        "units_system": "SI"
+        "calculation": {
+            "properties": [
+                "density", 
+                "viscosity", 
+                "cp", 
+                "thermal_conductivity", 
+                "prandtl_number",
+                "phase"
+            ],
+            "units_system": "SI"
+        }
     }
     
     try:

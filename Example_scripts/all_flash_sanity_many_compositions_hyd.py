@@ -70,31 +70,33 @@ def sanity_check_eos_with_composition(composition, description):
             # Prepare the PT-flash request payload
             pt_payload = {
                 "composition": composition,
-                "pressure_range": {
-                    "from": point["pressure"],
-                    "to": point["pressure"]
+                "variables": {
+                    "pressure": {
+                        "range": {"from": point["pressure"], "to": point["pressure"]},
+                        "resolution": 1
+                    },
+                    "temperature": {
+                        "range": {"from": point["temperature"], "to": point["temperature"]},
+                        "resolution": 1
+                    }
                 },
-                "temperature_range": {
-                    "from": point["temperature"],
-                    "to": point["temperature"]
-                },
-                "pressure_resolution": 1,
-                "temperature_resolution": 1,
-                "properties": [
-                    "density",
-                    "enthalpy",
-                    "internal_energy",
-                    "entropy",
-                    "Cv",
-                    "Cp",
-                    "sound_speed",
-                    "compressibility_factor",
-                    "phase",
-                    "vapor_fraction",
-                    "viscosity",
-                    "thermal_conductivity"
-                ],
-                "units_system": "SI"
+                "calculation": {
+                    "properties": [
+                        "density",
+                        "enthalpy",
+                        "internal_energy",
+                        "entropy",
+                        "Cv",
+                        "Cp",
+                        "sound_speed",
+                        "compressibility_factor",
+                        "phase",
+                        "vapor_fraction",
+                        "viscosity",
+                        "thermal_conductivity"
+                    ],
+                    "units_system": "SI"
+                }
             }
             
             # Send the PT-flash request
@@ -150,31 +152,33 @@ def sanity_check_eos_with_composition(composition, description):
             # Prepare the PH-flash request payload
             ph_payload = {
                 "composition": composition,
-                "pressure_range": {
-                    "from": pt_result["pressure"],
-                    "to": pt_result["pressure"]
+                "variables": {
+                    "pressure": {
+                        "range": {"from": pt_result["pressure"], "to": pt_result["pressure"]},
+                        "resolution": 1
+                    },
+                    "enthalpy": {
+                        "range": {"from": pt_result["enthalpy"], "to": pt_result["enthalpy"]},
+                        "resolution": 1
+                    }
                 },
-                "enthalpy_range": {
-                    "from": pt_result["enthalpy"],
-                    "to": pt_result["enthalpy"]
-                },
-                "pressure_resolution": 1,
-                "enthalpy_resolution": 1,
-                "properties": [
-                    "temperature",
-                    "density",
-                    "internal_energy",
-                    "entropy",
-                    "Cv",
-                    "Cp",
-                    "sound_speed",
-                    "compressibility_factor",
-                    "phase",
-                    "vapor_fraction",
-                    "viscosity",
-                    "thermal_conductivity"
-                ],
-                "units_system": "SI"
+                "calculation": {
+                    "properties": [
+                        "temperature",
+                        "density",
+                        "internal_energy",
+                        "entropy",
+                        "Cv",
+                        "Cp",
+                        "sound_speed",
+                        "compressibility_factor",
+                        "phase",
+                        "vapor_fraction",
+                        "viscosity",
+                        "thermal_conductivity"
+                    ],
+                    "units_system": "SI"
+                }
             }
             
             # Send the PH-flash request
@@ -234,31 +238,33 @@ def sanity_check_eos_with_composition(composition, description):
             # Prepare the TS-flash request payload
             ts_payload = {
                 "composition": composition,
-                "temperature_range": {
-                    "from": pt_result["temperature"],
-                    "to": pt_result["temperature"]
+                "variables": {
+                    "temperature": {
+                        "range": {"from": pt_result["temperature"], "to": pt_result["temperature"]},
+                        "resolution": 1
+                    },
+                    "entropy": {
+                        "range": {"from": pt_result["entropy"], "to": pt_result["entropy"]},
+                        "resolution": 1
+                    }
                 },
-                "entropy_range": {
-                    "from": pt_result["entropy"],
-                    "to": pt_result["entropy"]
-                },
-                "temperature_resolution": 1,
-                "entropy_resolution": 1,
-                "properties": [
-                    "pressure",
-                    "density",
-                    "internal_energy",
-                    "enthalpy",
-                    "Cv",
-                    "Cp",
-                    "sound_speed",
-                    "compressibility_factor",
-                    "phase",
-                    "vapor_fraction",
-                    "viscosity",
-                    "thermal_conductivity"
-                ],
-                "units_system": "SI"
+                "calculation": {
+                    "properties": [
+                        "pressure",
+                        "density",
+                        "internal_energy",
+                        "enthalpy",
+                        "Cv",
+                        "Cp",
+                        "sound_speed",
+                        "compressibility_factor",
+                        "phase",
+                        "vapor_fraction",
+                        "viscosity",
+                        "thermal_conductivity"
+                    ],
+                    "units_system": "SI"
+                }
             }
             
             # Send the TS-flash request

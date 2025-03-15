@@ -20,6 +20,13 @@ def get_phase(q):
     else:
         return 'Vapor'   # Superheated vapor
 
+def validate_composition(composition):
+    """Validate composition data"""
+    if not composition:
+        return False
+    total = sum(comp.get('fraction', 0) for comp in composition)
+    return abs(total - 1.0) < 1e-6
+
 def convert_for_json(obj):
     """Convert numpy types to JSON serializable Python types."""
     if isinstance(obj, np.integer):

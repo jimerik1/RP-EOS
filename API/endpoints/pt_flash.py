@@ -75,6 +75,9 @@ def calculate_properties(z: List[float], T: float, P: float, units_system: str =
     # Calculate compressibility factor
     Z = P_kpa / (D * 8.31446261815324 * T)
     
+    # Get molecular weight for conversions
+    wmm_kg = wmm / 1000  # Convert g/mol to kg/mol
+
     # Build raw properties dictionary
     raw_properties = {
         'density': D,
@@ -97,10 +100,10 @@ def calculate_properties(z: List[float], T: float, P: float, units_system: str =
         'isothermal_compressibility': -1/D * dDdP,
         'volume_expansivity': 1/D * dDdT,
         'dp_dt_saturation': dPdT,
-        'joule_thomson_coefficient': (T*dDdT/dDdP - 1)/Cp,
-        'kinematic_viscosity': eta/D,
-        'thermal_diffusivity': tcx/(D*Cp),
-        'prandtl_number': Cp*eta/tcx,
+        'joule_thomson_coefficient': (T*dDdT/dDdP - 1)/(Cp * 100),  # Convert to K/bar
+        'kinematic_viscosity': (eta * 1e-6) / (D * wmm / 1000) * 10000,
+        'thermal_diffusivity': tcx / (D * Cp) * 10000,  # Convert to cm²/s
+        'prandtl_number': (Cp / wmm_kg) * (eta * 1e-6) / tcx,
         'temperature': T - 273.15,  # Convert to Celsius
         'pressure': P
     }

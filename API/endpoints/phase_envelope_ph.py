@@ -7,36 +7,49 @@ from ctypes import c_double, c_int, byref
 
 from API.endpoints import phase_envelope_ph_bp
 from API.refprop_setup import RP
-from API.utils.helpers import convert_for_json
+from API.utils.helpers import validate_composition, get_phase, convert_for_json
 
 @phase_envelope_ph_bp.route('/phase_envelope_ph', methods=['POST'])
 def phase_envelope_ph():
-    """
-    Calculate bubble/dew curves in the p-h plane (Phase Envelope).
-    Example JSON payload:
-    {
-      "composition": [ {"fluid": "CO2", "fraction": 1.0} ],
-      "pressure_range": { "from": 10, "to": 200 },
-      "pressure_resolution": 5,
-      "desired_curve": "both"      # or "bubble"/"dew"
-    }
-    """
     try:
         data = request.get_json(force=True)
-        composition = data["composition"]
-        p_min = float(data["pressure_range"]["from"])
-        p_max = float(data["pressure_range"]["to"])
-        dp = float(data["pressure_resolution"])
-        desired_curve = data.get("desired_curve", "both")
+        
+        # Validate the new structure
+        required_fields = ['composition', 'variables']
+        for field in required_fields:
+            if field not in data:
+                return jsonify({'error': f'Missing field: {field}'}), 400
+                
+        # Check if required variables exist
+        variables = data.get('variables', {})
+        if 'pressure' not in variables:
+            return jsonify({'error': 'Missing pressure variable'}), 400
+
+        # Extract calculation settings
+        calculation = data.get('calculation', {})
+        desired_curve = calculation.get('curve_type', 'both')  # Default to both curves
+        
+        # Validate composition
+        if not validate_composition(data['composition']):
+            return jsonify({'error': 'Invalid composition - fractions must sum to 1'}), 400
+
+        # Extract range and resolution parameters
+        pressure_range = variables['pressure'].get('range', {})
+        pressure_resolution = variables['pressure'].get('resolution')
+        
+        # Validate required parameters exist
+        if not all([pressure_range.get('from'), pressure_range.get('to'), 
+                    pressure_resolution]):
+            return jsonify({'error': 'Missing pressure range or resolution parameters'}), 400
 
         # Setup mixture:
-        fluid_string = '|'.join(f"{c['fluid']}.FLD" for c in composition)
-        z = [c['fraction'] for c in composition] + [0]*(20-len(composition))
+        fluid_string = '|'.join(f"{c['fluid']}.FLD" for c in data['composition'])
+        z = [c['fraction'] for c in data['composition']] + [0]*(20-len(data['composition']))
         
         # Convert z to c_double array for REFPROP
         z_array = (len(z)*c_double)(*z)
 
-        ierr, herr = RP.SETUPdll(len(composition),
+        ierr, herr = RP.SETUPdll(len(data['composition']),
                                  fluid_string,
                                  'HMX.BNC',
                                  'DEF')
@@ -47,8 +60,13 @@ def phase_envelope_ph():
         results_dew = []
 
         # Convert pressures from bar to kPa for REFPROP
-        pressures = np.arange(p_min*100, (p_max+dp)*100, dp*100)
+        pressures = np.arange(
+            float(pressure_range['from'])*100, 
+            (float(pressure_range['to']) + float(pressure_resolution))*100, 
+            float(pressure_resolution)*100
+        )
         
+        # Rest of the function remains the same
         for p_kpa in pressures:
             # Calculate bubble point (q=0)
             if desired_curve in ["both", "bubble"]:
@@ -66,7 +84,6 @@ def phase_envelope_ph():
                         })
                 except Exception as e:
                     print(f"Bubble point error at P={p_kpa/100} bar: {str(e)}")
-                    # Continue to next pressure
             
             # Calculate dew point (q=1)
             if desired_curve in ["both", "dew"]:
@@ -84,7 +101,6 @@ def phase_envelope_ph():
                         })
                 except Exception as e:
                     print(f"Dew point error at P={p_kpa/100} bar: {str(e)}")
-                    # Continue to next pressure
 
         response = {
             "bubble_curve": results_bubble,
