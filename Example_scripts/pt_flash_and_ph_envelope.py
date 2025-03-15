@@ -11,30 +11,33 @@ pt_flash_url = "http://localhost:5051/pt_flash"
 ph_envelope_url = "http://localhost:5051/phase_envelope_ph"
 
 # Configure the request payload for CO2
+# Configure the request payload for CO2
 pt_flash_payload = {
     "composition": [
-    {"fluid": "CO2", "fraction": 1.000},
-    {"fluid": "NITROGEN", "fraction": 0.0}
+        {"fluid": "CO2", "fraction": 1.000},
+        {"fluid": "NITROGEN", "fraction": 0.0}
     ],
-    "pressure_range": {
-        "from": 10,   # Start at 10 bar
-        "to": 300     # Up to 300 bar
+    "variables": {
+        "pressure": {
+            "range": {"from": 5, "to": 300},
+            "resolution": 0.5
+        },
+        "temperature": {
+            "range": {"from": -60, "to": 150},
+            "resolution": 1
+        }
     },
-    "temperature_range": {
-        "from": -60,  # Start at -60°C
-        "to": 150     # Up to 150°C
-    },
-    "pressure_resolution": 0.5,   # Increased resolution for smoother lines
-    "temperature_resolution": 1, # Temperature step in °C
-    "properties": [
-        "enthalpy",
-        "vapor_fraction",
-        "phase",
-        "critical_temperature",
-        "critical_pressure",
-        "critical_density"  # Added critical density to compare all critical properties
-    ],
-    "units_system": "SI"  # Use SI units
+    "calculation": {
+        "properties": [
+            "enthalpy",
+            "vapor_fraction",
+            "phase",
+            "critical_temperature",
+            "critical_pressure",
+            "critical_density"
+        ],
+        "units_system": "SI"
+    }
 }
 
 # Phase envelope payload
@@ -43,12 +46,15 @@ ph_envelope_payload = {
         {"fluid": "CO2", "fraction": 1.000},
         {"fluid": "NITROGEN", "fraction": 0.0}
     ],
-    "pressure_range": {
-        "from": 5,
-        "to": 73  # Just below the critical pressure
+    "variables": {
+        "pressure": {
+            "range": {"from": 5, "to": 73},
+            "resolution": 0.1
+        }
     },
-    "pressure_resolution": 0.1,
-    "desired_curve": "both"
+    "calculation": {
+        "curve_type": "both"
+    }
 }
 
 # Function to send request to API with retry
@@ -67,6 +73,61 @@ def get_fluid_data(url, payload, max_retries=3, retry_delay=2):
             else:
                 print(f"Max retries reached for {url.split('/')[-1]}.")
                 return None
+
+def smooth_phase_envelope(h_values, p_values, critical_h, critical_p, window=5):
+    """
+    Apply smoothing to phase envelope lines, especially near critical point.
+    
+    Args:
+        h_values: List of enthalpy values
+        p_values: List of pressure values
+        critical_h: Critical point enthalpy
+        critical_p: Critical point pressure
+        window: Smoothing window size
+    
+    Returns:
+        Tuple of smoothed (h_values, p_values)
+    """
+    import numpy as np
+    from scipy.signal import savgol_filter
+    
+    # Convert to numpy arrays
+    h = np.array(h_values)
+    p = np.array(p_values)
+    
+    # Only apply smoothing if we have enough points
+    if len(h) > window:
+        # Convert to numpy arrays
+        h_arr = np.array(h)
+        p_arr = np.array(p)
+        
+        # Find points near critical point
+        near_critical = (p_arr > 0.9 * critical_p)
+        
+        # Apply Savitzky-Golay filter for smoothing
+        try:
+            # Apply stronger smoothing near critical point
+            if sum(near_critical) > window:
+                p_arr[near_critical] = savgol_filter(p_arr[near_critical], window, 3)
+            
+            # Apply general smoothing to whole curve
+            p_smoothed = savgol_filter(p_arr, window, 3)
+            
+            # Ensure the critical point is preserved
+            if critical_h is not None and critical_p is not None:
+                # Find the closest point to critical h
+                idx = np.argmin(np.abs(h_arr - critical_h))
+                if idx < len(p_smoothed):
+                    # Adjust to match critical pressure
+                    p_smoothed[idx] = critical_p
+            
+            return h, p_smoothed
+        except:
+            # If smoothing fails, return original
+            print("Smoothing failed, using original data")
+            return h, p
+    
+    return h_values, p_values
 
 # Function to generate sample data for testing when API is unavailable
 def generate_sample_data():
@@ -348,9 +409,22 @@ for point in data:
         crit_p = point["critical_pressure"]["value"]
         crit_d = point["critical_density"]["value"]
         
+        # Check units and convert appropriately
+        crit_T_unit = point["critical_temperature"]["unit"]
+        crit_p_unit = point["critical_pressure"]["unit"]
+        
         # Convert units to standard values
-        crit_T_C = crit_T - 273.15  # K to °C
-        crit_p_bar = crit_p / 100    # kPa to bar
+        crit_T_C = crit_T - 273.15 if crit_T_unit == "K" else crit_T  # K to °C
+        
+        # Handle pressure based on the unit
+        if crit_p_unit == "bar":
+            crit_p_bar = crit_p  # Already in bar
+        elif crit_p_unit == "kPa":
+            crit_p_bar = crit_p / 100  # kPa to bar
+        else:
+            # Default fallback - assume kPa if unit is unexpected
+            print(f"Warning: Unexpected pressure unit: {crit_p_unit}, assuming kPa")
+            crit_p_bar = crit_p / 100
         
         # Store for comparison
         critical_properties = {
