@@ -81,6 +81,43 @@
 			"response": []
 		},
 		{
+			"name": "TS Flash",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"METHANE\", \"fraction\": 0.85},\n    {\"fluid\": \"ETHANE\", \"fraction\": 0.1},\n    {\"fluid\": \"PROPANE\", \"fraction\": 0.05}\n  ],\n  \"temperature_range\": {\n    \"from\": -50,\n    \"to\": 50\n  },\n  \"entropy_range\": {\n    \"from\": 160,\n    \"to\": 240\n  },\n  \"temperature_resolution\": 10,\n  \"entropy_resolution\": 20,\n  \"properties\": [\n    \"pressure\",\n    \"density\",\n    \"vapor_fraction\",\n    \"enthalpy\",\n    \"cp\",\n    \"cv\",\n    \"sound_speed\",\n    \"phase\"\n  ],\n  \"units_system\": \"SI\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5051/ts_flash",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5051",
+					"path": [
+						"ts_flash"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Phase Envelope (PT)",
 			"request": {
 				"method": "POST",
