@@ -7,28 +7,26 @@ from tabulate import tabulate
 # API base URL - adjust if your API is hosted elsewhere
 BASE_URL = "http://localhost:5051"
 
-def sanity_check_eos():
+def sanity_check_eos_with_composition(composition, description):
     """
-    Comprehensive sanity check of the Span-Wagner EOS API by comparing PT-flash, PH-flash, and TS-flash results.
+    Comprehensive sanity check of the Span-Wagner EOS API by comparing PT-flash, PH-flash, and TS-flash results
+    for a specific composition.
     
-    This function:
-    1. Calculates thermodynamic properties using PT-flash at various pressure and temperature points
-    2. Uses the resulting enthalpy with the same pressure in PH-flash
-    3. Uses the resulting entropy with the same temperature in TS-flash
-    4. Compares all properties across the three calculations to verify consistency
+    Args:
+        composition: List of dictionaries with fluid name and fraction
+        description: Description of the test for reporting
     
-    Properties compared include:
-    - Temperature, pressure, and density (primary validation)
-    - Internal energy, enthalpy, entropy
-    - Heat capacities (Cv, Cp)
-    - Sound speed, compressibility factor
-    - Transport properties (viscosity, thermal conductivity)
-    
-    This comprehensive validation ensures that the EOS implementation is thermodynamically 
-    consistent across different flash calculation routes.
+    Returns:
+        Dictionary with test results and statistics
     """
-    print("Starting REFPROP API Sanity Check")
-    print("=" * 80)
+    print(f"\n\n{'=' * 80}")
+    print(f"Starting REFPROP API Sanity Check for: {description}")
+    print(f"{'=' * 80}")
+    
+    # Display composition
+    comp_table = [[c["fluid"], f"{c['fraction']*100:.1f}%"] for c in composition]
+    print("\nTesting composition:")
+    print(tabulate(comp_table, headers=["Component", "Fraction"], tablefmt="grid"))
     
     # Define test points - expanded to cover a wider range of conditions
     # Generate a grid of points from 1 to 300 bar and -50°C to 100°C
@@ -55,12 +53,6 @@ def sanity_check_eos():
     test_points.extend(additional_points)
     
     print(f"Testing {len(test_points)} pressure-temperature points")
-    
-    # Fluid composition: 90% CO2, 10% Methane
-    composition = [
-        {"fluid": "CO2", "fraction": 0.90},
-        {"fluid": "METHANE", "fraction": 0.10}
-    ]
     
     # Part 1: PT-flash calculations
     # Create batched PT-flash requests to optimize API calls
@@ -454,6 +446,7 @@ def sanity_check_eos():
     
     # Table for PT vs PH summary statistics
     summary_table_pt_ph = []
+    pt_ph_stats = {}
     
     for short, name, unit in zip(property_shorts_pt_ph, property_names_pt_ph, property_units_pt_ph):
         abs_col = f"{short}_diff_abs"
@@ -465,6 +458,14 @@ def sanity_check_eos():
             abs_max = df_pt_ph[abs_col].abs().max()
             rel_mean = df_pt_ph[rel_col].abs().mean()
             rel_max = df_pt_ph[rel_col].abs().max()
+            
+            # Store stats for return value
+            pt_ph_stats[short] = {
+                'abs_mean': abs_mean,
+                'abs_max': abs_max,
+                'rel_mean': rel_mean,
+                'rel_max': rel_max
+            }
             
             # Add to summary table
             summary_table_pt_ph.append([
@@ -491,6 +492,7 @@ def sanity_check_eos():
     
     # Table for PT vs TS summary statistics
     summary_table_pt_ts = []
+    pt_ts_stats = {}
     
     for short, name, unit in zip(property_shorts_pt_ts, property_names_pt_ts, property_units_pt_ts):
         abs_col = f"{short}_diff_abs"
@@ -502,6 +504,14 @@ def sanity_check_eos():
             abs_max = df_pt_ts[abs_col].abs().max()
             rel_mean = df_pt_ts[rel_col].abs().mean()
             rel_max = df_pt_ts[rel_col].abs().max()
+            
+            # Store stats for return value
+            pt_ts_stats[short] = {
+                'abs_mean': abs_mean,
+                'abs_max': abs_max,
+                'rel_mean': rel_mean,
+                'rel_max': rel_max
+            }
             
             # Add to summary table
             summary_table_pt_ts.append([
@@ -634,20 +644,24 @@ def sanity_check_eos():
     
     # Overall cross-consistency result
     if pt_ph_result.startswith("PASSED") and pt_ts_result.startswith("PASSED"):
-        print("\nOVERALL SANITY CHECK: PASSED")
-        print("All three calculation methods (PT, PH, TS) are consistently producing the same thermodynamic properties.")
+        overall_result = "PASSED"
+        overall_message = "All three calculation methods (PT, PH, TS) are consistently producing the same thermodynamic properties."
     elif pt_ph_result.startswith("PARTIALLY") and pt_ts_result.startswith("PARTIALLY"):
-        print("\nOVERALL SANITY CHECK: PARTIALLY PASSED")
-        print("The three calculation methods show moderate consistency with acceptable discrepancies.")
+        overall_result = "PARTIALLY PASSED"
+        overall_message = "The three calculation methods show moderate consistency with acceptable discrepancies."
     elif "FAILED" in pt_ph_result or "FAILED" in pt_ts_result:
-        print("\nOVERALL SANITY CHECK: FAILED")
-        print("Significant discrepancies exist between the different calculation methods.")
+        overall_result = "FAILED"
+        overall_message = "Significant discrepancies exist between the different calculation methods."
     else:
-        print("\nOVERALL SANITY CHECK: INCONCLUSIVE")
-        print("Could not properly evaluate consistency across all three calculation methods.")
+        overall_result = "INCONCLUSIVE"
+        overall_message = "Could not properly evaluate consistency across all three calculation methods."
+    
+    print(f"\nOVERALL SANITY CHECK: {overall_result}")
+    print(overall_message)
     
     # 9: Check for any specific property issues
     print("\nProperty-specific observations:")
+    property_warnings = []
     
     # PT vs PH property issues
     for short, name in zip(property_shorts_pt_ph, property_names_pt_ph):
@@ -656,9 +670,13 @@ def sanity_check_eos():
             mean_diff = df_pt_ph[rel_col].abs().mean()
             
             if mean_diff > 5.0:
-                print(f"- Warning: PT vs PH {name} shows large discrepancies (mean {mean_diff:.2f}%)")
+                issue = f"- Warning: PT vs PH {name} shows large discrepancies (mean {mean_diff:.2f}%)"
+                print(issue)
+                property_warnings.append(issue)
             elif mean_diff > 2.0:
-                print(f"- Note: PT vs PH {name} shows moderate discrepancies (mean {mean_diff:.2f}%)")
+                issue = f"- Note: PT vs PH {name} shows moderate discrepancies (mean {mean_diff:.2f}%)"
+                print(issue)
+                property_warnings.append(issue)
     
     # PT vs TS property issues
     for short, name in zip(property_shorts_pt_ts, property_names_pt_ts):
@@ -667,76 +685,292 @@ def sanity_check_eos():
             mean_diff = df_pt_ts[rel_col].abs().mean()
             
             if mean_diff > 5.0:
-                print(f"- Warning: PT vs TS {name} shows large discrepancies (mean {mean_diff:.2f}%)")
+                issue = f"- Warning: PT vs TS {name} shows large discrepancies (mean {mean_diff:.2f}%)"
+                print(issue)
+                property_warnings.append(issue)
             elif mean_diff > 2.0:
-                print(f"- Note: PT vs TS {name} shows moderate discrepancies (mean {mean_diff:.2f}%)")
+                issue = f"- Note: PT vs TS {name} shows moderate discrepancies (mean {mean_diff:.2f}%)"
+                print(issue)
+                property_warnings.append(issue)
+    
+    reasons = [
+        "1. Numerical precision in the solvers",
+        "2. Iteration tolerance settings in REFPROP",
+        "3. Different solution paths in PT vs PH vs TS flash calculations",
+        "4. Properties near phase boundaries or critical region",
+        "5. Implementation differences between flash algorithms",
+        "6. Thermodynamic consistency of the underlying equation of state"
+    ]
     
     print("\nPossible reasons for discrepancies:")
-    print("1. Numerical precision in the solvers")
-    print("2. Iteration tolerance settings in REFPROP")
-    print("3. Different solution paths in PT vs PH vs TS flash calculations")
-    print("4. Properties near phase boundaries or critical region")
-    print("5. Implementation differences between flash algorithms")
-    print("6. Thermodynamic consistency of the underlying equation of state")
+    for reason in reasons:
+        print(reason)
     
-    # 10: Display detailed property comparison for a specific test point
-    if len(df_pt_ph) > 0 and len(df_pt_ts) > 0:
-        print("\nDetailed comparison for first test point:")
-        print("\nPT-flash vs PH-flash:")
-        first_point_pt_ph = df_pt_ph.iloc[0]
-        detailed_comparison_pt_ph = []
-        
-        for short, name, unit in zip(property_shorts_pt_ph, property_names_pt_ph, property_units_pt_ph):
-            orig_col = f"original_{short}"
-            calc_col = f"calculated_{short}"
-            abs_col = f"{short}_diff_abs"
-            rel_col = f"{short}_diff_rel"
-            
-            if orig_col in first_point_pt_ph and calc_col in first_point_pt_ph:
-                detailed_comparison_pt_ph.append([
-                    name,
-                    unit,
-                    f"{first_point_pt_ph[orig_col]:.6g}",
-                    f"{first_point_pt_ph[calc_col]:.6g}",
-                    f"{first_point_pt_ph.get(abs_col, 'N/A'):.6g}" if abs_col in first_point_pt_ph else "N/A",
-                    f"{first_point_pt_ph.get(rel_col, 'N/A'):.4g}%" if rel_col in first_point_pt_ph else "N/A"
-                ])
-        
-        detail_headers = ["Property", "Unit", "PT Value", "PH Value", "Abs Diff", "Rel Diff"]
-        print(tabulate(detailed_comparison_pt_ph, headers=detail_headers, tablefmt="grid"))
-        
-        print("\nPT-flash vs TS-flash:")
-        first_point_pt_ts = df_pt_ts.iloc[0]
-        detailed_comparison_pt_ts = []
-        
-        for short, name, unit in zip(property_shorts_pt_ts, property_names_pt_ts, property_units_pt_ts):
-            orig_col = f"original_{short}"
-            calc_col = f"calculated_{short}"
-            abs_col = f"{short}_diff_abs"
-            rel_col = f"{short}_diff_rel"
-            
-            if orig_col in first_point_pt_ts and calc_col in first_point_pt_ts:
-                detailed_comparison_pt_ts.append([
-                    name,
-                    unit,
-                    f"{first_point_pt_ts[orig_col]:.6g}",
-                    f"{first_point_pt_ts[calc_col]:.6g}",
-                    f"{first_point_pt_ts.get(abs_col, 'N/A'):.6g}" if abs_col in first_point_pt_ts else "N/A",
-                    f"{first_point_pt_ts.get(rel_col, 'N/A'):.4g}%" if rel_col in first_point_pt_ts else "N/A"
-                ])
-        
-        detail_headers = ["Property", "Unit", "PT Value", "TS Value", "Abs Diff", "Rel Diff"]
-        print(tabulate(detailed_comparison_pt_ts, headers=detail_headers, tablefmt="grid"))
-    
-    # Return all DataFrames for further analysis if needed
-    return {
-        'pt_ph_comparison': df_pt_ph,
-        'pt_ts_comparison': df_pt_ts
+    # Return results
+    results = {
+        "description": description,
+        "composition": composition,
+        "pt_ph_result": pt_ph_result,
+        "pt_ts_result": pt_ts_result,
+        "overall_result": overall_result,
+        "overall_message": overall_message,
+        "property_warnings": property_warnings,
+        "pt_ph_stats": pt_ph_stats,
+        "pt_ts_stats": pt_ts_stats,
+        "raw_data": {
+            "pt_ph_comparison": df_pt_ph,
+            "pt_ts_comparison": df_pt_ts
+        }
     }
+    
+    return results
+
+def run_composition_tests():
+    """
+    Run multiple sanity checks with different compositions
+    """
+    # Define compositions to test
+    compositions = [
+        {
+            "description": "90% CO2, 10% Methane",
+            "components": [
+                {"fluid": "CO2", "fraction": 0.90},
+                {"fluid": "METHANE", "fraction": 0.10}
+            ]
+        },
+        {
+            "description": "80% CO2, 10% Methane, 10% Ethane",
+            "components": [
+                {"fluid": "CO2", "fraction": 0.80},
+                {"fluid": "METHANE", "fraction": 0.10},
+                {"fluid": "ETHANE", "fraction": 0.10}
+            ]
+        },
+        {
+            "description": "70% CO2, 10% Methane, 10% Ethane, 10% Propane",
+            "components": [
+                {"fluid": "CO2", "fraction": 0.70},
+                {"fluid": "METHANE", "fraction": 0.10},
+                {"fluid": "ETHANE", "fraction": 0.10},
+                {"fluid": "PROPANE", "fraction": 0.10}
+            ]
+        },
+        {
+            "description": "60% CO2, 10% Methane, 10% Ethane, 10% Propane, 10% Nitrogen",
+            "components": [
+                {"fluid": "CO2", "fraction": 0.60},
+                {"fluid": "METHANE", "fraction": 0.10},
+                {"fluid": "ETHANE", "fraction": 0.10},
+                {"fluid": "PROPANE", "fraction": 0.10},
+                {"fluid": "NITROGEN", "fraction": 0.10}
+            ]
+        },
+        {
+            "description": "50% CO2, 10% Methane, 10% Ethane, 10% Propane, 10% Nitrogen, 10% Oxygen",
+            "components": [
+                {"fluid": "CO2", "fraction": 0.50},
+                {"fluid": "METHANE", "fraction": 0.10},
+                {"fluid": "ETHANE", "fraction": 0.10},
+                {"fluid": "PROPANE", "fraction": 0.10},
+                {"fluid": "NITROGEN", "fraction": 0.10},
+                {"fluid": "OXYGEN", "fraction": 0.10}
+            ]
+        },
+        # New test cases with 7-10 components
+        {
+            "description": "45% CO2, 10% Methane, 10% Ethane, 10% Propane, 10% Nitrogen, 10% Oxygen, 5% Argon",
+            "components": [
+                {"fluid": "CO2", "fraction": 0.45},
+                {"fluid": "METHANE", "fraction": 0.10},
+                {"fluid": "ETHANE", "fraction": 0.10},
+                {"fluid": "PROPANE", "fraction": 0.10},
+                {"fluid": "NITROGEN", "fraction": 0.10},
+                {"fluid": "OXYGEN", "fraction": 0.10},
+                {"fluid": "ARGON", "fraction": 0.05}
+            ]
+        },
+        {
+            "description": "40% CO2, 10% Methane, 10% Ethane, 10% Propane, 10% Nitrogen, 5% Oxygen, 5% Argon, 10% Butane",
+            "components": [
+                {"fluid": "CO2", "fraction": 0.40},
+                {"fluid": "METHANE", "fraction": 0.10},
+                {"fluid": "ETHANE", "fraction": 0.10},
+                {"fluid": "PROPANE", "fraction": 0.10},
+                {"fluid": "NITROGEN", "fraction": 0.10},
+                {"fluid": "OXYGEN", "fraction": 0.05},
+                {"fluid": "ARGON", "fraction": 0.05},
+                {"fluid": "BUTANE", "fraction": 0.10}
+            ]
+        },
+        {
+            "description": "35% CO2, 10% Methane, 10% Ethane, 10% Propane, 5% Nitrogen, 5% Oxygen, 5% Argon, 10% Butane, 10% Hydrogen",
+            "components": [
+                {"fluid": "CO2", "fraction": 0.35},
+                {"fluid": "METHANE", "fraction": 0.10},
+                {"fluid": "ETHANE", "fraction": 0.10},
+                {"fluid": "PROPANE", "fraction": 0.10},
+                {"fluid": "NITROGEN", "fraction": 0.05},
+                {"fluid": "OXYGEN", "fraction": 0.05},
+                {"fluid": "ARGON", "fraction": 0.05},
+                {"fluid": "BUTANE", "fraction": 0.10},
+                {"fluid": "HYDROGEN", "fraction": 0.10}
+            ]
+        },
+        {
+            "description": "30% CO2, 10% Methane, 10% Ethane, 10% Propane, 5% Nitrogen, 5% Oxygen, 5% Argon, 5% Butane, 10% Hydrogen, 10% Helium",
+            "components": [
+                {"fluid": "CO2", "fraction": 0.30},
+                {"fluid": "METHANE", "fraction": 0.10},
+                {"fluid": "ETHANE", "fraction": 0.10},
+                {"fluid": "PROPANE", "fraction": 0.10},
+                {"fluid": "NITROGEN", "fraction": 0.05},
+                {"fluid": "OXYGEN", "fraction": 0.05},
+                {"fluid": "ARGON", "fraction": 0.05},
+                {"fluid": "BUTANE", "fraction": 0.05},
+                {"fluid": "HYDROGEN", "fraction": 0.10},
+                {"fluid": "HELIUM", "fraction": 0.10}
+            ]
+        }
+    ]
+    
+    # Run tests for each composition
+    results = []
+    for comp in compositions:
+        print(f"\n\n{'#' * 100}")
+        print(f"# Testing composition: {comp['description']}")
+        print(f"{'#' * 100}")
+        
+        try:
+            test_result = sanity_check_eos_with_composition(comp["components"], comp["description"])
+            results.append(test_result)
+        except Exception as e:
+            print(f"Error running test for {comp['description']}: {str(e)}")
+            # Add a failed result
+            results.append({
+                "description": comp["description"],
+                "composition": comp["components"],
+                "pt_ph_result": "ERROR: Test failed to complete",
+                "pt_ts_result": "ERROR: Test failed to complete",
+                "overall_result": "ERROR",
+                "overall_message": f"Error running test: {str(e)}",
+                "property_warnings": [],
+                "pt_ph_stats": {},
+                "pt_ts_stats": {},
+                "raw_data": None
+            })
+    
+    # Generate overall summary
+    print(f"\n\n{'*' * 100}")
+    print("* SUMMARY OF ALL COMPOSITION TESTS")
+    print(f"{'*' * 100}")
+    
+    summary_table = []
+    for result in results:
+        co2_pct = next((c["fraction"] * 100 for c in result["composition"] if c["fluid"] == "CO2"), 0)
+        num_components = len(result["composition"])
+        
+        # Extract key metrics for primary properties
+        pt_ph_temp_diff = result["pt_ph_stats"].get("T", {}).get("rel_mean", float('nan'))
+        pt_ph_dens_diff = result["pt_ph_stats"].get("D", {}).get("rel_mean", float('nan'))
+        pt_ts_pres_diff = result["pt_ts_stats"].get("P", {}).get("rel_mean", float('nan'))
+        pt_ts_dens_diff = result["pt_ts_stats"].get("D", {}).get("rel_mean", float('nan'))
+        
+        # Determine if there are any severe discrepancies
+        severe_issues = []
+        for stat_key, stat_dict in result["pt_ph_stats"].items():
+            if stat_dict.get("rel_mean", 0) > 5.0:
+                severe_issues.append(f"PT-PH {stat_key}")
+        
+        for stat_key, stat_dict in result["pt_ts_stats"].items():
+            if stat_dict.get("rel_mean", 0) > 5.0:
+                severe_issues.append(f"PT-TS {stat_key}")
+        
+        severe_str = ", ".join(severe_issues[:3])
+        if len(severe_issues) > 3:
+            severe_str += f" and {len(severe_issues) - 3} more"
+        
+        summary_table.append([
+            f"{co2_pct:.0f}% CO2",
+            num_components,
+            result["description"],
+            result["pt_ph_result"].split(":")[0],
+            result["pt_ts_result"].split(":")[0],
+            result["overall_result"],
+            f"{pt_ph_temp_diff:.4f}%" if not np.isnan(pt_ph_temp_diff) else "N/A",
+            f"{pt_ph_dens_diff:.4f}%" if not np.isnan(pt_ph_dens_diff) else "N/A",
+            f"{pt_ts_pres_diff:.4f}%" if not np.isnan(pt_ts_pres_diff) else "N/A",
+            f"{pt_ts_dens_diff:.4f}%" if not np.isnan(pt_ts_dens_diff) else "N/A",
+            severe_str if severe_issues else "None"
+        ])
+    
+    summary_headers = [
+        "Composition", 
+        "Components", 
+        "Description", 
+        "PT-PH Result", 
+        "PT-TS Result", 
+        "Overall Result",
+        "T Diff (PT-PH)",
+        "D Diff (PT-PH)",
+        "P Diff (PT-TS)",
+        "D Diff (PT-TS)",
+        "Severe Issues"
+    ]
+    
+    print("\nComposition Test Summary:")
+    print(tabulate(summary_table, headers=summary_headers, tablefmt="grid"))
+    
+    # Draw conclusions about the best composition ranges
+    print("\nConclusions:")
+    
+    # Count results by type
+    passed_count = sum(1 for r in results if r["overall_result"] == "PASSED")
+    partial_count = sum(1 for r in results if r["overall_result"] == "PARTIALLY PASSED")
+    failed_count = sum(1 for r in results if r["overall_result"] == "FAILED")
+    error_count = sum(1 for r in results if r["overall_result"] == "ERROR")
+    
+    print(f"- {passed_count} compositions PASSED the sanity check")
+    print(f"- {partial_count} compositions PARTIALLY PASSED the sanity check")
+    print(f"- {failed_count} compositions FAILED the sanity check")
+    print(f"- {error_count} compositions had ERRORS during testing")
+    
+    # Analyze by CO2 percentage
+    passed_co2 = [next((c["fraction"] * 100 for c in r["composition"] if c["fluid"] == "CO2"), 0) 
+                  for r in results if r["overall_result"] == "PASSED"]
+    
+    if passed_co2:
+        print(f"\nThe API performs best with compositions containing:")
+        print(f"- CO2 percentages: {', '.join(f'{x:.0f}%' for x in passed_co2)}")
+        
+        # Component count analysis
+        passed_comp_counts = [len(r["composition"]) for r in results if r["overall_result"] == "PASSED"]
+        if passed_comp_counts:
+            min_comps = min(passed_comp_counts)
+            max_comps = max(passed_comp_counts)
+            comp_range = f"{min_comps}" if min_comps == max_comps else f"{min_comps}-{max_comps}"
+            print(f"- Component count: {comp_range}")
+    
+    # Recommendations
+    print("\nRecommendations:")
+    if passed_count > 0:
+        print("- For most accurate results, use compositions that passed the sanity check")
+    elif partial_count > 0:
+        print("- Use compositions that at least partially pass the sanity check")
+        print("- Exercise caution with calculations that involve transport properties, which tend to show greater inconsistencies")
+    else:
+        print("- The API appears to have significant consistency issues with all tested compositions")
+        print("- Consider simplifying to binary mixtures or improving the underlying modeling approach")
+    
+    print("\nFor future work:")
+    print("- Implement validation checks in the API to warn users about potential inconsistencies")
+    print("- Improve the numerical methods for complex mixtures, especially for transport properties")
+    print("- Consider adding composition complexity limitations in the API documentation")
+    
+    return results
 
 if __name__ == "__main__":
     try:
-        results = sanity_check_eos()
-        print("\nSanity check completed successfully.")
+        results = run_composition_tests()
+        print("\nAll composition tests completed.")
     except Exception as e:
-        print(f"\nError during sanity check: {str(e)}")
+        print(f"\nError during composition testing: {str(e)}")
