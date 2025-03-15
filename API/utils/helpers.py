@@ -13,6 +13,14 @@ def get_phase(q):
         return 'Vapor'   # Superheated vapor
     elif q == 999:
         return 'Supercritical'
+    elif q == -999:
+        return 'Solid'   # Added support for solid phase
+    elif q == -997:
+        return 'Solid-Liquid'  # Solid-liquid equilibrium (melting)
+    elif q == 997:
+        return 'Solid-Vapor'   # Solid-vapor equilibrium (sublimation)
+    elif q == 996:
+        return 'Triple-Point'  # Triple point (solid-liquid-vapor)
     elif 0 < q < 1:
         return 'Two-Phase'
     elif q < 0:

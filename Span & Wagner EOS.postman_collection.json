@@ -192,6 +192,43 @@
 			"response": []
 		},
 		{
+			"name": "Critical Points",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"CO2\", \"fraction\": 0.7},\n    {\"fluid\": \"NITROGEN\", \"fraction\": 0.3}\n  ],\n  \"units_system\": \"SI\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5051/critical_point?Content-Type=application/json",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5051",
+					"path": [
+						"critical_point"
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Specific point calculation",
 			"request": {
 				"method": "POST",
