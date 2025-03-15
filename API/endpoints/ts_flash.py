@@ -94,7 +94,7 @@ def calculate_properties_ts(z: List[float], T: float, s: float, units_system: st
         'thermal_conductivity': tcx,
         'surface_tension': surface_tension,
         'critical_temperature': Tc,
-        'critical_pressure': Pc,
+        'critical_pressure': Pc / 100,  # Convert from kPa to bar
         'critical_density': Dc,
         'compressibility_factor': Z,
         'isothermal_compressibility': -1/D * dDdP,
