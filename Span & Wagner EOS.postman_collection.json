@@ -560,6 +560,37 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get EOS info",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"composition\": [\n    {\n      \"fluid\": \"CO2\",\n      \"fraction\": 0.5\n    },\n    {\n      \"fluid\": \"N2\",\n      \"fraction\": 0.2\n    },\n    {\n      \"fluid\": \"METHANE\",\n      \"fraction\": 0.1\n    },\n    {\n      \"fluid\": \"BUTANE\",\n      \"fraction\": 0.1\n    },\n    {\n      \"fluid\": \"PROPANE\",\n      \"fraction\": 0.05\n    },\n    {\n      \"fluid\": \"O2\",\n      \"fraction\": 0.05\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5051/models_info",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5051",
+					"path": [
+						"models_info"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

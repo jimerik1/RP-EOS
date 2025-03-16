@@ -6,7 +6,7 @@ from typing import Dict, Any, List
 
 from API.endpoints import models_info_bp  # You'll need to create this blueprint in __init__.py
 from API.refprop_setup import RP
-from API.utils.helpers import validate_composition, trim
+from API.utils.helpers import validate_composition
 
 def get_model_info(z: List[float]) -> Dict[str, Any]:
     """
@@ -24,8 +24,8 @@ def get_model_info(z: List[float]) -> Dict[str, Any]:
         # Get the primary EOS model
         hcode, hcite = RP.GETMODdll(0, 'EOS')
         models['primary_eos'] = {
-            'code': trim(hcode.raw),
-            'reference': trim(hcite.raw)
+            'code': hcode,      # no trim
+            'reference': hcite  # no trim
         }
         
         # Get transport property models
@@ -41,8 +41,8 @@ def get_model_info(z: List[float]) -> Dict[str, Any]:
             try:
                 hcode, hcite = RP.GETMODdll(0, code)
                 models['property_models'][prop_name] = {
-                    'code': trim(hcode.raw),
-                    'reference': trim(hcite.raw)
+                    'code': hcode,
+                    'reference': hcite
                 }
             except:
                 # Skip properties that don't have specific models
@@ -68,14 +68,14 @@ def get_model_info(z: List[float]) -> Dict[str, Any]:
                 # Get first two components with non-zero fractions
                 i, j = [idx+1 for idx, val in enumerate(z) if val > 0][:2]
                 hmixrule = RP.GETKTVdll(i, j).hmxrul
-                models['mixing_rule'] = trim(hmixrule)
+                models['mixing_rule'] = hmixrule
                 
                 # Get binary interaction parameters
                 hmodij = RP.GETKTVdll(i, j).hmodij
                 fij = RP.GETKTVdll(i, j).fij
                 
                 models['binary_interaction'] = {
-                    'model': trim(hmodij),
+                    'model': hmodij,
                     'parameters': [float(f) for f in fij]
                 }
             except Exception as e:
@@ -98,16 +98,16 @@ def get_model_info(z: List[float]) -> Dict[str, Any]:
                     
                     # Store component information
                     models['components'].append({
-                        'name': trim(hnam),
-                        'cas_number': trim(hcasn),
+                        'name': hnam,
+                        'cas_number': hcasn,
                         'molar_mass': wmm,
                         'critical_temperature': Tc,
                         'critical_pressure': Pc,
                         'critical_density': Dc,
                         'acentric_factor': acf,
                         'eos_model': {
-                            'code': trim(hcode),
-                            'reference': trim(hcite)
+                            'code': hcode,
+                            'reference': hcite
                         }
                     })
                 except Exception as e:

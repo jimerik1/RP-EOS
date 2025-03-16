@@ -35,6 +35,10 @@ def validate_composition(composition):
     total = sum(comp.get('fraction', 0) for comp in composition)
     return abs(total - 1.0) < 1e-6
 
+def trim(s: bytes) -> str:
+    """Trim NULL characters and decode."""
+    return s.replace(b'\x00', b'').strip().decode("utf-8")
+
 def convert_for_json(obj):
     """Convert numpy types to JSON serializable Python types."""
     if isinstance(obj, np.integer):
