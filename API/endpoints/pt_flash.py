@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request, jsonify, Response
 import numpy as np
 import sys
 import traceback
@@ -105,7 +105,11 @@ def calculate_properties(z: List[float], T: float, P: float, units_system: str =
         'thermal_diffusivity': tcx / (D * Cp) * 10000,  # Convert to cm²/s
         'prandtl_number': (Cp / wmm_kg) * (eta * 1e-6) / tcx,
         'temperature': T - 273.15,  # Convert to Celsius
-        'pressure': P
+        'pressure': P,
+        'x': list(x[:len(z)]),  # Liquid composition
+        'y': list(y[:len(z)]),  # Vapor composition
+        'dDdP': dDdP,          # Add pressure derivative of density
+        'dDdT': dDdT           # Add temperature derivative of density
     }
     
     # Convert properties to requested unit system
@@ -113,9 +117,13 @@ def calculate_properties(z: List[float], T: float, P: float, units_system: str =
     for prop_id, value in raw_properties.items():
         if value is not None:  # Skip undefined properties
             try:
-                properties[prop_id] = converter.convert_property(
-                    prop_id, float(value), wmm, 'SI', units_system
-                )
+                if prop_id in ['x', 'y']:
+                    # Composition vectors
+                    properties[prop_id] = {'value': value, 'unit': 'mole fraction'}
+                else:
+                    properties[prop_id] = converter.convert_property(
+                        prop_id, float(value), wmm, 'SI', units_system
+                    )
             except Exception as e:
                 print(f"Warning: Could not convert property {prop_id}: {str(e)}")
                 properties[prop_id] = {'value': float(value), 'unit': 'unknown'}
@@ -133,7 +141,7 @@ def pt_flash():
     try:
         data = request.get_json(force=True)
         
-        # Validate the new structure
+        # Validate the request structure
         required_fields = ['composition', 'variables']
         for field in required_fields:
             if field not in data:
@@ -148,6 +156,7 @@ def pt_flash():
         calculation = data.get('calculation', {})
         properties = calculation.get('properties', [])
         units_system = calculation.get('units_system', 'SI')  # Default to SI
+        response_format = calculation.get('response_format', 'json')  # Default to JSON
         
         if not properties:
             return jsonify({'error': 'No properties specified for calculation'}), 400
@@ -158,6 +167,9 @@ def pt_flash():
 
         # Setup mixture
         z = setup_mixture(data['composition'])
+        
+        # Get molecular weight for unit conversions
+        wmm = RP.WMOLdll(z)
 
         # Extract range and resolution parameters
         pressure_range = variables['pressure'].get('range', {})
@@ -172,8 +184,8 @@ def pt_flash():
             return jsonify({'error': 'Missing range or resolution parameters'}), 400
 
         # Debug log
-        print("Received request with temperature range:", temperature_range,
-              "and pressure range:", pressure_range)
+        print(f"Calculating PT flash for temperature range: {temperature_range['from']} to {temperature_range['to']} °C, "
+              f"pressure range: {pressure_range['from']} to {pressure_range['to']} bar")
 
         # Create arrays for calculations
         T_range = np.arange(
@@ -187,25 +199,40 @@ def pt_flash():
             float(pressure_resolution)
         )
 
-        # Calculate properties (rest of the function remains the same)
+        # Calculate properties
         results = []
         idx = 0
-        for T in T_range:
-            for P in P_range:
+        for p_idx, P in enumerate(P_range):
+            for t_idx, T in enumerate(T_range):
                 try:
                     props = calculate_properties(z, float(T), float(P), units_system)
                     filtered_props = {k: v for k, v in props.items() 
-                                   if k in properties or k in ['temperature', 'pressure']}
+                                   if k in properties or k in ['temperature', 'pressure', 'phase']}
+                    
+                    # Add grid indices for OLGA TAB formatting
                     results.append({
                         'index': idx,
+                        'p_idx': p_idx,
+                        't_idx': t_idx,
                         **filtered_props
                     })
                     idx += 1
                 except Exception as fe:
-                    print(f"Error processing T={T}, P={P}: {fe}", file=sys.stderr)
+                    print(f"Error processing T={T-273.15}°C, P={P} bar: {fe}", file=sys.stderr)
                     continue
 
-        return jsonify({'results': results})
+        # Return response in the requested format
+        if response_format.lower() == 'olga_tab':
+            from API.utils.olga_formatter import format_olga_tab
+            return format_olga_tab(
+                pressure_range,
+                temperature_range,
+                results,
+                data['composition'],
+                wmm
+            )
+        else:
+            return jsonify({'results': results})
         
     except Exception as e:
         print("Error processing request:", file=sys.stderr)

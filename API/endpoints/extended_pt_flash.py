@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request, jsonify, Response
 import numpy as np
 import sys
 import traceback
@@ -188,7 +188,9 @@ def calculate_properties_extended(
                     'thermal_conductivity': None,  # Could estimate but less reliable
                     'surface_tension': None,
                     'temperature': T - 273.15,  # Convert to Celsius
-                    'pressure': P / 100  # Convert kPa to bar
+                    'pressure': P / 100,  # Convert kPa to bar
+                    'x': list(x[:len(z)]),  # Liquid composition at triple point
+                    'y': list(y[:len(z)]),  # Vapor composition at triple point
                 }
             else:
                 # Fallback with minimal properties
@@ -303,7 +305,7 @@ def calculate_properties_extended(
                 'thermal_conductivity': tcx,
                 'surface_tension': surface_tension,
                 'critical_temperature': Tc,
-                'critical_pressure': Pc / 100,  # Convert from kPa to bar
+                'critical_pressure': Pc / 100 if Pc is not None else None,  # Convert from kPa to bar
                 'critical_density': Dc,
                 'compressibility_factor': Z,
                 'isothermal_compressibility': -1/D * dDdP if dDdP is not None else None,
@@ -311,7 +313,11 @@ def calculate_properties_extended(
                 'dp_dt_saturation': dPdT,
                 'joule_thomson_coefficient': (T*dDdT/dDdP - 1)/(Cp * 100) if (dDdT is not None and dDdP is not None and Cp is not None) else None,
                 'temperature': T - 273.15,  # Convert to Celsius
-                'pressure': P / 100  # Convert kPa to bar
+                'pressure': P / 100,  # Convert kPa to bar
+                'x': list(x[:len(z)]),  # Liquid composition
+                'y': list(y[:len(z)]),  # Vapor composition
+                'dDdP': dDdP,          # Add pressure derivative of density
+                'dDdT': dDdT           # Add temperature derivative of density
             }
         except Exception as e:
             # If calculation fails completely, return error with minimal set
@@ -333,9 +339,13 @@ def calculate_properties_extended(
     for prop_id, value in raw_properties.items():
         if value is not None:  # Skip undefined properties
             try:
-                properties[prop_id] = converter.convert_property(
-                    prop_id, float(value), wmm, 'SI', units_system
-                )
+                if prop_id in ['x', 'y']:
+                    # Composition vectors
+                    properties[prop_id] = {'value': value, 'unit': 'mole fraction'}
+                else:
+                    properties[prop_id] = converter.convert_property(
+                        prop_id, float(value), wmm, 'SI', units_system
+                    )
             except Exception as e:
                 print(f"Warning: Could not convert property {prop_id}: {str(e)}")
                 properties[prop_id] = {'value': float(value) if value is not None else None, 'unit': 'unknown'}
@@ -369,6 +379,7 @@ def extended_pt_flash():
         properties = calculation.get('properties', [])
         units_system = calculation.get('units_system', 'SI')  # Default to SI
         include_solid_phase = calculation.get('include_solid_phase', True)  # Default to include solid phase
+        response_format = calculation.get('response_format', 'json')  # Default to JSON
         
         if not properties:
             return jsonify({'error': 'No properties specified for calculation'}), 400
@@ -379,6 +390,9 @@ def extended_pt_flash():
 
         # Setup mixture
         z = setup_mixture(data['composition'])
+        
+        # Get molecular weight for unit conversions
+        wmm = RP.WMOLdll(z)
 
         # Determine if it's a pure fluid
         is_pure = sum(1 for component in z if component > 0) == 1
@@ -415,8 +429,8 @@ def extended_pt_flash():
         # Calculate properties
         results = []
         idx = 0
-        for T in T_range:
-            for P in P_range:
+        for p_idx, P in enumerate(P_range):
+            for t_idx, T in enumerate(T_range):
                 try:
                     props = calculate_properties_extended(
                         z, float(T), float(P), units_system, is_pure, pure_component_idx
@@ -430,9 +444,11 @@ def extended_pt_flash():
                     if 'calculation_error' in props and len(filtered_props) <= 3:  # Only T, P, and error
                         continue
                         
-                    # Add result with index
+                    # Add result with indices
                     results.append({
                         'index': idx,
+                        'p_idx': p_idx,
+                        't_idx': t_idx,
                         **filtered_props
                     })
                     idx += 1
@@ -440,7 +456,18 @@ def extended_pt_flash():
                     print(f"Error processing T={T-273.15}°C, P={P/100} bar: {fe}", file=sys.stderr)
                     continue
 
-        return jsonify({'results': results})
+        # Return response in the requested format
+        if response_format.lower() == 'olga_tab':
+            from API.utils.olga_formatter import format_olga_tab
+            return format_olga_tab(
+                pressure_range,
+                temperature_range,
+                results,
+                data['composition'],
+                wmm
+            )
+        else:
+            return jsonify({'results': results})
         
     except Exception as e:
         print("Error processing request:", file=sys.stderr)

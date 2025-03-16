@@ -436,9 +436,9 @@ for point in data:
 
 # Compare with literature values for verification
 literature_values = {
-    "temperature": 31.1,  # °C
-    "pressure": 73.9,     # bar
-    "density": 10.6       # mol/L (approximate)
+    "temperature": 30.98,  # °C
+    "pressure": 73.8,     # bar
+    "density": 10.63       # mol/L (approximate)
 }
 
 if critical_properties:

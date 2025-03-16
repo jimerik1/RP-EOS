@@ -12,6 +12,7 @@ This project provides a containerized web API for calculating thermodynamic prop
 - Support for various flash calculations:
   - PT-Flash (Pressure-Temperature)
   - PH-Flash (Pressure-Enthalpy)
+  - TS-Flash (Temperature-Entropy)
 - Phase envelope calculations:
   - P-T (Pressure-Temperature) plane
   - P-H (Pressure-Enthalpy) plane
@@ -22,6 +23,7 @@ This project provides a containerized web API for calculating thermodynamic prop
   - Transport properties
   - Critical properties
 - Multiple unit systems (SI and CGS)
+- Multiple response formats (JSON and OLGA TAB)
 - Docker containerization for easy deployment
 - Modular Flask architecture for extensibility
 
@@ -52,22 +54,31 @@ Calculate thermodynamic properties based on pressure and temperature.
     {"fluid": "FLUID_NAME2", "fraction": X2},
     ...
   ],
-  "pressure_range": {
-    "from": P_MIN,
-    "to": P_MAX
+  "variables": {
+    "pressure": {
+      "range": {
+        "from": P_MIN,
+        "to": P_MAX
+      },
+      "resolution": P_STEP
+    },
+    "temperature": {
+      "range": {
+        "from": T_MIN,
+        "to": T_MAX
+      },
+      "resolution": T_STEP
+    }
   },
-  "temperature_range": {
-    "from": T_MIN,
-    "to": T_MAX
-  },
-  "pressure_resolution": P_STEP,
-  "temperature_resolution": T_STEP,
-  "properties": [
-    "property1",
-    "property2",
-    ...
-  ],
-  "units_system": "SI" or "CGS"
+  "calculation": {
+    "properties": [
+      "property1",
+      "property2",
+      ...
+    ],
+    "units_system": "SI" or "CGS",
+    "response_format": "json" or "olga_tab"
+  }
 }
 ```
 
@@ -79,25 +90,34 @@ Calculate thermodynamic properties based on pressure and temperature.
     {"fluid": "CO2", "fraction": 0.7},
     {"fluid": "N2", "fraction": 0.3}
   ],
-  "pressure_range": {
-    "from": 10,
-    "to": 50
+  "variables": {
+    "pressure": {
+      "range": {
+        "from": 10,
+        "to": 50
+      },
+      "resolution": 10
+    },
+    "temperature": {
+      "range": {
+        "from": -20,
+        "to": 30
+      },
+      "resolution": 5
+    }
   },
-  "temperature_range": {
-    "from": -20,
-    "to": 30
-  },
-  "pressure_resolution": 10,
-  "temperature_resolution": 5,
-  "properties": [
-    "density",
-    "enthalpy",
-    "entropy",
-    "sound_speed",
-    "viscosity",
-    "phase"
-  ],
-  "units_system": "SI"
+  "calculation": {
+    "properties": [
+      "density",
+      "enthalpy",
+      "entropy",
+      "sound_speed",
+      "viscosity",
+      "phase"
+    ],
+    "units_system": "SI",
+    "response_format": "json"
+  }
 }
 ```
 
@@ -114,22 +134,31 @@ Calculate thermodynamic properties based on pressure and enthalpy.
     {"fluid": "FLUID_NAME2", "fraction": X2},
     ...
   ],
-  "pressure_range": {
-    "from": P_MIN,
-    "to": P_MAX
+  "variables": {
+    "pressure": {
+      "range": {
+        "from": P_MIN,
+        "to": P_MAX
+      },
+      "resolution": P_STEP
+    },
+    "enthalpy": {
+      "range": {
+        "from": H_MIN,
+        "to": H_MAX
+      },
+      "resolution": H_STEP
+    }
   },
-  "enthalpy_range": {
-    "from": H_MIN,
-    "to": H_MAX
-  },
-  "pressure_resolution": P_STEP,
-  "enthalpy_resolution": H_STEP,
-  "properties": [
-    "property1",
-    "property2",
-    ...
-  ],
-  "units_system": "SI" or "CGS"
+  "calculation": {
+    "properties": [
+      "property1",
+      "property2",
+      ...
+    ],
+    "units_system": "SI" or "CGS",
+    "response_format": "json" or "olga_tab"
+  }
 }
 ```
 
@@ -142,27 +171,36 @@ Calculate thermodynamic properties based on pressure and enthalpy.
     {"fluid": "ETHANE", "fraction": 0.1},
     {"fluid": "PROPANE", "fraction": 0.05}
   ],
-  "pressure_range": {
-    "from": 5,
-    "to": 50
+  "variables": {
+    "pressure": {
+      "range": {
+        "from": 5,
+        "to": 50
+      },
+      "resolution": 5
+    },
+    "enthalpy": {
+      "range": {
+        "from": 300,
+        "to": 800
+      },
+      "resolution": 50
+    }
   },
-  "enthalpy_range": {
-    "from": 300,
-    "to": 800
-  },
-  "pressure_resolution": 5,
-  "enthalpy_resolution": 50,
-  "properties": [
-    "temperature",
-    "density",
-    "vapor_fraction",
-    "entropy",
-    "cp",
-    "cv",
-    "sound_speed",
-    "phase"
-  ],
-  "units_system": "SI"
+  "calculation": {
+    "properties": [
+      "temperature",
+      "density",
+      "vapor_fraction",
+      "entropy",
+      "cp",
+      "cv",
+      "sound_speed",
+      "phase"
+    ],
+    "units_system": "SI",
+    "response_format": "json"
+  }
 }
 ```
 
@@ -179,12 +217,18 @@ Calculate phase envelope (bubble and dew curves) in the pressure-temperature pla
     {"fluid": "FLUID_NAME2", "fraction": X2},
     ...
   ],
-  "temperature_range": {
-    "from": T_MIN,
-    "to": T_MAX
+  "variables": {
+    "temperature": {
+      "range": {
+        "from": T_MIN,
+        "to": T_MAX
+      },
+      "resolution": T_STEP
+    }
   },
-  "temperature_resolution": T_STEP,
-  "desired_curve": "bubble", "dew", or "both"
+  "calculation": {
+    "curve_type": "bubble", "dew", or "both"
+  }
 }
 ```
 
@@ -196,12 +240,18 @@ Calculate phase envelope (bubble and dew curves) in the pressure-temperature pla
     {"fluid": "CO2", "fraction": 0.5},
     {"fluid": "METHANE", "fraction": 0.5}
   ],
-  "temperature_range": {
-    "from": -80,
-    "to": 50
+  "variables": {
+    "temperature": {
+      "range": {
+        "from": -80,
+        "to": 50
+      },
+      "resolution": 2
+    }
   },
-  "temperature_resolution": 2,
-  "desired_curve": "both"
+  "calculation": {
+    "curve_type": "both"
+  }
 }
 ```
 
@@ -218,12 +268,18 @@ Calculate phase envelope (bubble and dew curves) in the pressure-enthalpy plane.
     {"fluid": "FLUID_NAME2", "fraction": X2},
     ...
   ],
-  "pressure_range": {
-    "from": P_MIN,
-    "to": P_MAX
+  "variables": {
+    "pressure": {
+      "range": {
+        "from": P_MIN,
+        "to": P_MAX
+      },
+      "resolution": P_STEP
+    }
   },
-  "pressure_resolution": P_STEP,
-  "desired_curve": "bubble", "dew", or "both"
+  "calculation": {
+    "curve_type": "bubble", "dew", or "both"
+  }
 }
 ```
 
@@ -235,14 +291,92 @@ Calculate phase envelope (bubble and dew curves) in the pressure-enthalpy plane.
     {"fluid": "NITROGEN", "fraction": 0.2},
     {"fluid": "OXYGEN", "fraction": 0.8}
   ],
-  "pressure_range": {
-    "from": 10,
-    "to": 200
+  "variables": {
+    "pressure": {
+      "range": {
+        "from": 10,
+        "to": 200
+      },
+      "resolution": 5
+    }
   },
-  "pressure_resolution": 5,
-  "desired_curve": "both"
+  "calculation": {
+    "curve_type": "both"
+  }
 }
 ```
+
+## Response Formats
+
+The API supports multiple response formats:
+
+### 1. JSON (Default)
+
+JSON responses include calculated properties with their units:
+
+```json
+{
+  "results": [
+    {
+      "index": 0,
+      "temperature": {"value": X, "unit": "°C"},
+      "pressure": {"value": Y, "unit": "bar"},
+      "property1": {"value": Z1, "unit": "unit1"},
+      "property2": {"value": Z2, "unit": "unit2"},
+      ...
+    },
+    ...
+  ]
+}
+```
+
+### 2. OLGA TAB
+
+OLGA TAB is a specialized format used by multiphase flow simulators like OLGA. It represents fluid properties as a structured table across a pressure and temperature grid.
+
+To request OLGA TAB format, add `"response_format": "olga_tab"` to the calculation section of your request.
+
+Example:
+
+```json
+{
+  "calculation": {
+    "properties": [...],
+    "units_system": "SI",
+    "response_format": "olga_tab"
+  }
+}
+```
+
+The response will be a plain text file in OLGA TAB format with the following structure:
+
+```
+'Span-Wagner EOS FLUID_NAME-FRACTION'
+   NP  NT    .276731E-08
+    P1    P2    P3    P4    P5
+    ...
+    T1    T2    T3    T4    T5
+    ...
+ LIQUID DENSITY (KG/M3)                
+    D11    D12    D13    D14    D15
+    ...
+ GAS DENSITY (KG/M3)                
+    D21    D22    D23    D24    D25
+    ...
+```
+
+OLGA TAB format includes standard property sets typically needed for multiphase flow simulations:
+
+- Density (liquid and gas)
+- Viscosity (liquid and gas)
+- Specific heat (liquid and gas)
+- Thermal conductivity (liquid and gas)
+- Enthalpy (liquid and gas)
+- Entropy (liquid and gas)
+- Surface tension
+- Derivative properties (density derivatives with respect to pressure and temperature)
+- Phase fractions (gas mass fraction)
+- Component distributions (water mass fractions in liquid and gas phases)
 
 ## Available Properties
 
@@ -277,6 +411,10 @@ The following properties can be requested in the API calls:
 | `kinematic_viscosity`       | Kinematic viscosity                              | cm²/s                  | cm²/s                    |
 | `thermal_diffusivity`       | Thermal diffusivity                              | cm²/s                  | cm²/s                    |
 | `phase`                     | Phase state (Liquid, Vapor, etc.)                | text                   | text                     |
+| `dDdP`                      | Pressure derivative of density                   | (mol/L)/kPa            | (g/cm³)/(dyn/cm²)        |
+| `dDdT`                      | Temperature derivative of density                | (mol/L)/K              | (g/cm³)/K                |
+| `x`                         | Liquid phase composition                         | mole fraction          | mole fraction            |
+| `y`                         | Vapor phase composition                          | mole fraction          | mole fraction            |
 
 ## Available Fluids
 
@@ -331,26 +469,6 @@ The API supports two unit systems:
 - Thermal conductivity: cal/(s·cm·K)
 - Surface tension: dyn/cm
 
-## Response Format
-
-The API returns a JSON response with the following structure:
-
-```json
-{
-  "results": [
-    {
-      "index": 0,
-      "temperature": {"value": X, "unit": "°C"},
-      "pressure": {"value": Y, "unit": "bar"},
-      "property1": {"value": Z1, "unit": "unit1"},
-      "property2": {"value": Z2, "unit": "unit2"},
-      ...
-    },
-    ...
-  ]
-}
-```
-
 ## Error Handling
 
 The API returns standard HTTP status codes:
@@ -375,7 +493,10 @@ The API provides a health check endpoint:
 
 ## Usage Examples
 
-See the included test scripts for examples of how to interact with the API and visualize the results.
+See the included examples in the EXAMPLES directory:
+
+- `generate_olga_tab.py`: Example of generating an OLGA TAB file directly from the API
+- `json_to_olga_tab.py`: Utility to convert an existing JSON response to OLGA TAB format
 
 ## Notes on Fluid Composition
 
