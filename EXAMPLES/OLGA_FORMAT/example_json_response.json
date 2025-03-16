@@ -1,0 +1,5999 @@
+{
+    "results": [
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9694409818119956
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 35.85557999861119
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 26.302130913651343
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.4900794682314697
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 4.2338516617111015
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12828.477511158191
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 81.77784859529113
+            },
+            "index": 0,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10787.992110680876
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0010317571663747678
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.29920016583296616
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 12.358161230831628
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.4900794682314697
+            },
+            "p_idx": 0,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7544162647874644
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 10.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 409.9404963978676
+            },
+            "t_idx": 0,
+            "temperature": {
+                "unit": "°C",
+                "value": -20.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.02878498942361206
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 16.38109066261077
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.4900794682314697
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 9.716291473960476
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004368306793338149
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9713916705412223
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 35.89328824202884
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 26.405439167296976
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.4796222370421097
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 4.1377205253488025
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13007.843356875019
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 82.47947682218864
+            },
+            "index": 1,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10922.869135981666
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.001029609737494465
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.2978697706405404
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 12.847769330672548
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.4796222370421097
+            },
+            "p_idx": 0,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7524196704996868
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 10.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 414.22267154852125
+            },
+            "t_idx": 1,
+            "temperature": {
+                "unit": "°C",
+                "value": -15.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.029395452291959553
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 17.07527040347079
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.4796222370421097
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 9.885695072517459
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.00426023734392984
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9732002262942615
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 35.945750155652405
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 26.51828449735879
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.4696347660773994
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 4.046287391010079
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13187.434977675464
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 83.1685108099528
+            },
+            "index": 2,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11058.120727045238
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0010276337821777328
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.2964969495223374
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 13.344341551395507
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.4696347660773994
+            },
+            "p_idx": 0,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7505686101505854
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 10.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 418.41926496196834
+            },
+            "t_idx": 2,
+            "temperature": {
+                "unit": "°C",
+                "value": -10.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.030013354809979156
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 17.77897632665221
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.4696347660773994
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.053969374288693
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004158101615401757
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9748796964739185
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 36.012170892521155
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 26.64043186556071
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.46008384923206896
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 3.9591858070995576
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13367.324118877159
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 83.84569481574025
+            },
+            "index": 3,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11193.807266092364
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.001025811598697855
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.29508237016459177
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 13.847835158009827
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.46008384923206896
+            },
+            "p_idx": 0,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7488503659364698
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 10.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 422.53397898865563
+            },
+            "t_idx": 3,
+            "temperature": {
+                "unit": "°C",
+                "value": -5.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.030638897183449167
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 18.49212578095293
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.46008384923206896
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.221133072342303
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004061378722322655
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9764416579457457
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 36.09183280420683
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 26.771647591405344
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.45093953289339633
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 3.8760891175744425
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13547.578751814777
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 84.51171789552325
+            },
+            "index": 4,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11329.986531448498
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0010241277672659343
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.2936270231036688
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 14.358205625973914
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.45093953289339633
+            },
+            "p_idx": 0,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7472534985297589
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 10.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 426.5702937245119
+            },
+            "t_idx": 4,
+            "temperature": {
+                "unit": "°C",
+                "value": 0.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.0312722737447882
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 19.214638210759894
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.45093953289339633
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.387203702325762
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.003969610493705299
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9778964150621653
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 36.184080039266604
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 26.911696309780922
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.44217470692429567
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 3.7967049308228633
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13728.26341970676
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 85.1672191651739
+            },
+            "index": 5,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11466.71389111464
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0010225687959987898
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.2921321960821653
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 14.875407129249488
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.44217470692429567
+            },
+            "p_idx": 0,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7457676922482618
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 10.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 430.5314978445511
+            },
+            "t_idx": 5,
+            "temperature": {
+                "unit": "°C",
+                "value": 5.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03191366837026975
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 19.946435443461862
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.44217470692429567
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.552197883620346
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.003882391989874204
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.979253166554931
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 36.288306588762964
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.060339039815435
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.43376475832519534
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 3.7207705173364367
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13909.439515491058
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 85.81279235027638
+            },
+            "index": 6,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11604.04245220475
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0010211228309418767
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.2905994440397391
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 15.399392934204037
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.43376475832519534
+            },
+            "p_idx": 0,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7443836202084723
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 10.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 434.42071306849766
+            },
+            "t_idx": 6,
+            "temperature": {
+                "unit": "°C",
+                "value": 10.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.0325632511683677
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 20.687441953506823
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.43376475832519534
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.716131502860664
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.003799363723947653
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9805201468967643
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 36.403947019452566
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.217332103442157
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.42568727630520947
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 3.6480489553711446
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 14091.16550688442
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 86.44898975281761
+            },
+            "index": 7,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11742.023177145113
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.001019779416976138
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.28903055647453746
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 15.93011571846601
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.42568727630520947
+            },
+            "p_idx": 0,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7430928280445489
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 10.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 438.24091348541515
+            },
+            "t_idx": 7,
+            "temperature": {
+                "unit": "°C",
+                "value": 15.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.033221176143687296
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 21.43758507316799
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.42568727630520947
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.879019853878642
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.0037202052368087955
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.981704746600197
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 36.53046930714491
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.382426686920457
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.4179217998039358
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 3.578325883368723
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 14273.497120573158
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 87.07632573594721
+            },
+            "index": 8,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11880.704975082925
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0010185292994521443
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.2874275235506423
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 16.467527829609633
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.4179217998039358
+            },
+            "p_idx": 0,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7418876340762509
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 10.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 441.99494074363486
+            },
+            "t_idx": 8,
+            "temperature": {
+                "unit": "°C",
+                "value": 20.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.033887579623815764
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 22.19679513881358
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.4179217998039358
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.040877744553747
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.0036446297551990213
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9828136150423243
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 36.66736931303998
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.5553688816476
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.4104496002872965
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 3.5114067479688664
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 14456.48749484574
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 87.69527980722471
+            },
+            "index": 9,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 12020.134775047634
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.001017364258654071
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.2857925020364754
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 17.011581495333242
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.4104496002872965
+            },
+            "p_idx": 0,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7407610436733348
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 10.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 445.6855159346934
+            },
+            "t_idx": 9,
+            "temperature": {
+                "unit": "°C",
+                "value": 25.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03456257929053583
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 22.965005571803676
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.4104496002872965
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.20171957843394
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.0035723797229802474
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9838527487164903
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 36.81416654541536
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.735900074667693
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.4032534940268828
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 3.447114459452434
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 14640.187307952096
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 88.30629936467065
+            },
+            "index": 10,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 12160.357585922866
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0010162769709044473
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.28412778192129623
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 17.562228994335296
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.4032534940268828
+            },
+            "p_idx": 0,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7397066756876272
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 10.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 449.31524885504484
+            },
+            "t_idx": 10,
+            "temperature": {
+                "unit": "°C",
+                "value": 30.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.035246273693452033
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 23.742152898660198
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.4032534940268828
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.361559417062326
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.003503223041213241
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9384429389820763
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 37.62367465364701
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 26.596698184606854
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.0125349152577319
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 9.0945276779487
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12608.121098188298
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 75.39925013131881
+            },
+            "index": 11,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10632.880570812591
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0005332467607876727
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.6121889217031722
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 6.099426151139505
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.0125349152577319
+            },
+            "p_idx": 1,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.781889895420156
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 20.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 404.117391448982
+            },
+            "t_idx": 0,
+            "temperature": {
+                "unit": "°C",
+                "value": -20.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.029717658996615715
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 7.800876040048989
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.0125349152577319
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 9.90784388041149
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004849627425159979
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9424962162408586
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 37.54379834847605
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 26.67851467748066
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.9886534036758197
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 8.854138198768808
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12796.028005766426
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 76.13429237032642
+            },
+            "index": 12,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10773.074367449915
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0005307871657021567
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.6090741684651595
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 6.3512421320680605
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.9886534036758197
+            },
+            "p_idx": 1,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7780821350724273
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 20.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 408.851840169732
+            },
+            "t_idx": 1,
+            "temperature": {
+                "unit": "°C",
+                "value": -15.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.030298107377316395
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 8.162688546340753
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.9886534036758197
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.073558320509528
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004699662919259695
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9462384266103365
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 37.49080288187898
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 26.772195323019346
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.9660327625024503
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 8.628181891572298
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12983.603857404332
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 76.8539625310097
+            },
+            "index": 13,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10913.280698985647
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0005285526659324584
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.6058835474726985
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 6.606250444365469
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.9660327625024503
+            },
+            "p_idx": 1,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7746015052995551
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 20.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 413.46640868207726
+            },
+            "t_idx": 2,
+            "temperature": {
+                "unit": "°C",
+                "value": -10.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03088824930501333
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 8.52857940394873
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.9660327625024503
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.23828132317431
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004560448540940701
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9497003814928657
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 37.46220442498216
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 26.877175885422762
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.9445640162571228
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 8.415251893120347
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13170.976675940843
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 77.5593213659338
+            },
+            "index": 14,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11053.597688834083
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0005265157759299533
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.602620649209512
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 6.864460382982897
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.9445640162571228
+            },
+            "p_idx": 1,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.771411152189222
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 20.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 417.96832494587244
+            },
+            "t_idx": 3,
+            "temperature": {
+                "unit": "°C",
+                "value": -5.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03148801009937392
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 8.898575504777112
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.9445640162571228
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.402026817371588
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.0044307628801522675
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9529090531307424
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 37.455887700749415
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 26.99294931937181
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.9241514574451108
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 8.214130837260669
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13358.263021640583
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 78.2513284638485
+            },
+            "index": 15,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11194.115593329258
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0005246532690868321
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.599288917174119
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 7.1258757839346325
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.9241514574451108
+            },
+            "p_idx": 1,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7684794278793614
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 20.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 422.3641270032508
+            },
+            "t_idx": 4,
+            "temperature": {
+                "unit": "°C",
+                "value": 0.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.032097355224779404
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 9.272695566618705
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.9241514574451108
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.564807048816368
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004309570596475768
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9558881583828407
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 37.47003164513172
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.119051977624565
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.9047105708767497
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 8.023758757021778
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13545.569640989534
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 78.9308555752037
+            },
+            "index": 16,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11334.917898452899
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0005229453801021142
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.5958918101302709
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 7.390496092616446
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.9047105708767497
+            },
+            "p_idx": 1,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7657789995104147
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 20.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 426.6597709114471
+            },
+            "t_idx": 5,
+            "temperature": {
+                "unit": "°C",
+                "value": 5.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03271627606170751
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 9.65095164184629
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.9047105708767497
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.726633094960437
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004195987573038421
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9586586372276189
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 37.50305201093203
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.255053193928095
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.8861663508467984
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 7.843207430824896
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13732.994788180606
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 79.59869758352289
+            },
+            "index": 17,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11476.082191478135
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0005213751811271083
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.59243289943187
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 7.658317213594978
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.8861663508467984
+            },
+            "p_idx": 1,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7632861299602972
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 20.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 430.8607171717312
+            },
+            "t_idx": 6,
+            "temperature": {
+                "unit": "°C",
+                "value": 10.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03334477934528608
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 10.03335042128085
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.8861663508467984
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.887515234198352
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004089253694863812
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9612390479268664
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 37.5535567377679
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.400547472282447
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.8684519248257255
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 7.671659698048352
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13920.629293012502
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 80.25558162817579
+            },
+            "index": 18,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11617.680859336862
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.000519928088885706
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.588915920118006
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 7.929332191337977
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.8684519248257255
+            },
+            "p_idx": 1,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7609800957881613
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 20.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 434.9720002764307
+            },
+            "t_idx": 7,
+            "temperature": {
+                "unit": "°C",
+                "value": 15.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03398287929481412
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 10.419894337874132
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.8684519248257255
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.047463210121851
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.003988711365387772
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9636458956234036
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 37.620311025336754
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.555148686737315
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.8515074187283384
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 7.508392643817725
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 14108.557430987772
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 80.90217476144026
+            },
+            "index": 19,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11759.781652866133
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0005185914716362676
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.5853447894282671
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 8.2035317590478
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.8515074187283384
+            },
+            "p_idx": 1,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7588427144811247
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 20.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 438.99828493030094
+            },
+            "t_idx": 8,
+            "temperature": {
+                "unit": "°C",
+                "value": 20.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03463059175669712
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 10.810582486328732
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.8515074187283384
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.206486419857521
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.0038937883907803595
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9658939073303867
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 37.702209839723
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.718485829165143
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.8352790143711971
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 7.352763823821867
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 14296.857638172682
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 81.53909043265213
+            },
+            "index": 20,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11902.448146745903
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0005173543330452512
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.581723602779832
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 8.480904783772306
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.8352790143711971
+            },
+            "p_idx": 1,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7568579587709936
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 20.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 442.9439117093032
+            },
+            "t_idx": 9,
+            "temperature": {
+                "unit": "°C",
+                "value": 25.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.035287929878138065
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 11.205411379360836
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.8352790143711971
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.3645940472804
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.0038039842241126133
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9679962634170122
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 37.798256153447575
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.89019994525137
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 0.8197181611577384
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 7.204199898060406
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 14485.603103534595
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 82.16689402537828
+            },
+            "index": 21,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 12045.740117974683
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0005162070558878335
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.5780566146297526
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 8.76143862933882
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 0.8197181611577384
+            },
+            "p_idx": 1,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7550116404224747
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 20.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 446.81293432149533
+            },
+            "t_idx": 10,
+            "temperature": {
+                "unit": "°C",
+                "value": 30.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.035954900959520385
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 11.604375562257905
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 0.8197181611577384
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.521795156091596
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.0037188588194051924
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9070689265726272
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 39.69428684361983
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 26.90813219699882
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.57133523240643
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 14.683772645162493
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12378.548528817737
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 71.37791275591033
+            },
+            "index": 22,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10469.344217650076
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00036809131152782667
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.936708363037519
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 4.025334314753338
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.57133523240643
+            },
+            "p_idx": 2,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8151095734721203
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 30.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 398.7217561485114
+            },
+            "t_idx": 0,
+            "temperature": {
+                "unit": "°C",
+                "value": -20.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.030802276399687314
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 4.938396561344056
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.57133523240643
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.147311049999047
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.005404969131134287
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9133898425963558
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 39.45064476849171
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 26.964860364852267
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.5302372251415879
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 14.234471620150941
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12576.38980139953
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 72.15182069357742
+            },
+            "index": 23,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10615.909458410606
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0003652748431720081
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.9317031116504342
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 4.198000945866147
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.5302372251415879
+            },
+            "p_idx": 2,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8086826512083565
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 30.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 403.9230318441109
+            },
+            "t_idx": 1,
+            "temperature": {
+                "unit": "°C",
+                "value": -15.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03133843279440402
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 5.191159893925478
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.5302372251415879
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.305794161393726
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.005199494388687035
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9191982098210697
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 39.25420556704018
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.036491563831394
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.491676079453461
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 13.817372668569961
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12773.13357206122
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 72.90666962428675
+            },
+            "index": 24,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10761.973078625426
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0003627522907407504
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.9265355304472216
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 4.372544086097056
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.491676079453461
+            },
+            "p_idx": 2,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8028996782260238
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 30.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 408.964395625353
+            },
+            "t_idx": 2,
+            "temperature": {
+                "unit": "°C",
+                "value": -10.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.031888466222405765
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 5.445940762808656
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.491676079453461
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.46378702645451
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.00501228358754239
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9245490623393849
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 39.099107488045505
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.121984654135115
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.4553897296385954
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 13.428740341465708
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12969.000700785731
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 73.64400870693017
+            },
+            "index": 25,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10907.697162011302
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00036048189333531046
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.9212273512036842
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 4.549002455345426
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.4553897296385954
+            },
+            "p_idx": 2,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7976732692150826
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 30.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 413.8578751975514
+            },
+            "t_idx": 3,
+            "temperature": {
+                "unit": "°C",
+                "value": -5.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.032451687286916484
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 5.702839283835703
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.4553897296385954
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.621250371598231
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.0048408177433998225
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.929489823407714
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 38.98054559205669
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.220444370024797
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.4211542742364158
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 13.065429538302583
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13164.185495467136
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 74.36520308535938
+            },
+            "index": 26,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11053.225373553636
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00035842945862827106
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.9157958217790557
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 4.727405502626802
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.4211542742364158
+            },
+            "p_idx": 2,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7929310560269283
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 30.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 418.61405503579067
+            },
+            "t_idx": 4,
+            "temperature": {
+                "unit": "°C",
+                "value": 0.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03302756588452251
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 5.961937632149265
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.4211542742364158
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.778150692225465
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004683034836159617
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9340616126436816
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 38.894534056695505
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.331088938087063
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.3887768907725617
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 12.724769786791041
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13358.860371915296
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 75.07146415632852
+            },
+            "index": 27,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11198.686178398057
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.000356566708969144
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.9102550787818132
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 4.907775281309349
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.3887768907725617
+            },
+            "p_idx": 2,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7886125914424771
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 30.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 423.2423307017169
+            },
+            "t_idx": 5,
+            "temperature": {
+                "unit": "°C",
+                "value": 5.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03361568893518297
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 6.223303222095879
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.3887768907725617
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.93445947821354
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004537229285266078
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9383002841929888
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 38.837729208576306
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.453225341456807
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.358090326579875
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 12.404476139809201
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13553.179485788974
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 75.7638734752789
+            },
+            "index": 28,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11344.195339973727
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00035487004589855267
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.9046171057321105
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 5.0901279038719185
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.358090326579875
+            },
+            "p_idx": 2,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7846669809086572
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 30.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 427.7511081527286
+            },
+            "t_idx": 6,
+            "temperature": {
+                "unit": "°C",
+                "value": 10.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03421572941820086
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 6.486991332268714
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.358090326579875
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.090152560524455
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004401977017081592
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.942237260132311
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 38.80729611699071
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.586230399868832
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.328948562179305
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 12.10257975091655
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13747.281594466976
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 76.44340187214219
+            },
+            "index": 29,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11489.857879676703
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.000353319613980664
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.8988924002101042
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 5.2744746816095525
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.328948562179305
+            },
+            "p_idx": 2,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7810510532333628
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 30.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 432.147961364342
+            },
+            "t_idx": 7,
+            "temperature": {
+                "unit": "°C",
+                "value": 15.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03482742340186304
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 6.753047268516574
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.328948562179305
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.24520955473179
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004276078805764037
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9459002060148052
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 38.80080690378576
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.729536293805907
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.3012233593978075
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 11.817373193810415
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13941.292335272292
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 77.1109249134565
+            },
+            "index": 30,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11635.769629786611
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0003518985822283688
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.8930904350412932
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 5.460823025568395
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.3012233593978075
+            },
+            "p_idx": 2,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7777279345408153
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 30.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 436.4397580182047
+            },
+            "t_idx": 8,
+            "temperature": {
+                "unit": "°C",
+                "value": 20.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.035450552838524475
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 7.021508143194784
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.3012233593978075
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.399613383915913
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004158516872565417
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9493135833008817
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 38.816162450707274
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.882619495404356
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.274801485664132
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 11.547366963489813
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 14135.326056639291
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 77.76723554389368
+            },
+            "index": 31,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11782.018476018542
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00035059258603038974
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.8872199730042446
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 5.649177164613788
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.274801485664132
+            },
+            "p_idx": 2,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.774665926905258
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 30.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 440.63276049906045
+            },
+            "t_idx": 9,
+            "temperature": {
+                "unit": "°C",
+                "value": 25.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.036084932591264406
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 7.292404336385231
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.274801485664132
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.553349867580016
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.0040484212455717825
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.952499104752173
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 38.85153157109783
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 28.04499231646594
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.2495824611754491
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 11.291254552683327
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 14329.487303563079
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 78.41305452596539
+            },
+            "index": 32,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11928.685361146268
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00034938928905027473
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -0.8812892772013825
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 5.839538722081955
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.2495824611754491
+            },
+            "p_idx": 2,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7718376192716678
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 30.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 444.7327076486407
+            },
+            "t_idx": 10,
+            "temperature": {
+                "unit": "°C",
+                "value": 30.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.036730400613811255
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 7.565760694059385
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.2495824611754491
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.706407366070659
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.003945043400647705
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.8754415277442851
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 42.12204106514965
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.23425819804983
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.1708045862178635
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 21.12035388643626
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12139.261334206563
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 68.29901696121638
+            },
+            "index": 33,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10296.62656855541
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0002862005362700032
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.269553291133315
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 2.998727671795693
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.1708045862178635
+            },
+            "p_idx": 3,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8548109736387386
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 40.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 393.92292574044393
+            },
+            "t_idx": 0,
+            "temperature": {
+                "unit": "°C",
+                "value": -20.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03207724610105537
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 3.5080594005839467
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.1708045862178635
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.443304162034192
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.006044656608510303
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.8842000911563621
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 41.65297347216027
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.26240104056356
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.1076724634115114
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 20.375966861895936
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12348.662553204971
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 69.11815138478029
+            },
+            "index": 34,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10450.834465853324
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0002829909913901566
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.2630684935169836
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 3.1317972874705067
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.1076724634115114
+            },
+            "p_idx": 3,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8447245145826241
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 40.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 399.5885203756082
+            },
+            "t_idx": 1,
+            "temperature": {
+                "unit": "°C",
+                "value": -15.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.032548252536782056
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 3.707477684624695
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.1076724634115114
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.589536082489738
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.005766215062780909
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.8922067917975698
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 41.263963028444486
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.309240348629565
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.0490705285995006
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 19.694001767107565
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12555.924307042244
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 69.91336035506512
+            },
+            "index": 35,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10603.819709288879
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.000280160431586723
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.2561751670437542
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 3.2660489770498695
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.0490705285995006
+            },
+            "p_idx": 3,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8357999310228832
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 40.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 405.05007875056396
+            },
+            "t_idx": 2,
+            "temperature": {
+                "unit": "°C",
+                "value": -10.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.0330406212613544
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 3.9076923266226604
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.0490705285995006
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.73642684706911
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.00551748003474254
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.8995493440329878
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 40.942794684453666
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.37308623432165
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.9944493596360775
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 19.06607190042835
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12761.415113688769
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 70.68693231551507
+            },
+            "index": 36,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10755.849025648373
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00027764718609302473
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.2489541125636758
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 3.4015455121694695
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.9944493596360775
+            },
+            "p_idx": 3,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8278535903567671
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 40.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 410.3256151517344
+            },
+            "t_idx": 3,
+            "temperature": {
+                "unit": "°C",
+                "value": -5.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03355237343362213
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 4.10887329811973
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.9944493596360775
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.883772849580255
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.00529364121300122
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9063019973118374
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 40.679805201579384
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.45252598930459
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.943352862236739
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 18.485306051611754
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12965.449113959923
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 71.44082785295157
+            },
+            "index": 37,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10907.150758716232
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.000275402380492361
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.2414664531878523
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 3.5383361454169737
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.943352862236739
+            },
+            "p_idx": 3,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8207386119660538
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 40.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 415.4306306168165
+            },
+            "t_idx": 4,
+            "temperature": {
+                "unit": "°C",
+                "value": 0.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.034081974910338785
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 4.311160817621336
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.943352862236739
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.031407369895078
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.005090897290743723
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9125281371087356
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 40.46723741238844
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.546361490102406
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.8953982596195083
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 17.94601198247485
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13168.297122316098
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 72.17674360290746
+            },
+            "index": 38,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11057.9227038005
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.000273386750194938
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.2337593451330937
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 3.676459528753857
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.8953982596195083
+            },
+            "p_idx": 3,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8143360726045669
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 40.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 420.3786031654933
+            },
+            "t_idx": 5,
+            "temperature": {
+                "unit": "°C",
+                "value": 5.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.0346282186601147
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 4.5146710951844415
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.8953982596195083
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.179192547145895
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004906201894848216
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9182822806002547
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 40.29878063710956
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.653562030810928
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.8502611761264733
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 17.44342711735732
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13370.194945156103
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 72.89616071826858
+            },
+            "index": 39,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11208.337985927239
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00027156836768571724
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.2258699420127306
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 3.8159459189790326
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.8502611761264733
+            },
+            "p_idx": 3,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8085486260074278
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 40.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 425.18136206920946
+            },
+            "t_idx": 6,
+            "temperature": {
+                "unit": "°C",
+                "value": 10.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03519014118372831
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 4.719500839203674
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.8502611761264733
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.327013459916142
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004737083029105503
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9236116306535127
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 40.16923752851115
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.77322850971131
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.8076643335447586
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 16.97353089378999
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13571.34973698341
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 73.60038222180518
+            },
+            "index": 40,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11358.549536319962
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00026992099018865063
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.2178281759949805
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 3.956818866025198
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.8076643335447586
+            },
+            "p_idx": 3,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8032957949621127
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 40.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 429.849377313107
+            },
+            "t_idx": 7,
+            "temperature": {
+                "unit": "°C",
+                "value": 15.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.035766962025947424
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 4.925730833947439
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.8076643335447586
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.474773670905627
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004581512265849446
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9285573017985191
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 40.07427864781597
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.904566084500924
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.7673688582516531
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 16.532901509864914
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13771.944923081877
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 74.29056221031895
+            },
+            "index": 41,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11508.693547272898
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00026842283774185623
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.209658724045702
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 4.099096520370052
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.7673688582516531
+            },
+            "p_idx": 3,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7985104453503384
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 40.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 434.3919860501464
+            },
+            "t_idx": 8,
+            "temperature": {
+                "unit": "°C",
+                "value": 20.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03635803932426378
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 5.133428803891995
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.7673688582516531
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.622391813810248
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004437808339384559
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9331552987786889
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 40.010259076244395
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 28.046863205578525
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.7291675071834143
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 16.11860515955974
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13972.144058870013
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 74.96772899029625
+            },
+            "index": 42,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11658.892171251866
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00026705567565579486
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.201382405238334
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 4.242792656107754
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.7291675071834143
+            },
+            "p_idx": 3,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7941361101502725
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 40.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 438.81757160618133
+            },
+            "t_idx": 9,
+            "temperature": {
+                "unit": "°C",
+                "value": 25.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.036962836720198906
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 5.3426517216361065
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.7291675071834143
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.769798937631522
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004304564991515208
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9374373058513351
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 39.974079627894355
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 28.199475487633162
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 1.692879325588928
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 15.728109389433454
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 14172.093889790343
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 75.63280362890234
+            },
+            "index": 43,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11809.255653456836
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0002658041159697635
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.1930171765803228
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 4.387917479143048
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 1.692879325588928
+            },
+            "p_idx": 3,
+            "phase": {
+                "unit": null,
+                "value": "Vapor"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.7901249340602536
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 40.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 443.13370633150794
+            },
+            "t_idx": 10,
+            "temperature": {
+                "unit": "°C",
+                "value": 30.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03758089846578194
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 5.553447676425856
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 1.692879325588928
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 998.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.916936411801002
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004180596212134097
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.8437769967499492
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 44.95937668580115
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.571137961563423
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.815335821420906
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 28.538949195736777
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 11890.07089366653
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 65.718733938303
+            },
+            "index": 44,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10114.083829545529
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00023742798774363234
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.607147501042364
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 2.3925171861896706
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.815335821420906
+            },
+            "p_idx": 4,
+            "phase": {
+                "unit": null,
+                "value": "Supercritical"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.9016434051691431
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 50.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 389.9524483467346
+            },
+            "t_idx": 0,
+            "temperature": {
+                "unit": "°C",
+                "value": -20.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.0335869635825415
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 2.653507109876601
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.815335821420906
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 999.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.806011904597009
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.006775945279861538
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.8551321778102269
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 44.18543585433587
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.56767673519466
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.724146384375955
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 27.38615240081924
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12112.872443645703
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 66.59029645092572
+            },
+            "index": 45,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10277.435101263165
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00023381304068462896
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.600241144068661
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 2.5016578269411163
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.724146384375955
+            },
+            "p_idx": 4,
+            "phase": {
+                "unit": null,
+                "value": "Supercritical"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.886603318350392
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 50.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 396.04981776782284
+            },
+            "t_idx": 1,
+            "temperature": {
+                "unit": "°C",
+                "value": -15.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03396316376463462
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 2.821620193792736
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.724146384375955
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 999.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 10.932979094223526
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.0064032395654881995
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.8654555639255527
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 43.54267587234278
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.587420570087847
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.6405091126174414
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 26.344705296167696
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12332.14345499536
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 67.43158887732432
+            },
+            "index": 46,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10438.569228681221
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0002306754436833654
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.5923709463824163
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 2.611554275881666
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.6405091126174414
+            },
+            "p_idx": 4,
+            "phase": {
+                "unit": null,
+                "value": "Supercritical"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.873528036299902
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 50.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 401.899445668389
+            },
+            "t_idx": 2,
+            "temperature": {
+                "unit": "°C",
+                "value": -10.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03437359795796876
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 2.9896628011434077
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.6405091126174414
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 999.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.062846746352971
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.006077076582900989
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.8748777525768918
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 43.00761597505392
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.627852177098706
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.56336615013245
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 25.397594666484828
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12548.478399207706
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 68.24598950081285
+            },
+            "index": 47,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10597.918195492115
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00022792781847020914
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.583757865994888
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 2.722288328225095
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.56336615013245
+            },
+            "p_idx": 4,
+            "phase": {
+                "unit": null,
+                "value": "Supercritical"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8620636612970598
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 50.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 407.52574369394785
+            },
+            "t_idx": 3,
+            "temperature": {
+                "unit": "°C",
+                "value": -5.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03481374923338701
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 3.15787389080888
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.56336615013245
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 999.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.195021591452887
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.005788818346722505
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.8835072039698997
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 42.56232719053714
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.686912027321906
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.491865053013814
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 24.53126455725198
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12762.369015128614
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 69.0363095668529
+            },
+            "index": 48,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10755.83981165
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0002255031110044967
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.5745649630040355
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 2.8339242802460753
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.491865053013814
+            },
+            "p_idx": 4,
+            "phase": {
+                "unit": null,
+                "value": "Supercritical"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.851936815774019
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 50.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 412.94937140897207
+            },
+            "t_idx": 4,
+            "temperature": {
+                "unit": "°C",
+                "value": 0.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03528017584950783
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 3.326448895944637
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.491865053013814
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 999.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.329035322364879
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.005531876474534668
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.8914350007302075
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 42.19286484462535
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.762890306475104
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.4253089702459327
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 23.734759145839348
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 12974.227888343743
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 69.80492002858722
+            },
+            "index": 49,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 10912.634886651676
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0002233489502519618
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.5649146557670404
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 2.9465129278181754
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.4253089702459327
+            },
+            "p_idx": 4,
+            "phase": {
+                "unit": null,
+                "value": "Supercritical"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8429328063895145
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 50.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 418.18802230727505
+            },
+            "t_idx": 5,
+            "temperature": {
+                "unit": "°C",
+                "value": 5.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03577020933872153
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 3.4955489992598636
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.4253089702459327
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 999.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.464512529777716
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.005301133539706368
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.8987383736599308
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 41.88820461279411
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.854347391558296
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.3631210460064698
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 22.999112527209952
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13184.405547353197
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 70.5538438816555
+            },
+            "index": 50,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11068.559637364922
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0002214237999562666
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.554900424185318
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 3.060094522217885
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.3631210460064698
+            },
+            "p_idx": 4,
+            "phase": {
+                "unit": null,
+                "value": "Supercritical"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8348805782570177
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 50.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 423.2570111257309
+            },
+            "t_idx": 6,
+            "temperature": {
+                "unit": "°C",
+                "value": 10.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.03628174758445906
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 3.6653080714926345
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.3631210460064698
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 999.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.601148308883506
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.005092550891396601
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9054833640571691
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 41.63950237691772
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 27.960054451235116
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.3048184387654556
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 22.31690524551247
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13393.20310683261
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 71.28482481674645
+            },
+            "index": 51,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11223.8348321332
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00021969426867876157
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.544594886911928
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 3.1747009896324325
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.3048184387654556
+            },
+            "p_idx": 4,
+            "phase": {
+                "unit": null,
+                "value": "Supercritical"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.82764209747602
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 50.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 428.1697198690568
+            },
+            "t_idx": 7,
+            "temperature": {
+                "unit": "°C",
+                "value": 15.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.0368131097108518
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 3.8358379779303293
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.3048184387654556
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 999.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.73869223369469
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.00490289617708608
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9117268680212154
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 41.43956825972337
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 28.078948593654122
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.2499930021019967
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 21.681936139205604
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13600.881781223037
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 71.99937919112496
+            },
+            "index": 52,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11378.652647475115
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0002181331887973982
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.5340554562164155
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 3.290357620913227
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.2499930021019967
+            },
+            "p_idx": 4,
+            "phase": {
+                "unit": null,
+                "value": "Supercritical"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8211047029325031
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 50.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 432.9379413319406
+            },
+            "t_idx": 8,
+            "temperature": {
+                "unit": "°C",
+                "value": 20.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.037362932279293805
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 4.007232706330879
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.2499930021019967
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 999.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 11.876936639688257
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004729549869346468
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9175182295515342
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 41.282485838227814
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 28.21009871746451
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.198296679337952
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 21.088975603032193
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 13807.67015420433
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 72.69883600961785
+            },
+            "index": 53,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11533.181889269215
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.0002167182184128257
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.523328343328758
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 3.4070843739099006
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.198296679337952
+            },
+            "p_idx": 4,
+            "phase": {
+                "unit": null,
+                "value": "Supercritical"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8151754972697696
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 50.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 437.5721469854614
+            },
+            "t_idx": 9,
+            "temperature": {
+                "unit": "°C",
+                "value": 25.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.037930093745207796
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 4.179571620247535
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.198296679337952
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 999.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 12.015707892720448
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004570365220840683
+            }
+        },
+        {
+            "compressibility_factor": {
+                "unit": "dimensionless",
+                "value": 0.9229004984055106
+            },
+            "cp": {
+                "unit": "J/(mol·K)",
+                "value": 41.16333189946338
+            },
+            "critical_density": {
+                "unit": "mol/L",
+                "value": 10.139128
+            },
+            "critical_pressure": {
+                "unit": "bar",
+                "value": 45.992
+            },
+            "critical_temperature": {
+                "unit": "K",
+                "value": 190.564
+            },
+            "cv": {
+                "unit": "J/(mol·K)",
+                "value": 28.35267934084285
+            },
+            "density": {
+                "unit": "mol/L",
+                "value": 2.149430297271083
+            },
+            "dp_dt_saturation": {
+                "unit": "kPa/K",
+                "value": 20.533577396638957
+            },
+            "enthalpy": {
+                "unit": "J/mol",
+                "value": 14013.769810522546
+            },
+            "entropy": {
+                "unit": "J/(mol·K)",
+                "value": 73.38436813035108
+            },
+            "index": 54,
+            "internal_energy": {
+                "unit": "J/mol",
+                "value": 11687.572023905317
+            },
+            "isothermal_compressibility": {
+                "unit": "1/kPa",
+                "value": -0.00021543080649033682
+            },
+            "joule_thomson_coefficient": {
+                "unit": "K/bar",
+                "value": -1.512451422299044
+            },
+            "kinematic_viscosity": {
+                "unit": "cm²/s",
+                "value": 3.5248968883564915
+            },
+            "liquid_density": {
+                "unit": "mol/L",
+                "value": 2.149430297271083
+            },
+            "p_idx": 4,
+            "phase": {
+                "unit": null,
+                "value": "Supercritical"
+            },
+            "prandtl_number": {
+                "unit": "dimensionless",
+                "value": 0.8097771677281898
+            },
+            "pressure": {
+                "unit": "bar",
+                "value": 50.0
+            },
+            "sound_speed": {
+                "unit": "m/s",
+                "value": 442.0816982352018
+            },
+            "t_idx": 10,
+            "temperature": {
+                "unit": "°C",
+                "value": 30.0
+            },
+            "thermal_conductivity": {
+                "unit": "W/(m·K)",
+                "value": 0.038513658656896856
+            },
+            "thermal_diffusivity": {
+                "unit": "cm²/s",
+                "value": 4.352922049216952
+            },
+            "vapor_density": {
+                "unit": "mol/L",
+                "value": 2.149430297271083
+            },
+            "vapor_fraction": {
+                "unit": "dimensionless",
+                "value": 999.0
+            },
+            "viscosity": {
+                "unit": "μPa·s",
+                "value": 12.154859772857021
+            },
+            "volume_expansivity": {
+                "unit": "1/K",
+                "value": -0.004423565138689682
+            }
+        }
+    ]
+}

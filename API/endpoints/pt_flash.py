@@ -224,13 +224,14 @@ def pt_flash():
         # Return response in the requested format
         if response_format.lower() == 'olga_tab':
             from API.utils.olga_formatter import format_olga_tab
-            return format_olga_tab(
-                pressure_range,
-                temperature_range,
+            response = format_olga_tab(
+                variables['pressure'],
+                variables['temperature'],
                 results,
                 data['composition'],
                 wmm
             )
+            return response  # Return the Response object directly
         else:
             return jsonify({'results': results})
         

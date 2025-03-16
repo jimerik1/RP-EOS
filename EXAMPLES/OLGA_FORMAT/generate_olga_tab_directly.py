@@ -29,16 +29,18 @@ def generate_olga_tab(output_file="output.tab"):
     # Define input parameters for API request
     request_data = {
         "composition": [
-            {"fluid": "WATER", "fraction": 1.0}
-        ],
+            {"fluid": "CO2", "fraction": 0.9},
+            {"fluid": "METHANE", "fraction": 0.1}  
+
+            ],
         "variables": {
             "pressure": {
-                "range": {"from": 1.0, "to": 200.0},
-                "resolution": 10.0
+            "range": {"from": 10, "to": 50},
+            "resolution": 10
             },
             "temperature": {
-                "range": {"from": 0.0, "to": 200.0},
-                "resolution": 10.0
+            "range": {"from": -20, "to": 30},
+            "resolution": 5
             }
         },
         "calculation": {
@@ -53,10 +55,19 @@ def generate_olga_tab(output_file="output.tab"):
         }
     }
 
+        # Debug: Print the request payload
+    print("Request payload:")
+    print(json.dumps(request_data, indent=2))
+
     # Make API request
+    headers = {'Content-Type': 'application/json'}
     print(f"Sending request to {API_URL}...")
-    response = requests.post(API_URL, json=request_data)
+    response = requests.post(API_URL, data=json.dumps(request_data), headers=headers)
     
+        # Debug: Print request headers
+    print("Request headers:")
+    print(headers)
+
     # Check response status
     if response.status_code != 200:
         print(f"Error: Received status code {response.status_code}")
