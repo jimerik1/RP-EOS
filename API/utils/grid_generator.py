@@ -394,3 +394,170 @@ def get_phase_boundaries_ts(rp, z: List[float], t_range: Dict[str, float], s_ran
         print(f"Error determining TS phase boundaries: {str(e)}")
     
     return t_boundaries, s_boundaries
+
+def get_phase_boundaries_tv(rp, z: List[float], t_range: Dict[str, float], v_range: Dict[str, float]) -> Tuple[List[float], List[float]]:
+    """
+    Determine phase boundaries in T-V space for a given composition.
+    
+    Args:
+        rp: REFPROP instance
+        z: Composition array
+        t_range: Temperature range dictionary {'from': min, 'to': max} in °C
+        v_range: Specific volume range dictionary {'from': min, 'to': max} in m³/mol
+        
+    Returns:
+        t_boundaries: List of temperatures (°C) at phase boundaries
+        v_boundaries: List of specific volumes (m³/mol) at phase boundaries
+    """
+    t_boundaries = []
+    v_boundaries = []
+    
+    try:
+        # Get range values
+        t_min, t_max = t_range['from'], t_range['to']
+        v_min, v_max = v_range['from'], v_range['to']
+        
+        # Get critical point
+        Tc, Pc, Dc, ierr, herr = rp.CRITPdll(z)
+        
+        if ierr == 0:
+            Tc_C = Tc - 273.15  # Convert to Celsius
+            Vc = 1.0 / Dc       # Critical specific volume in m³/mol
+            
+            # Check if critical point is within range
+            if t_min <= Tc_C <= t_max and v_min <= Vc <= v_max:
+                t_boundaries.append(Tc_C)
+                v_boundaries.append(Vc)
+        
+        # Create temperature points for calculating saturation curve
+        num_t_points = min(50, int((t_max - t_min) / 2) + 1)  # Reasonable number of points
+        t_sat_points = np.linspace(t_min, min(Tc_C if ierr == 0 else t_max, t_max), num_t_points)
+        
+        # Calculate saturation points at each temperature
+        for T_C in t_sat_points:
+            T_K = T_C + 273.15  # Convert to Kelvin
+            
+            try:
+                # Get saturation pressure and densities at this temperature
+                result = rp.SATTdll(T_K, z, 1)  # Bubble point (kph=1)
+                
+                if result.ierr == 0:
+                    # Get saturated liquid and vapor densities
+                    Dl = result.Dl
+                    Dv = result.Dv
+                    
+                    # Convert to specific volumes
+                    Vl = 1.0 / Dl  # Saturated liquid specific volume
+                    Vv = 1.0 / Dv  # Saturated vapor specific volume
+                    
+                    # Check if within volume range
+                    if v_min <= Vl <= v_max:
+                        t_boundaries.append(T_C)
+                        v_boundaries.append(Vl)
+                    
+                    if v_min <= Vv <= v_max:
+                        t_boundaries.append(T_C)
+                        v_boundaries.append(Vv)
+            except Exception:
+                # Skip failed calculations
+                pass
+        
+    except Exception as e:
+        print(f"Error determining TV phase boundaries: {str(e)}")
+    
+    return t_boundaries, v_boundaries
+
+def get_phase_boundaries_uv(rp, z: List[float], u_range: Dict[str, float], v_range: Dict[str, float]) -> Tuple[List[float], List[float]]:
+    """
+    Determine phase boundaries in U-V space for a given composition.
+    
+    Args:
+        rp: REFPROP instance
+        z: Composition array
+        u_range: Internal energy range dictionary {'from': min, 'to': max} in J/mol
+        v_range: Specific volume range dictionary {'from': min, 'to': max} in m³/mol
+        
+    Returns:
+        u_boundaries: List of internal energies (J/mol) at phase boundaries
+        v_boundaries: List of specific volumes (m³/mol) at phase boundaries
+    """
+    u_boundaries = []
+    v_boundaries = []
+    
+    try:
+        # Get range values
+        u_min, u_max = u_range['from'], u_range['to']
+        v_min, v_max = v_range['from'], v_range['to']
+        
+        # Get critical point
+        Tc, Pc, Dc, ierr, herr = rp.CRITPdll(z)
+        
+        if ierr == 0:
+            Vc = 1.0 / Dc       # Critical specific volume in m³/mol
+            
+            # Calculate critical internal energy
+            try:
+                result = rp.THERMdll(Tc, Dc, z)
+                Uc = result.e   # Critical internal energy
+                
+                # Check if critical point is within range
+                if u_min <= Uc <= u_max and v_min <= Vc <= v_max:
+                    u_boundaries.append(Uc)
+                    v_boundaries.append(Vc)
+            except Exception:
+                pass
+        
+        # Generate a temperature range to calculate saturation properties
+        # Use a wide temperature range to ensure coverage of the u-v space
+        T_min = max(250.0, 0.5 * Tc if ierr == 0 else 250.0)  # K
+        T_max = min(450.0, 0.95 * Tc if ierr == 0 else 450.0) # K
+        num_t_points = 40
+        
+        # Create temperature points for calculating saturation curve
+        t_sat_points = np.linspace(T_min, T_max, num_t_points)
+        
+        # Calculate saturation points at each temperature
+        for T_K in t_sat_points:
+            try:
+                # Get saturation pressure and densities at this temperature
+                result = rp.SATTdll(T_K, z, 1)  # Bubble point (kph=1)
+                
+                if result.ierr == 0:
+                    # Get saturated liquid and vapor densities
+                    Dl = result.Dl
+                    Dv = result.Dv
+                    P = result.P
+                    
+                    # Convert to specific volumes
+                    Vl = 1.0 / Dl  # Saturated liquid specific volume
+                    Vv = 1.0 / Dv  # Saturated vapor specific volume
+                    
+                    # Calculate internal energies at saturation for liquid and vapor
+                    try:
+                        # Liquid properties
+                        props_l = rp.THERMdll(T_K, Dl, z)
+                        Ul = props_l.e  # Saturated liquid internal energy
+                        
+                        # Vapor properties
+                        props_v = rp.THERMdll(T_K, Dv, z)
+                        Uv = props_v.e  # Saturated vapor internal energy
+                        
+                        # Check if within ranges and add boundary points
+                        if u_min <= Ul <= u_max and v_min <= Vl <= v_max:
+                            u_boundaries.append(Ul)
+                            v_boundaries.append(Vl)
+                        
+                        if u_min <= Uv <= u_max and v_min <= Vv <= v_max:
+                            u_boundaries.append(Uv)
+                            v_boundaries.append(Vv)
+                    except Exception:
+                        # Skip if thermodynamic properties can't be calculated
+                        pass
+            except Exception:
+                # Skip failed calculations
+                pass
+        
+    except Exception as e:
+        print(f"Error determining UV phase boundaries: {str(e)}")
+    
+    return u_boundaries, v_boundaries

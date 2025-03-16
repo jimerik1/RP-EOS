@@ -340,6 +340,80 @@
 			"response": []
 		},
 		{
+			"name": "VT Flash",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"METHANE\", \"fraction\": 1}\n  ],\n  \"variables\": {\n    \"temperature\": {\n      \"range\": {\"from\": -20, \"to\": 30},\n      \"resolution\": 5\n    },\n    \"specific_volume\": {\n      \"range\": {\"from\": 0.02, \"to\": 0.1},\n      \"resolution\": 0.01\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"temperature\",\n      \"pressure\",\n      \"density\",\n      \"liquid_density\",\n      \"vapor_density\",\n      \"critical_density\",\n      \"critical_pressure\",\n      \"critical_temperature\",\n      \"internal_energy\",\n      \"enthalpy\",\n      \"entropy\",\n      \"cv\",\n      \"cp\",\n      \"sound_speed\",\n      \"viscosity\",\n      \"thermal_conductivity\",\n      \"surface_tension\",\n      \"vapor_fraction\",\n      \"compressibility_factor\",\n      \"prandtl_number\",\n      \"isothermal_compressibility\",\n      \"volume_expansivity\",\n      \"dp_dt_saturation\",\n      \"joule_thomson_coefficient\",\n      \"kinematic_viscosity\",\n      \"thermal_diffusivity\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\",\n    \"grid_type\": \"adaptive\",\n    \"enhancement_factor\": 5.0,\n    \"response_format\": \"olga_tab\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5051/vt_flash",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5051",
+					"path": [
+						"vt_flash"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UV Flash",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"METHANE\", \"fraction\": 1}\n  ],\n  \"variables\": {\n    \"internal_energy\": {\n      \"range\": {\"from\": -2000, \"to\": 3000},\n      \"resolution\": 500\n    },\n    \"specific_volume\": {\n      \"range\": {\"from\": 0.02, \"to\": 0.1},\n      \"resolution\": 0.01\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"temperature\",\n      \"pressure\",\n      \"density\",\n      \"liquid_density\",\n      \"vapor_density\",\n      \"critical_density\",\n      \"critical_pressure\",\n      \"critical_temperature\",\n      \"internal_energy\",\n      \"enthalpy\",\n      \"entropy\",\n      \"cv\",\n      \"cp\",\n      \"sound_speed\",\n      \"viscosity\",\n      \"thermal_conductivity\",\n      \"surface_tension\",\n      \"vapor_fraction\",\n      \"compressibility_factor\",\n      \"prandtl_number\",\n      \"isothermal_compressibility\",\n      \"volume_expansivity\",\n      \"dp_dt_saturation\",\n      \"joule_thomson_coefficient\",\n      \"kinematic_viscosity\",\n      \"thermal_diffusivity\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\",\n    \"grid_type\": \"adaptive\",\n    \"enhancement_factor\": 5.0,\n    \"response_format\": \"olga_tab\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5051/uv_flash",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5051",
+					"path": [
+						"uv_flash"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Phase Envelope (PT)",
 			"request": {
 				"method": "POST",

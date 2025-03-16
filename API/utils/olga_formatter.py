@@ -14,7 +14,7 @@ def format_olga_tab(x_vars, y_vars, results, composition, molar_mass, endpoint_t
         results (list): List of result dictionaries from the calculation
         composition (list): List of fluid compositions (dict with 'fluid' and 'fraction')
         molar_mass (float): Molar mass of the mixture in g/mol
-        endpoint_type (str): Type of endpoint ('pt_flash', 'ph_flash', 'ts_flash')
+        endpoint_type (str): Type of endpoint ('pt_flash', 'ph_flash', 'ts_flash', 'vt_flash', 'uv_flash')
         
     Returns:
         Response: Flask response object with OLGA TAB formatted content
@@ -50,6 +50,24 @@ def format_olga_tab(x_vars, y_vars, results, composition, molar_mass, endpoint_t
             y_idx_name = 's_idx'
             x_multiplier = 1.0  # already in C
             y_multiplier = 1.0  # J/mol-K
+        elif endpoint_type == 'vt_flash':
+            x_name = 'temperature'
+            y_name = 'specific_volume'
+            x_header = 'Temperature (C)'
+            y_header = 'Specific Volume (m3/mol)'
+            x_idx_name = 't_idx'
+            y_idx_name = 'v_idx'
+            x_multiplier = 1.0  # already in C
+            y_multiplier = 1.0  # m3/mol
+        elif endpoint_type == 'uv_flash':
+            x_name = 'internal_energy'
+            y_name = 'specific_volume'
+            x_header = 'Internal Energy (J/mol)'
+            y_header = 'Specific Volume (m3/mol)'
+            x_idx_name = 'u_idx'
+            y_idx_name = 'v_idx'
+            x_multiplier = 1.0  # J/mol
+            y_multiplier = 1.0  # m3/mol
         else:
             # Default to PT flash
             x_name = 'pressure'
