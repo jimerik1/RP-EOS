@@ -10,6 +10,9 @@ extended_pt_flash_bp = Blueprint('extended_pt_flash', __name__)
 phase_boundaries_bp = Blueprint('phase_boundaries', __name__)
 vt_flash_bp = Blueprint('vt_flash', __name__)  
 uv_flash_bp = Blueprint('uv_flash', __name__)  
+models_info_bp = Blueprint('models_info', __name__)  
+
+
 
 blueprints = [
     pt_flash_bp,
@@ -21,7 +24,8 @@ blueprints = [
     extended_pt_flash_bp,
     phase_boundaries_bp,
     vt_flash_bp,    
-    uv_flash_bp,    
+    uv_flash_bp,
+    models_info_bp,    
     # Add more here ...
 ]
 
@@ -36,3 +40,4 @@ from API.endpoints import extended_pt_flash
 from API.endpoints import phase_boundaries
 from API.endpoints import vt_flash    
 from API.endpoints import uv_flash    
+from API.endpoints import models_info
