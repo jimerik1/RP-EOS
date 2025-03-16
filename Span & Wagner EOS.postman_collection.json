@@ -81,6 +81,117 @@
 			"response": []
 		},
 		{
+			"name": "PT Flash - Adaptive Grid and OLGA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"CO2\", \"fraction\": 0.9},\n    {\"fluid\": \"METHANE\", \"fraction\": 0.1}  \n  ],\n  \"variables\": {\n    \"pressure\": {\n      \"range\": {\"from\": 10, \"to\": 50},\n      \"resolution\": 10\n    },\n    \"temperature\": {\n      \"range\": {\"from\": -20, \"to\": 30},\n      \"resolution\": 5\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"temperature\",\n      \"pressure\",\n      \"density\",\n      \"liquid_density\",\n      \"vapor_density\",\n      \"critical_density\",\n      \"critical_pressure\",\n      \"critical_temperature\",\n      \"internal_energy\",\n      \"enthalpy\",\n      \"entropy\",\n      \"cv\",\n      \"cp\",\n      \"sound_speed\",\n      \"viscosity\",\n      \"thermal_conductivity\",\n      \"surface_tension\",\n      \"vapor_fraction\",\n      \"compressibility_factor\",\n      \"prandtl_number\",\n      \"isothermal_compressibility\",\n      \"volume_expansivity\",\n      \"dp_dt_saturation\",\n      \"joule_thomson_coefficient\",\n      \"kinematic_viscosity\",\n      \"thermal_diffusivity\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\",\n    \"response_format\": \"olga_tab\",\n    \"grid_type\": \"adaptive\",\n    \"enhancement_factor\": 5.0,\n    \"boundary_zone_width\": null\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5051/pt_flash",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5051",
+					"path": [
+						"pt_flash"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PT Flash - Logarithmic Grid and OLGA Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"CO2\", \"fraction\": 0.9},\n    {\"fluid\": \"METHANE\", \"fraction\": 0.1}  \n  ],\n  \"variables\": {\n    \"pressure\": {\n      \"range\": {\"from\": 10, \"to\": 50},\n      \"resolution\": 10\n    },\n    \"temperature\": {\n      \"range\": {\"from\": -20, \"to\": 30},\n      \"resolution\": 5\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"temperature\",\n      \"pressure\",\n      \"density\",\n      \"liquid_density\",\n      \"vapor_density\",\n      \"critical_density\",\n      \"critical_pressure\",\n      \"critical_temperature\",\n      \"internal_energy\",\n      \"enthalpy\",\n      \"entropy\",\n      \"cv\",\n      \"cp\",\n      \"sound_speed\",\n      \"viscosity\",\n      \"thermal_conductivity\",\n      \"surface_tension\",\n      \"vapor_fraction\",\n      \"compressibility_factor\",\n      \"prandtl_number\",\n      \"isothermal_compressibility\",\n      \"volume_expansivity\",\n      \"dp_dt_saturation\",\n      \"joule_thomson_coefficient\",\n      \"kinematic_viscosity\",\n      \"thermal_diffusivity\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\",\n    \"response_format\": \"json\",\n    \"grid_type\": \"logarithmic\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5051/pt_flash",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5051",
+					"path": [
+						"pt_flash"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PT Flash - Exponensial Grid and OLGA Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"CO2\", \"fraction\": 0.9},\n    {\"fluid\": \"METHANE\", \"fraction\": 0.1}  \n  ],\n  \"variables\": {\n    \"pressure\": {\n      \"range\": {\"from\": 10, \"to\": 50},\n      \"resolution\": 10\n    },\n    \"temperature\": {\n      \"range\": {\"from\": -20, \"to\": 30},\n      \"resolution\": 5\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"temperature\",\n      \"pressure\",\n      \"density\",\n      \"liquid_density\",\n      \"vapor_density\",\n      \"critical_density\",\n      \"critical_pressure\",\n      \"critical_temperature\",\n      \"internal_energy\",\n      \"enthalpy\",\n      \"entropy\",\n      \"cv\",\n      \"cp\",\n      \"sound_speed\",\n      \"viscosity\",\n      \"thermal_conductivity\",\n      \"surface_tension\",\n      \"vapor_fraction\",\n      \"compressibility_factor\",\n      \"prandtl_number\",\n      \"isothermal_compressibility\",\n      \"volume_expansivity\",\n      \"dp_dt_saturation\",\n      \"joule_thomson_coefficient\",\n      \"kinematic_viscosity\",\n      \"thermal_diffusivity\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\",\n    \"response_format\": \"json\",\n    \"grid_type\": \"exponential\",\n    \"exponent\": 2.0\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5051/pt_flash",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5051",
+					"path": [
+						"pt_flash"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "PH Flash",
 			"request": {
 				"method": "POST",

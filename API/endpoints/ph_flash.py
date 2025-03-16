@@ -7,7 +7,8 @@ from typing import List, Dict, Any
 from API.endpoints import ph_flash_bp
 from API.refprop_setup import RP
 from API.unit_converter import UnitConverter
-from API.utils.helpers import get_phase, convert_for_json
+from API.utils.helpers import get_phase
+from API.utils.grid_generator import generate_grid, get_phase_boundaries_ph
 
 def validate_composition(composition: List[Dict[str, Any]]) -> bool:
     """Validate composition data"""
@@ -140,7 +141,7 @@ def ph_flash():
     try:
         data = request.get_json(force=True)
         
-        # Validate the new structure
+        # Validate the structure
         required_fields = ['composition', 'variables']
         for field in required_fields:
             if field not in data:
@@ -156,6 +157,11 @@ def ph_flash():
         properties = calculation.get('properties', [])
         units_system = calculation.get('units_system', 'SI')  # Default to SI
         response_format = calculation.get('response_format', 'json')  # Default to JSON
+        
+        # Extract grid_type parameter and related options
+        grid_type = calculation.get('grid_type', 'equidistant')  # Default to equidistant grid
+        enhancement_factor = calculation.get('enhancement_factor', 5.0)  
+        boundary_zone_width = calculation.get('boundary_zone_width', None)
         
         if not properties:
             return jsonify({'error': 'No properties specified for calculation'}), 400
@@ -198,12 +204,56 @@ def ph_flash():
             return jsonify({'error': f'Invalid range or resolution parameters: {str(ve)}'}), 400
 
         # Debug log
-        print("Received request with enthalpy range:", enthalpy_range,
-              "and pressure range:", pressure_range)
+        print(f"Calculating PH flash for pressure range: {pressure_range['from']} to {pressure_range['to']} bar, "
+              f"enthalpy range: {enthalpy_range['from']} to {enthalpy_range['to']} J/mol, grid_type: {grid_type}")
 
-        # Create arrays for calculations
-        P_range = np.arange(p_from, p_to + pressure_resolution, pressure_resolution)
-        h_range = np.arange(h_from, h_to + enthalpy_resolution, enthalpy_resolution)
+        # Generate grids based on grid_type
+        if grid_type.lower() != 'equidistant':
+            # If we're using an adaptive grid, determine phase boundaries first
+            if grid_type.lower() == 'adaptive':
+                try:
+                    # Get phase boundaries in P-H space
+                    p_boundaries, h_boundaries = get_phase_boundaries_ph(
+                        RP, z, pressure_range, enthalpy_range
+                    )
+                    
+                    print(f"Identified phase boundaries: {len(p_boundaries)} pressure points, "
+                          f"{len(h_boundaries)} enthalpy points")
+                except Exception as e:
+                    print(f"Error determining phase boundaries: {e}")
+                    p_boundaries, h_boundaries = [], []
+            else:
+                p_boundaries, h_boundaries = [], []
+            
+            # Generate grids using the utility function
+            P_range = generate_grid(
+                p_from, p_to, pressure_resolution, 
+                grid_type, p_boundaries, 
+                enhancement_factor, boundary_zone_width
+            )
+            
+            h_range = generate_grid(
+                h_from, h_to, enthalpy_resolution,
+                grid_type, h_boundaries,
+                enhancement_factor, boundary_zone_width
+            )
+            
+            # Debug info about the grid
+            print(f"Generated {len(P_range)} pressure points and {len(h_range)} enthalpy points")
+            
+        else:
+            # Create regular (equidistant) grids as before
+            P_range = np.arange(
+                p_from,
+                p_to + pressure_resolution,
+                pressure_resolution
+            )
+            
+            h_range = np.arange(
+                h_from,
+                h_to + enthalpy_resolution,
+                enthalpy_resolution
+            )
 
         # Calculate properties
         results = []
@@ -213,7 +263,7 @@ def ph_flash():
                 try:
                     props = calculate_properties_ph(z, float(P), float(h), units_system)
                     filtered_props = {k: v for k, v in props.items() 
-                                   if k in properties or k in ['temperature', 'pressure', 'enthalpy']}
+                                   if k in properties or k in ['temperature', 'pressure', 'enthalpy', 'phase']}
                     
                     # Add grid indices for OLGA TAB formatting
                     results.append({
@@ -224,7 +274,7 @@ def ph_flash():
                     })
                     idx += 1
                 except Exception as fe:
-                    print(f"Error processing P={P}, h={h}: {fe}", file=sys.stderr)
+                    print(f"Error processing P={P} bar, h={h} J/mol: {fe}", file=sys.stderr)
                     continue
 
         # Return response in the requested format
@@ -233,22 +283,24 @@ def ph_flash():
             try:
                 # Create structured variable dictionaries for formatter
                 pressure_vars = {
-                    'range': pressure_range,
-                    'resolution': pressure_resolution
+                    'range': {'from': P_range.min(), 'to': P_range.max()},
+                    'resolution': pressure_resolution,
+                    'values': P_range  # Pass the actual grid values
                 }
                 
                 enthalpy_vars = {
-                    'range': enthalpy_range,
-                    'resolution': enthalpy_resolution
+                    'range': {'from': h_range.min(), 'to': h_range.max()},
+                    'resolution': enthalpy_resolution,
+                    'values': h_range  # Pass the actual grid values
                 }
                 
                 response = format_olga_tab(
-                    pressure_vars,     # x-axis (pressure) 
-                    enthalpy_vars,     # y-axis (enthalpy)
+                    pressure_vars,  # x-axis (pressure)
+                    enthalpy_vars,  # y-axis (enthalpy)
                     results,
                     data['composition'],
                     wmm,
-                    endpoint_type='ph_flash'  # Specify endpoint type for correct grid variables
+                    endpoint_type='ph_flash'
                 )
                 return response  # Return the Response object directly
             except Exception as e:
@@ -256,7 +308,16 @@ def ph_flash():
                 traceback.print_exc()
                 return jsonify({'error': f'Error formatting OLGA TAB response: {str(e)}'}), 500
         else:
-            return jsonify({'results': results})
+            # For JSON responses, include grid information
+            return jsonify({
+                'results': results,
+                'grid_info': {
+                    'type': grid_type,
+                    'pressure_points': len(P_range),
+                    'enthalpy_points': len(h_range),
+                    'total_points': len(results)
+                }
+            })
         
     except Exception as e:
         print("Error processing request:", file=sys.stderr)

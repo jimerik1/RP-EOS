@@ -8,6 +8,7 @@ from API.endpoints import pt_flash_bp
 from API.refprop_setup import RP
 from API.unit_converter import UnitConverter
 from API.utils.helpers import get_phase
+from API.utils.grid_generator import generate_grid, get_phase_boundaries_pt
 
 def validate_composition(composition: List[Dict[str, Any]]) -> bool:
     """Validate composition data"""
@@ -158,6 +159,11 @@ def pt_flash():
         units_system = calculation.get('units_system', 'SI')  # Default to SI
         response_format = calculation.get('response_format', 'json')  # Default to JSON
         
+        # Extract grid_type parameter and related options
+        grid_type = calculation.get('grid_type', 'equidistant')  # Default to equidistant grid
+        enhancement_factor = calculation.get('enhancement_factor', 5.0)  
+        boundary_zone_width = calculation.get('boundary_zone_width', None)  
+        
         if not properties:
             return jsonify({'error': 'No properties specified for calculation'}), 400
 
@@ -171,7 +177,7 @@ def pt_flash():
         # Get molecular weight for unit conversions
         wmm = RP.WMOLdll(z)
 
-        # Extract range and resolution parameters
+        # Extract range and resolution parameters with robust error handling
         try:
             pressure_range = variables['pressure'].get('range', {})
             temperature_range = variables['temperature'].get('range', {})
@@ -200,19 +206,57 @@ def pt_flash():
 
         # Debug log
         print(f"Calculating PT flash for temperature range: {temperature_range['from']} to {temperature_range['to']} °C, "
-              f"pressure range: {pressure_range['from']} to {pressure_range['to']} bar")
+              f"pressure range: {pressure_range['from']} to {pressure_range['to']} bar, grid_type: {grid_type}")
 
-        # Create arrays for calculations
-        T_range = np.arange(
-            t_from + 273.15,  # Convert from °C to K
-            t_to + 273.15 + temperature_resolution,
-            temperature_resolution
-        )
-        P_range = np.arange(
-            p_from,
-            p_to + pressure_resolution,
-            pressure_resolution
-        )
+        # Generate grids based on grid_type
+        if grid_type.lower() != 'equidistant':
+            # If we're using an adaptive grid, determine phase boundaries first
+            if grid_type.lower() == 'adaptive':
+                try:
+                    # Get phase boundaries in P-T space
+                    t_boundaries, p_boundaries = get_phase_boundaries_pt(
+                        RP, z, temperature_range, pressure_range
+                    )
+                    
+                    print(f"Identified phase boundaries: {len(t_boundaries)} temperature points, "
+                          f"{len(p_boundaries)} pressure points")
+                except Exception as e:
+                    print(f"Error determining phase boundaries: {e}")
+                    t_boundaries, p_boundaries = [], []
+            else:
+                t_boundaries, p_boundaries = [], []
+            
+            # Generate grids using the utility function
+            P_range = generate_grid(
+                p_from, p_to, pressure_resolution, 
+                grid_type, p_boundaries, 
+                enhancement_factor, boundary_zone_width
+            )
+            
+            # For temperature, we generate grid in °C but need to convert to K for calculations
+            T_range_C = generate_grid(
+                t_from, t_to, temperature_resolution,
+                grid_type, t_boundaries,
+                enhancement_factor, boundary_zone_width
+            )
+            T_range = T_range_C + 273.15  # Convert to Kelvin
+            
+            # Debug info about the grid
+            print(f"Generated {len(P_range)} pressure points and {len(T_range)} temperature points")
+            
+        else:
+            # Create regular (equidistant) grids as before
+            P_range = np.arange(
+                p_from,
+                p_to + pressure_resolution,
+                pressure_resolution
+            )
+            
+            T_range = np.arange(
+                t_from + 273.15,  # Convert from °C to K
+                t_to + 273.15 + temperature_resolution,
+                temperature_resolution
+            )
 
         # Calculate properties
         results = []
@@ -242,13 +286,15 @@ def pt_flash():
             try:
                 # Create structured variable dictionaries for formatter
                 pressure_vars = {
-                    'range': pressure_range,
-                    'resolution': pressure_resolution
+                    'range': {'from': P_range.min(), 'to': P_range.max()},
+                    'resolution': pressure_resolution,
+                    'values': P_range  # Pass the actual grid values
                 }
                 
                 temperature_vars = {
-                    'range': temperature_range,
-                    'resolution': temperature_resolution
+                    'range': {'from': (T_range.min() - 273.15), 'to': (T_range.max() - 273.15)},
+                    'resolution': temperature_resolution,
+                    'values': T_range - 273.15  # Pass the actual grid values in °C
                 }
                 
                 response = format_olga_tab(
@@ -265,7 +311,16 @@ def pt_flash():
                 traceback.print_exc()
                 return jsonify({'error': f'Error formatting OLGA TAB response: {str(e)}'}), 500
         else:
-            return jsonify({'results': results})
+            # For JSON responses, include grid information
+            return jsonify({
+                'results': results,
+                'grid_info': {
+                    'type': grid_type,
+                    'pressure_points': len(P_range),
+                    'temperature_points': len(T_range),
+                    'total_points': len(results)
+                }
+            })
         
     except Exception as e:
         print("Error processing request:", file=sys.stderr)

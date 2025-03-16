@@ -22,6 +22,7 @@ This project provides a containerized web API for calculating thermodynamic prop
   - Phase determination
   - Transport properties
   - Critical properties
+- **Smart grid generation with adaptive resolution near phase boundaries**
 - Multiple unit systems (SI and CGS)
 - Multiple response formats (JSON and OLGA TAB)
 - Docker containerization for easy deployment
@@ -77,7 +78,10 @@ Calculate thermodynamic properties based on pressure and temperature.
       ...
     ],
     "units_system": "SI" or "CGS",
-    "response_format": "json" or "olga_tab"
+    "response_format": "json" or "olga_tab",
+    "grid_type": "equidistant" or "adaptive" or "logarithmic" or "exponential",
+    "enhancement_factor": 5.0,
+    "boundary_zone_width": null
   }
 }
 ```
@@ -116,7 +120,8 @@ Calculate thermodynamic properties based on pressure and temperature.
       "phase"
     ],
     "units_system": "SI",
-    "response_format": "json"
+    "response_format": "json",
+    "grid_type": "adaptive"
   }
 }
 ```
@@ -157,7 +162,10 @@ Calculate thermodynamic properties based on pressure and enthalpy.
       ...
     ],
     "units_system": "SI" or "CGS",
-    "response_format": "json" or "olga_tab"
+    "response_format": "json" or "olga_tab",
+    "grid_type": "equidistant" or "adaptive" or "logarithmic" or "exponential",
+    "enhancement_factor": 5.0,
+    "boundary_zone_width": null
   }
 }
 ```
@@ -199,12 +207,57 @@ Calculate thermodynamic properties based on pressure and enthalpy.
       "phase"
     ],
     "units_system": "SI",
-    "response_format": "json"
+    "response_format": "json",
+    "grid_type": "adaptive"
   }
 }
 ```
 
-### 3. Phase Envelope PT: `/phase_envelope_pt`
+### 3. TS-Flash: `/ts_flash`
+
+Calculate thermodynamic properties based on temperature and entropy.
+
+#### Request Format
+
+```json
+{
+  "composition": [
+    {"fluid": "FLUID_NAME1", "fraction": X1},
+    {"fluid": "FLUID_NAME2", "fraction": X2},
+    ...
+  ],
+  "variables": {
+    "temperature": {
+      "range": {
+        "from": T_MIN,
+        "to": T_MAX
+      },
+      "resolution": T_STEP
+    },
+    "entropy": {
+      "range": {
+        "from": S_MIN,
+        "to": S_MAX
+      },
+      "resolution": S_STEP
+    }
+  },
+  "calculation": {
+    "properties": [
+      "property1",
+      "property2",
+      ...
+    ],
+    "units_system": "SI" or "CGS",
+    "response_format": "json" or "olga_tab",
+    "grid_type": "equidistant" or "adaptive" or "logarithmic" or "exponential",
+    "enhancement_factor": 5.0,
+    "boundary_zone_width": null
+  }
+}
+```
+
+### 4. Phase Envelope PT: `/phase_envelope_pt`
 
 Calculate phase envelope (bubble and dew curves) in the pressure-temperature plane.
 
@@ -255,7 +308,7 @@ Calculate phase envelope (bubble and dew curves) in the pressure-temperature pla
 }
 ```
 
-### 4. Phase Envelope PH: `/phase_envelope_ph`
+### 5. Phase Envelope PH: `/phase_envelope_ph`
 
 Calculate phase envelope (bubble and dew curves) in the pressure-enthalpy plane.
 
@@ -306,6 +359,26 @@ Calculate phase envelope (bubble and dew curves) in the pressure-enthalpy plane.
 }
 ```
 
+## Grid Generation Types
+
+The API supports several types of grid generation for calculating properties:
+
+### 1. Equidistant (Default)
+Regular uniform grid with equal spacing between points. This is the default mode and matches the original behavior.
+
+### 2. Adaptive
+Higher resolution near phase boundaries where fluid properties change rapidly. The API automatically detects phase transitions and increases the grid density in these regions.
+
+Parameters:
+- `enhancement_factor`: Controls how much to increase resolution near boundaries (default: 5.0)
+- `boundary_zone_width`: Width of zone around boundary where resolution is enhanced (if null, calculated as 10% of the total range)
+
+### 3. Logarithmic
+More points at lower values, fewer at higher values. Useful for pressure ranges spanning multiple orders of magnitude.
+
+### 4. Exponential
+More points at higher values, fewer at lower values. Provides the opposite distribution to logarithmic grids.
+
 ## Response Formats
 
 The API supports multiple response formats:
@@ -326,13 +399,19 @@ JSON responses include calculated properties with their units:
       ...
     },
     ...
-  ]
+  ],
+  "grid_info": {
+    "type": "adaptive",
+    "pressure_points": 12,
+    "temperature_points": 15,
+    "total_points": 180
+  }
 }
 ```
 
 ### 2. OLGA TAB
 
-OLGA TAB is a specialized format used by multiphase flow simulators like OLGA. It represents fluid properties as a structured table across a pressure and temperature grid.
+OLGA TAB is a specialized format used by multiphase flow simulators like OLGA. It represents fluid properties as a structured table across a grid.
 
 To request OLGA TAB format, add `"response_format": "olga_tab"` to the calculation section of your request.
 
@@ -343,7 +422,8 @@ Example:
   "calculation": {
     "properties": [...],
     "units_system": "SI",
-    "response_format": "olga_tab"
+    "response_format": "olga_tab",
+    "grid_type": "adaptive"
   }
 }
 ```
@@ -504,6 +584,21 @@ When specifying fluid compositions:
 - The fractions must sum to 1.0
 - For pure fluids, use a single component with fraction 1.0
 - Fluid names are case-insensitive but typically uppercase in REFPROP
+
+## Benefits of Adaptive Grid Generation
+
+The adaptive grid feature offers several key advantages:
+
+1. **Improved Accuracy**: Higher resolution near phase boundaries where properties change rapidly
+2. **Computational Efficiency**: Fewer points needed in regions where properties change slowly
+3. **Better Interpolation**: More accurate interpolation of properties between calculated points
+4. **Optimal Resource Usage**: Concentrates computational effort where it's most needed
+
+This is particularly valuable for:
+- Phase transitions (liquid-vapor interfaces)
+- Critical regions
+- Retrograde condensation areas
+- Anywhere fluid properties change non-linearly
 
 ## Development and Contributions
 

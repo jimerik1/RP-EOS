@@ -9,8 +9,8 @@ def format_olga_tab(x_vars, y_vars, results, composition, molar_mass, endpoint_t
     Format calculation results in OLGA TAB format using generic grid variables.
     
     Args:
-        x_vars (dict): Dictionary with 'range' and 'resolution' for x-axis variable (pressure for PT/PH, temperature for TS)
-        y_vars (dict): Dictionary with 'range' and 'resolution' for y-axis variable (temperature for PT, enthalpy for PH, entropy for TS)
+        x_vars (dict): Dictionary with 'range', 'resolution', and optional 'values' for x-axis variable
+        y_vars (dict): Dictionary with 'range', 'resolution', and optional 'values' for y-axis variable
         results (list): List of result dictionaries from the calculation
         composition (list): List of fluid compositions (dict with 'fluid' and 'fraction')
         molar_mass (float): Molar mass of the mixture in g/mol
@@ -61,71 +61,78 @@ def format_olga_tab(x_vars, y_vars, results, composition, molar_mass, endpoint_t
             x_multiplier = 1e5  # bar to Pa
             y_multiplier = 1.0  # C
 
-        # Extract range and resolution with robust error handling
-        try:
-            # Get x-axis range with defaults
-            x_range = x_vars.get('range', {})
-            if not x_range:
-                x_range = {'from': 1.0, 'to': 100.0}
+        # Use provided grid values if available, otherwise generate from range
+        if 'values' in x_vars:
+            # Use the provided grid values directly
+            x_grid = x_vars['values']
+            nx_grid = len(x_grid)
+        else:
+            # Extract range and resolution with robust error handling
+            try:
+                # Get x-axis range with defaults
+                x_range = x_vars.get('range', {})
+                if not x_range:
+                    x_range = {'from': 1.0, 'to': 100.0}
+                    
+                x_from = float(x_range.get('from', 1.0))
+                x_to = float(x_range.get('to', 100.0))
                 
-            x_from = float(x_range.get('from', 1.0))
-            x_to = float(x_range.get('to', 100.0))
-            
-            # Ensure valid range
-            if x_to <= x_from:
-                x_to = x_from + 10.0
-                
-            # Get resolution with default
-            x_resolution = float(x_vars.get('resolution', 10.0))
-            if x_resolution <= 0:
-                x_resolution = 10.0
-                
-            # Same for y-axis
-            y_range = y_vars.get('range', {})
-            if not y_range:
-                y_range = {'from': 0.0, 'to': 100.0}
-                
-            y_from = float(y_range.get('from', 0.0))
-            y_to = float(y_range.get('to', 100.0))
-            
-            # Ensure valid range
-            if y_to <= y_from:
-                y_to = y_from + 10.0
-                
-            # Get resolution with default
-            y_resolution = float(y_vars.get('resolution', 5.0))
-            if y_resolution <= 0:
-                y_resolution = 5.0
-                
-        except (TypeError, ValueError) as e:
-            # If there's any issue parsing the ranges, use defaults
-            print(f"Error parsing grid ranges: {e}. Using defaults.")
-            x_from, x_to, x_resolution = 1.0, 100.0, 10.0
-            y_from, y_to, y_resolution = 0.0, 100.0, 5.0
-        
-        # Debug info
-        print(f"Generating OLGA TAB with {x_name} range: {x_from}-{x_to}, {y_name} range: {y_from}-{y_to}")
-        
-        # Generate grid arrays
-        try:
-            x_grid = np.arange(x_from, x_to + x_resolution, x_resolution)
-            y_grid = np.arange(y_from, y_to + y_resolution, y_resolution)
-            
-            # Safety check - if arrays are empty or too large, use defaults
-            if len(x_grid) == 0 or len(x_grid) > 1000:
+                # Ensure valid range
+                if x_to <= x_from:
+                    x_to = x_from + 10.0
+                    
+                # Get resolution with default
+                x_resolution = float(x_vars.get('resolution', 10.0))
+                if x_resolution <= 0:
+                    x_resolution = 10.0
+                    
+                # Generate regular grid
+                x_grid = np.arange(x_from, x_to + x_resolution, x_resolution)
+                nx_grid = len(x_grid)
+                    
+            except (TypeError, ValueError) as e:
+                # If there's any issue parsing the ranges, use defaults
+                print(f"Error parsing grid ranges: {e}. Using defaults.")
+                x_from, x_to, x_resolution = 1.0, 100.0, 10.0
                 x_grid = np.linspace(x_from, x_to, 10)
-            if len(y_grid) == 0 or len(y_grid) > 1000:
-                y_grid = np.linspace(y_from, y_to, 20)
+                nx_grid = len(x_grid)
+
+        # Same for y-axis
+        if 'values' in y_vars:
+            # Use the provided grid values directly
+            y_grid = y_vars['values']
+            ny_grid = len(y_grid)
+        else:
+            try:
+                y_range = y_vars.get('range', {})
+                if not y_range:
+                    y_range = {'from': 0.0, 'to': 100.0}
+                    
+                y_from = float(y_range.get('from', 0.0))
+                y_to = float(y_range.get('to', 100.0))
                 
-        except Exception as e:
-            print(f"Error generating grid arrays: {e}. Using defaults.")
-            x_grid = np.linspace(1.0, 100.0, 10)
-            y_grid = np.linspace(0.0, 100.0, 20)
+                # Ensure valid range
+                if y_to <= y_from:
+                    y_to = y_from + 10.0
+                    
+                # Get resolution with default
+                y_resolution = float(y_vars.get('resolution', 5.0))
+                if y_resolution <= 0:
+                    y_resolution = 5.0
+                    
+                # Generate regular grid
+                y_grid = np.arange(y_from, y_to + y_resolution, y_resolution)
+                ny_grid = len(y_grid)
+                
+            except (TypeError, ValueError) as e:
+                # If there's any issue parsing the ranges, use defaults
+                print(f"Error parsing grid ranges: {e}. Using defaults.")
+                y_from, y_to, y_resolution = 0.0, 100.0, 5.0
+                y_grid = np.linspace(y_from, y_to, 20)
+                ny_grid = len(y_grid)
             
-        nx_grid = len(x_grid)
-        ny_grid = len(y_grid)
-        
-        print(f"Generated grid with {nx_grid} {x_name} points and {ny_grid} {y_name} points")
+        # Debug info
+        print(f"Generating OLGA TAB with {nx_grid} {x_name} points and {ny_grid} {y_name} points")
         
         # Compose fluid description
         fluid_desc = " ".join([f"{comp['fluid']}-{comp['fraction']:.4f}" for comp in composition])
