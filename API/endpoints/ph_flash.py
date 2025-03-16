@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request, jsonify, Response
 import numpy as np
 import sys
 import traceback
@@ -93,7 +93,7 @@ def calculate_properties_ph(z: List[float], P: float, h: float, units_system: st
         'thermal_conductivity': tcx,
         'surface_tension': surface_tension,
         'critical_temperature': Tc,
-        'critical_pressure': Pc / 100,  # Convert from kPa to bar
+        'critical_pressure': Pc / 100 if Pc is not None else None,  # Convert from kPa to bar
         'critical_density': Dc,
         'compressibility_factor': Z,
         'isothermal_compressibility': -1/D * dDdP,
@@ -104,7 +104,11 @@ def calculate_properties_ph(z: List[float], P: float, h: float, units_system: st
         'thermal_diffusivity': tcx / (D * Cp) * 10000,  # Convert to cm²/s
         'prandtl_number': (Cp / wmm_kg) * (eta * 1e-6) / tcx,
         'temperature': T - 273.15,  # Convert to Celsius
-        'pressure': P
+        'pressure': P,
+        'x': list(x[:len(z)]),  # Liquid composition
+        'y': list(y[:len(z)]),  # Vapor composition
+        'dDdP': dDdP,          # Add pressure derivative of density
+        'dDdT': dDdT           # Add temperature derivative of density
     }
     
     # Convert properties to requested unit system
@@ -112,12 +116,16 @@ def calculate_properties_ph(z: List[float], P: float, h: float, units_system: st
     for prop_id, value in raw_properties.items():
         if value is not None:  # Skip undefined properties
             try:
-                properties[prop_id] = converter.convert_property(
-                    prop_id, float(value), wmm, 'SI', units_system
-                )
+                if prop_id in ['x', 'y']:
+                    # Composition vectors
+                    properties[prop_id] = {'value': value, 'unit': 'mole fraction'}
+                else:
+                    properties[prop_id] = converter.convert_property(
+                        prop_id, float(value), wmm, 'SI', units_system
+                    )
             except Exception as e:
                 print(f"Warning: Could not convert property {prop_id}: {str(e)}")
-                properties[prop_id] = {'value': float(value), 'unit': 'unknown'}
+                properties[prop_id] = {'value': float(value) if value is not None else None, 'unit': 'unknown'}
     
     # Add phase information
     properties['phase'] = {
@@ -147,6 +155,7 @@ def ph_flash():
         calculation = data.get('calculation', {})
         properties = calculation.get('properties', [])
         units_system = calculation.get('units_system', 'SI')  # Default to SI
+        response_format = calculation.get('response_format', 'json')  # Default to JSON
         
         if not properties:
             return jsonify({'error': 'No properties specified for calculation'}), 400
@@ -157,47 +166,60 @@ def ph_flash():
 
         # Setup mixture
         z = setup_mixture(data['composition'])
-
-        # Extract range and resolution parameters
-        pressure_range = variables['pressure'].get('range', {})
-        enthalpy_range = variables['enthalpy'].get('range', {})
-        pressure_resolution = variables['pressure'].get('resolution')
-        enthalpy_resolution = variables['enthalpy'].get('resolution')
         
-        # Validate required parameters exist
-        if not all([pressure_range.get('from'), pressure_range.get('to'), 
-                   enthalpy_range.get('from'), enthalpy_range.get('to'),
-                   pressure_resolution, enthalpy_resolution]):
-            return jsonify({'error': 'Missing range or resolution parameters'}), 400
+        # Get molecular weight for unit conversions
+        wmm = RP.WMOLdll(z)
+
+        # Extract range and resolution parameters with robust error handling
+        try:
+            pressure_range = variables['pressure'].get('range', {})
+            enthalpy_range = variables['enthalpy'].get('range', {})
+            
+            # Ensure all necessary values exist with defaults if not
+            p_from = float(pressure_range.get('from', 1.0))
+            p_to = float(pressure_range.get('to', 100.0))
+            h_from = float(enthalpy_range.get('from', 100.0))
+            h_to = float(enthalpy_range.get('to', 1000.0))
+            
+            pressure_resolution = float(variables['pressure'].get('resolution', 10.0))
+            enthalpy_resolution = float(variables['enthalpy'].get('resolution', 100.0))
+            
+            # Ensure to > from
+            if p_to <= p_from:
+                p_to = p_from + pressure_resolution
+            if h_to <= h_from:
+                h_to = h_from + enthalpy_resolution
+                
+            # Update the ranges for later use
+            pressure_range = {'from': p_from, 'to': p_to}
+            enthalpy_range = {'from': h_from, 'to': h_to}
+            
+        except (ValueError, TypeError) as ve:
+            return jsonify({'error': f'Invalid range or resolution parameters: {str(ve)}'}), 400
 
         # Debug log
         print("Received request with enthalpy range:", enthalpy_range,
               "and pressure range:", pressure_range)
 
         # Create arrays for calculations
-        P_range = np.arange(
-            float(pressure_range['from']),
-            float(pressure_range['to']) + float(pressure_resolution),
-            float(pressure_resolution)
-        )
-        
-        h_range = np.arange(
-            float(enthalpy_range['from']),
-            float(enthalpy_range['to']) + float(enthalpy_resolution),
-            float(enthalpy_resolution)
-        )
+        P_range = np.arange(p_from, p_to + pressure_resolution, pressure_resolution)
+        h_range = np.arange(h_from, h_to + enthalpy_resolution, enthalpy_resolution)
 
-        # The rest of the function remains the same
+        # Calculate properties
         results = []
         idx = 0
-        for P in P_range:
-            for h in h_range:
+        for p_idx, P in enumerate(P_range):
+            for h_idx, h in enumerate(h_range):
                 try:
                     props = calculate_properties_ph(z, float(P), float(h), units_system)
                     filtered_props = {k: v for k, v in props.items() 
                                    if k in properties or k in ['temperature', 'pressure', 'enthalpy']}
+                    
+                    # Add grid indices for OLGA TAB formatting
                     results.append({
                         'index': idx,
+                        'p_idx': p_idx,
+                        'h_idx': h_idx,
                         **filtered_props
                     })
                     idx += 1
@@ -205,7 +227,36 @@ def ph_flash():
                     print(f"Error processing P={P}, h={h}: {fe}", file=sys.stderr)
                     continue
 
-        return jsonify({'results': results})
+        # Return response in the requested format
+        if response_format.lower() == 'olga_tab':
+            from API.utils.olga_formatter import format_olga_tab
+            try:
+                # Create structured variable dictionaries for formatter
+                pressure_vars = {
+                    'range': pressure_range,
+                    'resolution': pressure_resolution
+                }
+                
+                enthalpy_vars = {
+                    'range': enthalpy_range,
+                    'resolution': enthalpy_resolution
+                }
+                
+                response = format_olga_tab(
+                    pressure_vars,     # x-axis (pressure) 
+                    enthalpy_vars,     # y-axis (enthalpy)
+                    results,
+                    data['composition'],
+                    wmm,
+                    endpoint_type='ph_flash'  # Specify endpoint type for correct grid variables
+                )
+                return response  # Return the Response object directly
+            except Exception as e:
+                print(f"Error formatting OLGA TAB: {e}", file=sys.stderr)
+                traceback.print_exc()
+                return jsonify({'error': f'Error formatting OLGA TAB response: {str(e)}'}), 500
+        else:
+            return jsonify({'results': results})
         
     except Exception as e:
         print("Error processing request:", file=sys.stderr)

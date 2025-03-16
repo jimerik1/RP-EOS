@@ -19,7 +19,44 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"CO2\", \"fraction\": 0.7},\n    {\"fluid\": \"N2\", \"fraction\": 0.3}\n  ],\n  \"variables\": {\n    \"pressure\": {\n      \"range\": {\"from\": 10, \"to\": 50},\n      \"resolution\": 10\n    },\n    \"temperature\": {\n      \"range\": {\"from\": -20, \"to\": 30},\n      \"resolution\": 5\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"density\",\n      \"enthalpy\",\n      \"entropy\",\n      \"sound_speed\",\n      \"viscosity\",\n      \"thermal_conductivity\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\"\n  }\n}",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"METHANE\", \"fraction\": 1}  ],\n  \"variables\": {\n    \"pressure\": {\n      \"range\": {\"from\": 10, \"to\": 50},\n      \"resolution\": 10\n    },\n    \"temperature\": {\n      \"range\": {\"from\": -20, \"to\": 30},\n      \"resolution\": 5\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"temperature\",\n      \"pressure\",\n      \"density\",\n      \"liquid_density\",\n      \"vapor_density\",\n      \"critical_density\",\n      \"critical_pressure\",\n      \"critical_temperature\",\n      \"internal_energy\",\n      \"enthalpy\",\n      \"entropy\",\n      \"cv\",\n      \"cp\",\n      \"sound_speed\",\n      \"viscosity\",\n      \"thermal_conductivity\",\n      \"surface_tension\",\n      \"vapor_fraction\",\n      \"compressibility_factor\",\n      \"prandtl_number\",\n      \"isothermal_compressibility\",\n      \"volume_expansivity\",\n      \"dp_dt_saturation\",\n      \"joule_thomson_coefficient\",\n      \"kinematic_viscosity\",\n      \"thermal_diffusivity\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5051/pt_flash",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5051",
+					"path": [
+						"pt_flash"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PT Flash - OLGA TAB format",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"CO2\", \"fraction\": 0.9},\n    {\"fluid\": \"METHANE\", \"fraction\": 0.1}  \n\n    ],\n  \"variables\": {\n    \"pressure\": {\n      \"range\": {\"from\": 10, \"to\": 50},\n      \"resolution\": 10\n    },\n    \"temperature\": {\n      \"range\": {\"from\": -20, \"to\": 30},\n      \"resolution\": 5\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"temperature\",\n      \"pressure\",\n      \"density\",\n      \"liquid_density\",\n      \"vapor_density\",\n      \"critical_density\",\n      \"critical_pressure\",\n      \"critical_temperature\",\n      \"internal_energy\",\n      \"enthalpy\",\n      \"entropy\",\n      \"cv\",\n      \"cp\",\n      \"sound_speed\",\n      \"viscosity\",\n      \"thermal_conductivity\",\n      \"surface_tension\",\n      \"vapor_fraction\",\n      \"compressibility_factor\",\n      \"prandtl_number\",\n      \"isothermal_compressibility\",\n      \"volume_expansivity\",\n      \"dp_dt_saturation\",\n      \"joule_thomson_coefficient\",\n      \"kinematic_viscosity\",\n      \"thermal_diffusivity\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\",\n    \"response_format\": \"olga_tab\"\n  }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -81,6 +118,43 @@
 			"response": []
 		},
 		{
+			"name": "PH Flash OLGA TAB format",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"METHANE\", \"fraction\": 0.85},\n    {\"fluid\": \"ETHANE\", \"fraction\": 0.1},\n    {\"fluid\": \"PROPANE\", \"fraction\": 0.05}\n  ],\n  \"variables\": {\n    \"pressure\": {\n      \"range\": {\"from\": 5, \"to\": 50},\n      \"resolution\": 5\n    },\n    \"enthalpy\": {\n      \"range\": {\"from\": 300, \"to\": 800},\n      \"resolution\": 50\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"temperature\",\n      \"density\",\n      \"vapor_fraction\",\n      \"entropy\",\n      \"cp\",\n      \"cv\",\n      \"sound_speed\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\",\n    \"response_format\": \"olga_tab\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5051/ph_flash",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5051",
+					"path": [
+						"ph_flash"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "TS Flash",
 			"request": {
 				"method": "POST",
@@ -94,6 +168,43 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"METHANE\", \"fraction\": 0.85},\n    {\"fluid\": \"ETHANE\", \"fraction\": 0.1},\n    {\"fluid\": \"PROPANE\", \"fraction\": 0.05}\n  ],\n  \"variables\": {\n    \"temperature\": {\n      \"range\": {\"from\": -50, \"to\": 50},\n      \"resolution\": 10\n    },\n    \"entropy\": {\n      \"range\": {\"from\": 160, \"to\": 240},\n      \"resolution\": 20\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"pressure\",\n      \"density\",\n      \"vapor_fraction\",\n      \"enthalpy\",\n      \"cp\",\n      \"cv\",\n      \"sound_speed\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5051/ts_flash",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5051",
+					"path": [
+						"ts_flash"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TS Flash - OLGA TAB format",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"composition\": [\n    {\"fluid\": \"METHANE\", \"fraction\": 0.85},\n    {\"fluid\": \"ETHANE\", \"fraction\": 0.1},\n    {\"fluid\": \"PROPANE\", \"fraction\": 0.05}\n  ],\n  \"variables\": {\n    \"temperature\": {\n      \"range\": {\"from\": -50, \"to\": 50},\n      \"resolution\": 10\n    },\n    \"entropy\": {\n      \"range\": {\"from\": 160, \"to\": 240},\n      \"resolution\": 20\n    }\n  },\n  \"calculation\": {\n    \"properties\": [\n      \"pressure\",\n      \"density\",\n      \"vapor_fraction\",\n      \"enthalpy\",\n      \"cp\",\n      \"cv\",\n      \"sound_speed\",\n      \"phase\"\n    ],\n    \"units_system\": \"SI\",\n    \"response_format\": \"olga_tab\"\n  }\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -125,7 +125,7 @@ def calculate_properties_ts(z: List[float], T: float, s: float, units_system: st
                     )
             except Exception as e:
                 print(f"Warning: Could not convert property {prop_id}: {str(e)}")
-                properties[prop_id] = {'value': float(value), 'unit': 'unknown'}
+                properties[prop_id] = {'value': float(value) if value is not None else None, 'unit': 'unknown'}
     
     # Add phase information
     properties['phase'] = {
@@ -170,17 +170,32 @@ def ts_flash():
         # Get molecular weight for unit conversions
         wmm = RP.WMOLdll(z)
 
-        # Extract range and resolution parameters
-        temperature_range = variables['temperature'].get('range', {})
-        entropy_range = variables['entropy'].get('range', {})
-        temperature_resolution = variables['temperature'].get('resolution')
-        entropy_resolution = variables['entropy'].get('resolution')
-        
-        # Validate required parameters exist
-        if not all([temperature_range.get('from'), temperature_range.get('to'), 
-                   entropy_range.get('from'), entropy_range.get('to'),
-                   temperature_resolution, entropy_resolution]):
-            return jsonify({'error': 'Missing range or resolution parameters'}), 400
+        # Extract range and resolution parameters with robust error handling
+        try:
+            temperature_range = variables['temperature'].get('range', {})
+            entropy_range = variables['entropy'].get('range', {})
+            
+            # Ensure all necessary values exist with defaults if not
+            t_from = float(temperature_range.get('from', 0.0))
+            t_to = float(temperature_range.get('to', 100.0))
+            s_from = float(entropy_range.get('from', 100.0))
+            s_to = float(entropy_range.get('to', 500.0))
+            
+            temperature_resolution = float(variables['temperature'].get('resolution', 5.0))
+            entropy_resolution = float(variables['entropy'].get('resolution', 50.0))
+            
+            # Ensure to > from
+            if t_to <= t_from:
+                t_to = t_from + temperature_resolution
+            if s_to <= s_from:
+                s_to = s_from + entropy_resolution
+                
+            # Update the ranges for later use
+            temperature_range = {'from': t_from, 'to': t_to}
+            entropy_range = {'from': s_from, 'to': s_to}
+            
+        except (ValueError, TypeError) as ve:
+            return jsonify({'error': f'Invalid range or resolution parameters: {str(ve)}'}), 400
 
         # Debug log
         print(f"Calculating TS flash for temperature range: {temperature_range['from']} to {temperature_range['to']} °C, "
@@ -188,15 +203,15 @@ def ts_flash():
 
         # Create arrays for calculations
         T_range = np.arange(
-            float(temperature_range['from']) + 273.15,  # Convert from °C to K
-            float(temperature_range['to']) + 273.15 + float(temperature_resolution),
-            float(temperature_resolution)
+            t_from + 273.15,  # Convert from °C to K
+            t_to + 273.15 + temperature_resolution,
+            temperature_resolution
         )
         
         s_range = np.arange(
-            float(entropy_range['from']),
-            float(entropy_range['to']) + float(entropy_resolution),
-            float(entropy_resolution)
+            s_from,
+            s_to + entropy_resolution,
+            entropy_resolution
         )
 
         # Calculate properties
@@ -224,22 +239,31 @@ def ts_flash():
         # Return response in the requested format
         if response_format.lower() == 'olga_tab':
             from API.utils.olga_formatter import format_olga_tab
-            
-            # Extract pressure range from results for OLGA TAB format
-            pressures = sorted(list(set([r['pressure']['value'] for r in results])))
-            pressure_range = {
-                'from': min(pressures),
-                'to': max(pressures),
-                'resolution': pressures[1] - pressures[0] if len(pressures) > 1 else 1.0
-            }
-            
-            return format_olga_tab(
-                pressure_range,
-                temperature_range,
-                results,
-                data['composition'],
-                wmm
-            )
+            try:
+                # Create structured variable dictionaries for formatter
+                temperature_vars = {
+                    'range': temperature_range,
+                    'resolution': temperature_resolution
+                }
+                
+                entropy_vars = {
+                    'range': entropy_range,
+                    'resolution': entropy_resolution
+                }
+                
+                response = format_olga_tab(
+                    temperature_vars,  # x-axis (temperature)
+                    entropy_vars,      # y-axis (entropy)
+                    results,
+                    data['composition'],
+                    wmm,
+                    endpoint_type='ts_flash'  # Specify endpoint type for correct grid variables
+                )
+                return response  # Return the Response object directly
+            except Exception as e:
+                print(f"Error formatting OLGA TAB: {e}", file=sys.stderr)
+                traceback.print_exc()
+                return jsonify({'error': f'Error formatting OLGA TAB response: {str(e)}'}), 500
         else:
             return jsonify({'results': results})
         

@@ -172,16 +172,31 @@ def pt_flash():
         wmm = RP.WMOLdll(z)
 
         # Extract range and resolution parameters
-        pressure_range = variables['pressure'].get('range', {})
-        temperature_range = variables['temperature'].get('range', {})
-        pressure_resolution = variables['pressure'].get('resolution')
-        temperature_resolution = variables['temperature'].get('resolution')
-        
-        # Validate required parameters exist
-        if not all([pressure_range.get('from'), pressure_range.get('to'), 
-                   temperature_range.get('from'), temperature_range.get('to'),
-                   pressure_resolution, temperature_resolution]):
-            return jsonify({'error': 'Missing range or resolution parameters'}), 400
+        try:
+            pressure_range = variables['pressure'].get('range', {})
+            temperature_range = variables['temperature'].get('range', {})
+            
+            # Ensure all necessary values exist with defaults if not
+            p_from = float(pressure_range.get('from', 1.0))
+            p_to = float(pressure_range.get('to', 100.0))
+            t_from = float(temperature_range.get('from', 0.0))
+            t_to = float(temperature_range.get('to', 100.0))
+            
+            pressure_resolution = float(variables['pressure'].get('resolution', 10.0))
+            temperature_resolution = float(variables['temperature'].get('resolution', 5.0))
+            
+            # Ensure to > from
+            if p_to <= p_from:
+                p_to = p_from + pressure_resolution
+            if t_to <= t_from:
+                t_to = t_from + temperature_resolution
+                
+            # Update the ranges for later use
+            pressure_range = {'from': p_from, 'to': p_to}
+            temperature_range = {'from': t_from, 'to': t_to}
+            
+        except (ValueError, TypeError) as ve:
+            return jsonify({'error': f'Invalid range or resolution parameters: {str(ve)}'}), 400
 
         # Debug log
         print(f"Calculating PT flash for temperature range: {temperature_range['from']} to {temperature_range['to']} °C, "
@@ -189,14 +204,14 @@ def pt_flash():
 
         # Create arrays for calculations
         T_range = np.arange(
-            float(temperature_range['from']) + 273.15,
-            float(temperature_range['to']) + 273.15 + float(temperature_resolution),
-            float(temperature_resolution)
+            t_from + 273.15,  # Convert from °C to K
+            t_to + 273.15 + temperature_resolution,
+            temperature_resolution
         )
         P_range = np.arange(
-            float(pressure_range['from']),
-            float(pressure_range['to']) + float(pressure_resolution),
-            float(pressure_resolution)
+            p_from,
+            p_to + pressure_resolution,
+            pressure_resolution
         )
 
         # Calculate properties
@@ -224,14 +239,31 @@ def pt_flash():
         # Return response in the requested format
         if response_format.lower() == 'olga_tab':
             from API.utils.olga_formatter import format_olga_tab
-            response = format_olga_tab(
-                variables['pressure'],
-                variables['temperature'],
-                results,
-                data['composition'],
-                wmm
-            )
-            return response  # Return the Response object directly
+            try:
+                # Create structured variable dictionaries for formatter
+                pressure_vars = {
+                    'range': pressure_range,
+                    'resolution': pressure_resolution
+                }
+                
+                temperature_vars = {
+                    'range': temperature_range,
+                    'resolution': temperature_resolution
+                }
+                
+                response = format_olga_tab(
+                    pressure_vars,  # x-axis (pressure)
+                    temperature_vars,  # y-axis (temperature)
+                    results,
+                    data['composition'],
+                    wmm,
+                    endpoint_type='pt_flash'  # Specify endpoint type for correct grid variables
+                )
+                return response  # Return the Response object directly
+            except Exception as e:
+                print(f"Error formatting OLGA TAB: {e}", file=sys.stderr)
+                traceback.print_exc()
+                return jsonify({'error': f'Error formatting OLGA TAB response: {str(e)}'}), 500
         else:
             return jsonify({'results': results})
         
