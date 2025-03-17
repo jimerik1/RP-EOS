@@ -155,9 +155,9 @@ def format_olga_tab(x_vars, y_vars, results, composition, molar_mass, endpoint_t
         # Compose fluid description
         fluid_desc = " ".join([f"{comp['fluid']}-{comp['fraction']:.4f}" for comp in composition])
         
-        # Create OLGA TAB header - customized for the grid variables
-        olga_tab = f"'Span-Wagner EOS {fluid_desc} ({x_name.upper()}-{y_name.upper()} grid)'\n"
-        olga_tab += f"   {nx_grid}  {ny_grid}    .276731E-08\n"
+        # Create OLGA TAB header - simplified to remove grid description
+        olga_tab = f"'{fluid_desc}'"
+        olga_tab += f"    {nx_grid}  {ny_grid}    .276731E-08\n"
         
         # X-axis grid with appropriate multiplier
         x_grid_formatted = [x * x_multiplier for x in x_grid]
@@ -599,7 +599,7 @@ def convert_vapor_fraction_to_mass(q, result=None, composition=None, molar_mass=
 
 def format_grid_values(values, values_per_line=5):
     """
-    Format grid values for OLGA TAB format.
+    Format grid values for OLGA TAB format with leading decimal point.
     
     Args:
         values (list): List of values to format
@@ -614,11 +614,34 @@ def format_grid_values(values, values_per_line=5):
         
         for i in range(0, len(values_array), values_per_line):
             line_values = values_array[i:i + values_per_line]
-            # Remove the dot before the value - use proper scientific notation
-            formatted += "    " + "    ".join([f"{value:.6E}" for value in line_values]) + "\n"
+            line = "    "
+            for val in line_values:
+                # Convert to scientific notation
+                if val < 0:
+                    # Handle negative numbers with format "-.123456E+00"
+                    sci_notation = f"{abs(val):.6E}"
+                    mantissa, exponent = sci_notation.split('E')
+                    # Remove decimal point and leading zeros
+                    mantissa = mantissa.replace("0.", "").replace(".", "")
+                    # Ensure mantissa has 6 digits
+                    mantissa = mantissa.ljust(6, '0')
+                    # Format with negative sign before the decimal point
+                    formatted_val = f"-.{mantissa}E{exponent}"
+                else:
+                    sci_notation = f"{val:.6E}"
+                    mantissa, exponent = sci_notation.split('E')
+                    # Remove decimal point and leading zeros
+                    mantissa = mantissa.replace("0.", "").replace(".", "")
+                    # Ensure mantissa has 6 digits
+                    mantissa = mantissa.ljust(6, '0')
+                    # Format with leading decimal point
+                    formatted_val = f".{mantissa}E{exponent}"
+                
+                line += formatted_val + "    "
+            formatted += line.rstrip() + "\n"
         
         return formatted
     except Exception as e:
         print(f"Error formatting grid values: {e}")
         # Return a minimal valid grid as fallback
-        return "    0.000000E+00\n"
+        return "    .000000E+00\n" 
