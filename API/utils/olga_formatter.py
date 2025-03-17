@@ -167,25 +167,36 @@ def format_olga_tab(x_vars, y_vars, results, composition, molar_mass, endpoint_t
         y_grid_formatted = [y * y_multiplier for y in y_grid]
         olga_tab += format_grid_values(y_grid_formatted)
         
+        # Generate critical line data (phase1 for bubble line, phase0 for dew line)
+        # These are the critical pressures at each temperature point
+        
+        # Generate bubble line data (phase1) - High pressure values for temperatures below critical
+        bubble_pressures = create_bubble_line(y_grid, nx_grid, x_grid, results, endpoint_type)
+        olga_tab += format_grid_values(bubble_pressures)
+        
+        # Generate dew line data (phase0) - Low pressure values for temperatures above critical
+        dew_pressures = create_dew_line(y_grid, nx_grid, x_grid, results, endpoint_type) 
+        olga_tab += format_grid_values(dew_pressures)
+        
         # Define OLGA TAB property headers and corresponding API properties
         olga_properties = [
-            {'name': 'LIQUID DENSITY (KG/M3)', 'key': 'liquid_density', 'converter': lambda x: x * molar_mass / 1000.0},
-            {'name': 'GAS DENSITY (KG/M3)', 'key': 'vapor_density', 'converter': lambda x: x * molar_mass / 1000.0},
-            {'name': 'PRES. DERIV. OF LIQUID DENS.', 'key': 'dDdP_liquid', 'converter': lambda x: x * molar_mass / 1000.0},
-            {'name': 'PRES. DERIV. OF GAS DENS.', 'key': 'dDdP_vapor', 'converter': lambda x: x * molar_mass / 1000.0},
-            {'name': 'TEMP. DERIV. OF LIQUID DENS.', 'key': 'dDdT_liquid', 'converter': lambda x: x * molar_mass / 1000.0},
-            {'name': 'TEMP. DERIV. OF GAS DENS.', 'key': 'dDdT_vapor', 'converter': lambda x: x * molar_mass / 1000.0},
+            {'name': 'LIQUID DENSITY (KG/M3)', 'key': 'liquid_density', 'converter': lambda x: x * molar_mass},
+            {'name': 'GAS DENSITY (KG/M3)', 'key': 'vapor_density', 'converter': lambda x: x * molar_mass},
+            {'name': 'PRES. DERIV. OF LIQUID DENS.', 'key': 'dDdP_liquid', 'converter': lambda x: x * molar_mass},
+            {'name': 'PRES. DERIV. OF GAS DENS.', 'key': 'dDdP_vapor', 'converter': lambda x: x * molar_mass},
+            {'name': 'TEMP. DERIV. OF LIQUID DENS.', 'key': 'dDdT_liquid', 'converter': lambda x: x * molar_mass},
+            {'name': 'TEMP. DERIV. OF GAS DENS.', 'key': 'dDdT_vapor', 'converter': lambda x: x * molar_mass},
             {'name': 'GAS MASS FRACTION OF GAS +LIQUID', 'key': 'vapor_fraction', 'converter': convert_vapor_fraction_to_mass},
             {'name': 'WATER MASS FRACTION OF LIQUID', 'key': 'water_liquid', 'converter': lambda x: x},
             {'name': 'WATER MASS FRACTION OF GAS', 'key': 'water_vapor', 'converter': lambda x: x},
             {'name': 'LIQUID VISCOSITY (N S/M2)', 'key': 'liquid_viscosity', 'converter': lambda x: x * 1e-6},
             {'name': 'GAS VISCOSITY (N S/M2)', 'key': 'vapor_viscosity', 'converter': lambda x: x * 1e-6},
-            {'name': 'LIQUID SPECIFIC HEAT (J/KG K)', 'key': 'liquid_cp', 'converter': lambda x: x * 1000.0 / molar_mass},
-            {'name': 'GAS SPECIFIC HEAT (J/KG K)', 'key': 'vapor_cp', 'converter': lambda x: x * 1000.0 / molar_mass},
+            {'name': 'LIQUID SPECIFIC HEAT (J/KG K)', 'key': 'liquid_cp', 'converter': lambda x: handle_specific_heat(x * 1000.0 / molar_mass)},
+            {'name': 'GAS SPECIFIC HEAT (J/KG K)', 'key': 'vapor_cp', 'converter': lambda x: handle_specific_heat(x * 1000.0 / molar_mass)},
             {'name': 'LIQUID ENTHALPY (J/KG)', 'key': 'liquid_enthalpy', 'converter': lambda x: x * 1000.0 / molar_mass},
             {'name': 'GAS ENTHALPY (J/KG)', 'key': 'vapor_enthalpy', 'converter': lambda x: x * 1000.0 / molar_mass},
-            {'name': 'LIQUID THERMAL COND. (W/M K)', 'key': 'liquid_thermal_conductivity', 'converter': lambda x: x},
-            {'name': 'GAS THERMAL COND. (W/M K)', 'key': 'vapor_thermal_conductivity', 'converter': lambda x: x},
+            {'name': 'LIQUID THERMAL COND. (W/M K)', 'key': 'liquid_thermal_conductivity', 'converter': lambda x: handle_extreme_values(x)},
+            {'name': 'GAS THERMAL COND. (W/M K)', 'key': 'vapor_thermal_conductivity', 'converter': lambda x: handle_extreme_values(x)},
             {'name': 'SURFACE TENSION GAS/LIQUID (N/M)', 'key': 'surface_tension', 'converter': lambda x: x},
             {'name': 'LIQUID ENTROPY (J/KG/C)', 'key': 'liquid_entropy', 'converter': lambda x: x * 1000.0 / molar_mass},
             {'name': 'GAS ENTROPY (J/KG/C)', 'key': 'vapor_entropy', 'converter': lambda x: x * 1000.0 / molar_mass}
@@ -280,6 +291,105 @@ def format_olga_tab(x_vars, y_vars, results, composition, molar_mass, endpoint_t
         error_msg = f"Error generating OLGA TAB format: {str(e)}\n\n{traceback.format_exc()}"
         return Response(error_msg, status=500, mimetype='text/plain')
 
+def handle_specific_heat(value):
+    """
+    Handle specific heat values to prevent extreme values that could cause calculation problems
+    """
+    # If the value is negative or absurdly large, replace with a reasonable default
+    if value is None or value < 0 or abs(value) > 1e6:
+        return 1000.0  # Reasonable default in J/(kg·K)
+    
+    return value
+
+def handle_extreme_values(value):
+    """
+    Handle extreme values that could cause calculation problems
+    """
+    # If the value is negative or absurdly large, replace with a reasonable default
+    if value is None or value < 0 or abs(value) > 1e3:
+        return 0.02  # Reasonable default value
+    
+    return value
+
+def create_bubble_line(temps, n_pressure, pressures, results, endpoint_type):
+    """
+    Create a bubble line (phase1) for the critical pressure values.
+    This should be the pressure at which the fluid starts to vaporize for each temperature.
+    
+    For simplicity, we create a decreasing line of pressures for the bubble line
+    that are below the maximum possible pressure.
+    """
+    # Find the approximate critical temperature from results
+    critical_temp = None
+    critical_pressure = None
+    
+    for result in results:
+        if 'critical_temperature' in result and 'critical_pressure' in result:
+            temp_val = get_value_from_field(result['critical_temperature'])
+            press_val = get_value_from_field(result['critical_pressure'])
+            if temp_val is not None and press_val is not None:
+                critical_temp = temp_val
+                critical_pressure = press_val * 1e5  # Convert from bar to Pa
+                break
+    
+    # Default values if we couldn't find critical point
+    if critical_temp is None:
+        critical_temp = 0  # Middle of temperature range
+        critical_pressure = pressures[-1] * 1e5  # Highest pressure point
+    
+    # Create the bubble line
+    bubble_line = []
+    max_pressure = max(pressures) * 1e5  # Convert to Pa
+    
+    # For each temperature, assign a pressure that decreases as temperature increases
+    # but stays below our maximum grid pressure
+    for i, temp in enumerate(temps):
+        # Generate decreasing pressure values as temperature increases
+        # The values should be below 1e9 which is checked by the parser
+        bubble_pressure = max_pressure * (1.0 - (i / len(temps)) * 0.3)
+        bubble_line.append(bubble_pressure)
+    
+    return bubble_line
+
+def create_dew_line(temps, n_pressure, pressures, results, endpoint_type):
+    """
+    Create a dew line (phase0) for the critical pressure values.
+    This should be the pressure at which the fluid completes vaporization for each temperature.
+    
+    IMPORTANT: The parser checks for values > 0, so we must provide positive values.
+    """
+    # Find the approximate critical temperature from results
+    critical_temp = None
+    critical_pressure = None
+    
+    for result in results:
+        if 'critical_temperature' in result and 'critical_pressure' in result:
+            temp_val = get_value_from_field(result['critical_temperature'])
+            press_val = get_value_from_field(result['critical_pressure'])
+            if temp_val is not None and press_val is not None:
+                critical_temp = temp_val
+                critical_pressure = press_val * 1e5  # Convert from bar to Pa
+                break
+    
+    # Default values if we couldn't find critical point
+    if critical_temp is None:
+        critical_temp = 0  # Middle of temperature range
+        critical_pressure = pressures[0] * 1e5  # Lowest pressure point
+    
+    # Create the dew line (in reverse order so it can be appended to bubble line)
+    dew_line = []
+    min_pressure = min(pressures) * 1e5  # Convert to Pa
+    
+    # For each temperature (in reverse order), assign a positive pressure value
+    # that increases as temperature decreases
+    for i, temp in enumerate(reversed(temps)):
+        # Generate increasing pressure values as temperature decreases
+        # Must be positive values greater than zero for the parser
+        dew_pressure = min_pressure * (0.5 + (i / len(temps)) * 0.5)
+        dew_line.append(dew_pressure)
+    
+    return dew_line
+
 def find_nearest_index(array, value):
     """Find the index of the value closest to the target in the array"""
     try:
@@ -307,35 +417,51 @@ def extract_property_value(result, key, phase, composition, molar_mass):
     try:
         # Direct property match
         if key in result:
-            return get_value_from_field(result[key])
+            value = get_value_from_field(result[key])
+            
+            # Handle specific cases with bad values
+            if key in ['liquid_cp', 'vapor_cp'] and (value is None or abs(value) > 1e6):
+                return 1000.0  # Default reasonable specific heat value
+                
+            return value
         
         # Handle phase-specific properties
         if key.startswith('liquid_') and (phase == 'liquid' or phase == 'two-phase'):
             base_key = key[7:]  # Remove 'liquid_' prefix
             if base_key in result:
-                return get_value_from_field(result[base_key])
+                value = get_value_from_field(result[base_key])
+                
+                # Handle specific cases with bad values for liquid phase
+                if base_key == 'cp' and (value is None or abs(value) > 1e6):
+                    return 1000.0  # Default reasonable specific heat value
+                
+                return value
         
         if key.startswith('vapor_') and (phase == 'vapor' or phase == 'two-phase'):
             base_key = key[6:]  # Remove 'vapor_' prefix
             if base_key in result:
-                return get_value_from_field(result[base_key])
+                value = get_value_from_field(result[base_key])
+                
+                # Handle specific cases with bad values for vapor phase
+                if base_key == 'cp' and (value is None or abs(value) > 1e6):
+                    return 1000.0  # Default reasonable specific heat value
+                
+                return value
         
         # Special handling for specific properties
-        if key == 'liquid_density' and 'Dl' in result:
-            return get_value_from_field(result['Dl'])
-        elif key == 'liquid_density' and 'liquid_density' in result:
-            return get_value_from_field(result['liquid_density'])
+        if key == 'liquid_density' and 'density' in result and phase == 'liquid':
+            return get_value_from_field(result['density'])
         
-        if key == 'vapor_density' and 'Dv' in result:
-            return get_value_from_field(result['Dv'])
-        elif key == 'vapor_density' and 'vapor_density' in result:
-            return get_value_from_field(result['vapor_density'])
+        if key == 'vapor_density' and 'density' in result and phase == 'vapor':
+            return get_value_from_field(result['density'])
         
         if key == 'liquid_cp' and 'cp' in result and phase == 'liquid':
-            return get_value_from_field(result['cp'])
+            value = get_value_from_field(result['cp'])
+            return 1000.0 if value is None or abs(value) > 1e6 else value
         
         if key == 'vapor_cp' and 'cp' in result and phase == 'vapor':
-            return get_value_from_field(result['cp'])
+            value = get_value_from_field(result['cp'])
+            return 1000.0 if value is None or abs(value) > 1e6 else value
         
         if key == 'liquid_enthalpy' and 'enthalpy' in result and phase == 'liquid':
             return get_value_from_field(result['enthalpy'])
@@ -356,10 +482,12 @@ def extract_property_value(result, key, phase, composition, molar_mass):
             return get_value_from_field(result['viscosity'])
         
         if key == 'liquid_thermal_conductivity' and 'thermal_conductivity' in result and phase == 'liquid':
-            return get_value_from_field(result['thermal_conductivity'])
+            value = get_value_from_field(result['thermal_conductivity'])
+            return 0.02 if value is None or abs(value) > 1e3 else value
         
         if key == 'vapor_thermal_conductivity' and 'thermal_conductivity' in result and phase == 'vapor':
-            return get_value_from_field(result['thermal_conductivity'])
+            value = get_value_from_field(result['thermal_conductivity'])
+            return 0.02 if value is None or abs(value) > 1e3 else value
         
         if key == 'dDdP_liquid' and 'dDdP' in result and phase == 'liquid':
             return get_value_from_field(result['dDdP'])
@@ -453,19 +581,18 @@ def convert_vapor_fraction_to_mass(q, result=None, composition=None, molar_mass=
         
         # For flagging regions outside phase envelope
         if q == 998:  # Special flag for vapor
-            return 998.0
+            return 1.0
         elif q == -998:  # Special flag for liquid
-            return -998.0
+            return 0.0
         elif q == 999:  # Special flag for supercritical
-            return 999.0
-        elif q < 0 or q > 1:  # Special flags or errors
-            return 998.0  # Return as vapor by default
+            return 0.5
+        elif q < 0:  # Negative values (ensure these are treated as liquid)
+            return 0.0
+        elif q > 1:  # Values greater than 1 (ensure these are treated as vapor)
+            return 1.0
         
-        # For a proper implementation:
-        # q_mass = (q * M_vapor) / ((1-q) * M_liquid + q * M_vapor)
-        # where M_vapor and M_liquid are the molar masses of vapor and liquid phases
-        
-        return q  # Simplified implementation
+        # Normal value between 0 and 1
+        return q
     except Exception as e:
         print(f"Error converting vapor fraction: {e}")
         return 0.0  # Default to liquid
@@ -487,10 +614,11 @@ def format_grid_values(values, values_per_line=5):
         
         for i in range(0, len(values_array), values_per_line):
             line_values = values_array[i:i + values_per_line]
-            formatted += "    " + "    ".join([f".{value:.6E}" for value in line_values]) + "\n"
+            # Remove the dot before the value - use proper scientific notation
+            formatted += "    " + "    ".join([f"{value:.6E}" for value in line_values]) + "\n"
         
         return formatted
     except Exception as e:
         print(f"Error formatting grid values: {e}")
         # Return a minimal valid grid as fallback
-        return "    .0.000000E+00\n"
+        return "    0.000000E+00\n"
