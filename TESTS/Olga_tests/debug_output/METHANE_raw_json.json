@@ -1,0 +1,2660 @@
+{
+  "grid_info": {
+    "pressure_points": 25,
+    "temperature_points": 2,
+    "total_points": 50,
+    "type": "equidistant"
+  },
+  "results": [
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 36.79296711662176
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 0.03726599397046232
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 15505.47520013621
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 110.10803517320545
+      },
+      "index": 0,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 0.03726599397046232
+      },
+      "p_idx": 0,
+      "phase": {
+        "unit": null,
+        "value": "Vapor"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1.0
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.03751957094018369
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 0.03726599397046232
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 998.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 11.871589467318266
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 36.83597041897438
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 0.03715045056634233
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 15542.289648939943
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 110.22178294709393
+      },
+      "index": 1,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 0.03715045056634233
+      },
+      "p_idx": 0,
+      "phase": {
+        "unit": null,
+        "value": "Vapor"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1.0
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.037666442438485576
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 0.03715045056634233
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 998.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 11.902917992401894
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 42.29503542150913
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 2.5470263231601
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 14650.546333552626
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 73.58524604756106
+      },
+      "index": 2,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 2.5470263231601
+      },
+      "p_idx": 1,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 63.458333333333336
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.042202224640400306
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 2.5470263231601
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 13.03134393611222
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 42.28160519583163
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 2.5364631342355617
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 14692.83455411149
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 73.71590650688205
+      },
+      "index": 3,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 2.5364631342355617
+      },
+      "p_idx": 1,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 63.458333333333336
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.04232425929826195
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 2.5364631342355617
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 13.057241828718599
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.447101290014146
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 5.313381578701352
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13837.529609501487
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 65.91649281728043
+      },
+      "index": 4,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 5.313381578701352
+      },
+      "p_idx": 2,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 125.91666666666667
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.04936603305836304
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 5.313381578701352
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 15.026066038002874
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.35370346242815
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 5.2865582649162635
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13885.929769844422
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 66.0660377667492
+      },
+      "index": 5,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 5.2865582649162635
+      },
+      "p_idx": 2,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 125.91666666666667
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.04942627017337682
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 5.2865582649162635
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 15.034968547533714
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 52.787115954179654
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 8.008837961887707
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13175.198755607651
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 60.93447507224759
+      },
+      "index": 6,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 8.008837961887707
+      },
+      "p_idx": 3,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 188.375
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.05819811201093925
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 8.008837961887707
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 17.70931259589163
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 52.659785037368
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 7.966516461721179
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13227.921969649205
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 61.097377246728186
+      },
+      "index": 7,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 7.966516461721179
+      },
+      "p_idx": 3,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 188.375
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.05818227711935637
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 7.966516461721179
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 17.692041491700685
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 54.27802362927342
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 10.31151358711263
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12718.541914957528
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 57.40925273852004
+      },
+      "index": 8,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 10.31151358711263
+      },
+      "p_idx": 4,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 250.83333333333334
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.06677395661391107
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 10.31151358711263
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 20.6630761956403
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 54.17829396651506
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 10.26095495977982
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12772.769968480496
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 57.576804483746905
+      },
+      "index": 9,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 10.26095495977982
+      },
+      "p_idx": 4,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 250.83333333333334
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.06670862308216047
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 10.26095495977982
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 20.620654378508284
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 54.07278814959578
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 12.150829291763895
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12439.806409620245
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 54.827439049504484
+      },
+      "index": 10,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 12.150829291763895
+      },
+      "p_idx": 5,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 313.2916666666667
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.07436488724995705
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 12.150829291763895
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 23.555106563368426
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 54.011860719459634
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 12.098226676256756
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12493.848705540277
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 54.99441681746727
+      },
+      "index": 11,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 12.098226676256756
+      },
+      "p_idx": 5,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 313.2916666666667
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.07427035964095152
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 12.098226676256756
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 23.493592547728326
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 53.311060157676366
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 13.611947032115124
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12286.10616643845
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 52.8528840290515
+      },
+      "index": 12,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 13.611947032115124
+      },
+      "p_idx": 6,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 375.75
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.08114227544453192
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 13.611947032115124
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 26.266182443769267
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 53.277944780959125
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 13.560213241097014
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12339.400664288867
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 53.01755125839038
+      },
+      "index": 13,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 13.560213241097014
+      },
+      "p_idx": 6,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 375.75
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.0810257317540476
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 13.560213241097014
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 26.190642692680377
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 52.47837153060813
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 14.796669632134059
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12215.765090688741
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 51.27556851490758
+      },
+      "index": 14,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 14.796669632134059
+      },
+      "p_idx": 7,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 438.20833333333337
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.08734173169251021
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 14.796669632134059
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 28.787482573189642
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 52.46274257242899
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 14.746811178761567
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12268.235646871457
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 51.43768994840026
+      },
+      "index": 15,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 14.746811178761567
+      },
+      "p_idx": 7,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 438.20833333333337
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.08720652659752041
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 14.746811178761567
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 28.70114619239694
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 51.723570253966116
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 15.78208058184211
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12201.731340430355
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 49.96872410075155
+      },
+      "index": 16,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 15.78208058184211
+      },
+      "p_idx": 8,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 500.6666666666667
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.09311294173419166
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 15.78208058184211
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 31.142879065505383
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 51.71884577836474
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 15.734310148327786
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12253.452545368822
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 50.12853021013454
+      },
+      "index": 17,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 15.734310148327786
+      },
+      "p_idx": 8,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 500.6666666666667
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.0929615340061672
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 15.734310148327786
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 31.047697267392557
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 51.07657167973257
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 16.621098691005937
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12226.956197397378
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.854321907711714
+      },
+      "index": 18,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 16.621098691005937
+      },
+      "p_idx": 9,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 563.125
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.09854982251154412
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 16.621098691005937
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 33.36088965003025
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 51.07884807751451
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 16.57533945747932
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12278.033900874814
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 49.01213974650746
+      },
+      "index": 19,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 16.57533945747932
+      },
+      "p_idx": 9,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 563.125
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.09838418469534536
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 16.57533945747932
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 33.258054012452945
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 50.530923361266304
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 17.349712278468505
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12280.489158330865
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 47.88242873716723
+      },
+      "index": 20,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 17.349712278468505
+      },
+      "p_idx": 10,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 625.5833333333334
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.10371652909731667
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 17.349712278468505
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 35.46663718248711
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 50.53787686654283
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 17.305797344232325
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12331.02354898207
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.03856786605186
+      },
+      "index": 21,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 17.305797344232325
+      },
+      "p_idx": 10,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 625.5833333333334
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.10353822007210721
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 17.305797344232325
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 35.356908940603375
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 50.07155250979311
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 17.992839676535876
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12355.06666725847
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 47.01973012704248
+      },
+      "index": 22,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 17.992839676535876
+      },
+      "p_idx": 11,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 688.0416666666667
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.10866002581350571
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 17.992839676535876
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 37.480493482113886
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 50.08175619410565
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 17.95058672064021
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12405.143309617368
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 47.174454921018004
+      },
+      "index": 23,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 17.95058672064021
+      },
+      "p_idx": 11,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 688.0416666666667
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.10847026342485634
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 17.95058672064021
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 37.36438671980831
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 49.68335040002869
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 18.568181655089244
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12445.705525395102
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 46.24312121610547
+      },
+      "index": 24,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 18.568181655089244
+      },
+      "p_idx": 12,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 750.5
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.11341621199131995
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 18.568181655089244
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 39.41864109740821
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 49.69589399990467
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 18.527419236783167
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12495.395133573045
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 46.39665016552252
+      },
+      "index": 25,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 18.527419236783167
+      },
+      "p_idx": 12,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 750.5
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.11321594993257836
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 18.527419236783167
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 39.29652119533506
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 49.35339887327342
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 19.088645095869378
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12548.878410462436
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 45.536021435290564
+      },
+      "index": 26,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 19.088645095869378
+      },
+      "p_idx": 13,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 812.9583333333334
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.11801327466495944
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 19.088645095869378
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 41.29395364719791
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 49.36767991196571
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 19.049220461213345
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12598.238934214985
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 45.68853359146016
+      },
+      "index": 27,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 19.049220461213345
+      },
+      "p_idx": 13,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 812.9583333333334
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.1178032687021826
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 19.049220461213345
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 41.16609181096327
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 49.07120721636984
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 19.56387306333964
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12662.018306764206
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 44.886175954234616
+      },
+      "index": 28,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 19.56387306333964
+      },
+      "p_idx": 14,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 875.4166666666667
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.12247375251634576
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 19.56387306333964
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 43.11676384172101
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 49.086813411285
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 19.525652986468355
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12711.097300142519
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 45.03781824808558
+      },
+      "index": 29,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 19.525652986468355
+      },
+      "p_idx": 14,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 875.4166666666667
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.12225461176238768
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 19.525652986468355
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 42.98336894259141
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.8283988530718
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 20.00122958787926
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12783.211213989252
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 44.2842941900876
+      },
+      "index": 30,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 20.00122958787926
+      },
+      "p_idx": 15,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 937.875
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.1268159200026273
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 20.00122958787926
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 44.89545590683158
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.84503954873968
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 19.964098752187002
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12832.047915209161
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 44.43518785851753
+      },
+      "index": 31,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 19.964098752187002
+      },
+      "p_idx": 15,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 937.875
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.12658814468100074
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 19.964098752187002
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 44.75669399649237
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.6183052034142
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 20.406448849626027
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12910.999541665948
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 43.72317673332757
+      },
+      "index": 32,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 20.406448849626027
+      },
+      "p_idx": 16,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1000.3333333333334
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.13105476714994121
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 20.406448849626027
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 46.63690867320296
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.63576996431853
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 20.370307544231192
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 12959.626560416888
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 43.873422532614995
+      },
+      "index": 33,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 20.370307544231192
+      },
+      "p_idx": 16,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1000.3333333333334
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.13081877583851043
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 20.370307544231192
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 46.49291539141042
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.435600222568745
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 20.784073659437144
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13044.252581363693
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 43.19713753963708
+      },
+      "index": 34,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 20.784073659437144
+      },
+      "p_idx": 17,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1062.7916666666667
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.13520271651454113
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 20.784073659437144
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 48.34682616869919
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.4537330147119
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 20.748835475475857
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13092.697228448023
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 43.34681985372848
+      },
+      "index": 35,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 20.748835475475857
+      },
+      "p_idx": 17,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1062.7916666666667
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.13495886570625112
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 20.748835475475857
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 48.197714852861935
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.27600406321562
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 21.137758549473364
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13182.078867060749
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 42.701610618615994
+      },
+      "index": 36,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 21.137758549473364
+      },
+      "p_idx": 18,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1125.25
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.13927015921496125
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 21.137758549473364
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 50.02998592876814
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.29468668557193
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 21.103348316125903
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13230.364192317445
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 42.85080066607389
+      },
+      "index": 37,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 21.103348316125903
+      },
+      "p_idx": 18,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1125.25
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.13901875742203373
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 21.103348316125903
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 49.87585303484569
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.136052097861445
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 21.470483815175598
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13323.765437446846
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 42.23287552053913
+      },
+      "index": 38,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 21.470483815175598
+      },
+      "p_idx": 19,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1187.7083333333335
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.14326586192980253
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 21.470483815175598
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 51.69042725811833
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.155193269010866
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 21.436835834469356
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13371.91103952253
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 42.38163385654871
+      },
+      "index": 39,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 21.436835834469356
+      },
+      "p_idx": 19,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1187.7083333333335
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.14300717994965587
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 21.436835834469356
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 51.53135605793571
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.012917571693485
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 21.78470967061031
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13468.734824804524
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 41.787861414987646
+      },
+      "index": 40,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 21.78470967061031
+      },
+      "p_idx": 20,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1250.1666666666667
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.14719727975902402
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 21.78470967061031
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 53.33159539174083
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 48.03244556827508
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 21.751766239587823
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13516.757485351209
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 41.93623989088156
+      },
+      "index": 41,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 21.751766239587823
+      },
+      "p_idx": 20,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1250.1666666666667
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.1469315582390674
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 21.751766239587823
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 53.16765854377739
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 47.90427595897846
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 22.08248928288847
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13616.51400020652
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 41.36400444263738
+      },
+      "index": 42,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 22.08248928288847
+      },
+      "p_idx": 21,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1312.625
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.15107079930396217
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 22.08248928288847
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 54.95645298111382
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 47.92413354031588
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 22.05019946782412
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13664.428183577349
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 41.512047749839816
+      },
+      "index": 43,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 22.05019946782412
+      },
+      "p_idx": 21,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1312.625
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.15079825439378314
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 22.05019946782412
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 54.78771435250704
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 47.80820103486261
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 22.365553022316565
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13766.711555577094
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 40.959141977616774
+      },
+      "index": 44,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 22.365553022316565
+      },
+      "p_idx": 22,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1375.0833333333335
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.15489192937078747
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 22.365553022316565
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 56.56756714267993
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 47.82834187268193
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 22.333871645019755
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13814.529805345366
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 41.10688887279449
+      },
+      "index": 45,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 22.333871645019755
+      },
+      "p_idx": 22,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1375.0833333333335
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.1546127570072101
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 22.333871645019755
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 56.394083125735506
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 47.72308487183092
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 22.635372203102825
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13919.000670375885
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 40.57143297436772
+      },
+      "index": 46,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 22.635372203102825
+      },
+      "p_idx": 23,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1437.5416666666667
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.15866545194043052
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 22.635372203102825
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 58.167178056776784
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 47.74347099173378
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 22.60425900215229
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 13966.733926355571
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 40.71891725894953
+      },
+      "index": 47,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 22.60425900215229
+      },
+      "p_idx": 23,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1437.5416666666667
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.1583798311442266
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 22.60425900215229
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 57.988998539137285
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 47.64757586665839
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 22.893207969952126
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 14073.106212433442
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 40.19929708158634
+      },
+      "index": 48,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 22.893207969952126
+      },
+      "p_idx": 24,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1500.0
+      },
+      "t_idx": 0,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 50.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.16239554270506168
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 22.893207969952126
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 59.757253509127
+      }
+    },
+    {
+      "cp": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 47.668175783000166
+      },
+      "density": {
+        "unit": "mol/L",
+        "value": 22.862626904890472
+      },
+      "enthalpy": {
+        "unit": "J/mol",
+        "value": 14120.764066072743
+      },
+      "entropy": {
+        "unit": "J/(mol\u00b7K)",
+        "value": 40.34654839086946
+      },
+      "index": 49,
+      "liquid_density": {
+        "unit": "mol/L",
+        "value": 22.862626904890472
+      },
+      "p_idx": 24,
+      "phase": {
+        "unit": null,
+        "value": "Supercritical"
+      },
+      "pressure": {
+        "unit": "bar",
+        "value": 1500.0
+      },
+      "t_idx": 1,
+      "temperature": {
+        "unit": "\u00b0C",
+        "value": 51.0
+      },
+      "thermal_conductivity": {
+        "unit": "W/(m\u00b7K)",
+        "value": 0.1621036381542964
+      },
+      "vapor_density": {
+        "unit": "mol/L",
+        "value": 22.862626904890472
+      },
+      "vapor_fraction": {
+        "unit": "dimensionless",
+        "value": 999.0
+      },
+      "viscosity": {
+        "unit": "\u03bcPa\u00b7s",
+        "value": 59.5744226032087
+      }
+    }
+  ]
+}

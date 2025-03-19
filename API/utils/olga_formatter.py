@@ -322,6 +322,9 @@ def map_results_to_grid(
     """
     mapped_points = 0
     
+    # Debug info about molar mass
+    logger.info(f"Using molecular weight for conversion: {molar_mass} g/mol")
+    
     for result in results:
         try:
             # Get grid indices from the result
@@ -345,15 +348,6 @@ def map_results_to_grid(
                 phase_grid[x_idx, y_idx] = 0.0
             elif phase == 'vapor':
                 phase_grid[x_idx, y_idx] = 1.0
-                
-                    # Debug log all vapor properties for verification
-                if options['debug_level'] >= 2:
-                    for prop in olga_properties:
-                        if prop['name'] == 'GAS DENSITY (KG/M3)':
-                            value = extract_property_value(result, prop['key'], prop['fallbacks'], phase, composition, molar_mass)
-                            converted_value = prop['converter'](value, molar_mass) if value is not None else 0.0
-                            logger.info(f"Gas density at point ({x_idx}, {y_idx}): {value} mol/L → {converted_value} kg/m³")
-
             elif phase == 'two-phase':
                 # Use vapor fraction if available
                 vf = get_value_from_field(result.get('vapor_fraction', {'value': 0.5}))
@@ -361,6 +355,10 @@ def map_results_to_grid(
             else:
                 # For other phases (supercritical, etc.), use standard mapping
                 phase_grid[x_idx, y_idx] = PHASE_MAPPING.get(phase, 0.5)
+                
+            # Log phase info for debugging
+            if options['debug_level'] >= 2:
+                logger.info(f"Point ({x_idx}, {y_idx}): Phase = {phase}, Grid Value = {phase_grid[x_idx, y_idx]}")
             
             # Process each property
             for prop in olga_properties:
@@ -374,18 +372,58 @@ def map_results_to_grid(
                         )
                         
                         if value is not None:
+                            # Add special logging for gas density
+                            is_gas_density = prop['name'] == 'GAS DENSITY (KG/M3)'
+                            
+                            if is_gas_density and options['debug_level'] >= 1:
+                                logger.info(f"Gas density at ({x_idx}, {y_idx}): Original={value} mol/L")
+                            
                             # Apply conversion function
                             converted_value = prop['converter'](value, molar_mass)
-                            property_arrays[prop['name']][x_idx, y_idx] = converted_value
+                            
+                            if is_gas_density and options['debug_level'] >= 1:
+                                logger.info(f"Gas density at ({x_idx}, {y_idx}): Converted={converted_value} kg/m³")
+                                logger.info(f"Conversion factor (molar_mass): {molar_mass}")
+                            
+                            # Debug: Check value before assignment
+                            if is_gas_density and options['debug_level'] >= 2:
+                                logger.info(f"Before assignment: array[{x_idx}, {y_idx}] = {property_arrays[prop['name']][x_idx, y_idx]}")
+                            
+                            # Store the value - using explicit float conversion to avoid any numpy type issues
+                            property_arrays[prop['name']][x_idx, y_idx] = float(converted_value)
+                            
+                            # Debug: Check value after assignment to ensure it was stored correctly
+                            if is_gas_density and options['debug_level'] >= 2:
+                                logger.info(f"After assignment: array[{x_idx}, {y_idx}] = {property_arrays[prop['name']][x_idx, y_idx]}")
+                            
                         elif options['debug_level'] >= 2:
                             logger.info(f"No value found for {prop['key']} at point ({x_idx}, {y_idx})")
+                            
                 except Exception as prop_error:
                     if options['debug_level'] >= 1:
                         logger.warning(f"Error processing property {prop['key']} for point ({x_idx}, {y_idx}): {prop_error}")
+                        logger.warning(f"Exception details: {str(prop_error)}")
+                        
         except Exception as e:
             if options['debug_level'] >= 1:
                 logger.warning(f"Error processing result: {e}")
+                logger.warning(f"Exception details: {str(e)}")
             continue
+    
+    # At the end, perform a check of the gas density array
+    if 'GAS DENSITY (KG/M3)' in property_arrays and options['debug_level'] >= 1:
+        gas_array = property_arrays['GAS DENSITY (KG/M3)']
+        zero_count = np.count_nonzero(gas_array == 0)
+        total_count = gas_array.size
+        if zero_count > 0:
+            logger.warning(f"Gas density array has {zero_count}/{total_count} zero values")
+            
+        # Check if values are reasonable for kg/m³ (should be larger than mol/L by factor of MW)
+        sample_idx = np.argmax(gas_array)
+        max_value = gas_array.flatten()[sample_idx]
+        logger.info(f"Maximum gas density value: {max_value} kg/m³")
+        if max_value < 1.0:  # Most gas densities in kg/m³ should be > 1
+            logger.warning(f"Maximum gas density value ({max_value}) seems too low for kg/m³")
             
     return mapped_points
 
@@ -709,11 +747,43 @@ def find_nearest_index(array: np.ndarray, value: float) -> int:
         print(f"Error in find_nearest_index: {e}")
         return 0  # Return 0 as a fallback
 
+def parse_olga_scientific(value_str: str) -> float:
+    """Parse OLGA scientific notation back to float."""
+    if not value_str:
+        return 0.0
+    
+    # Check for negative sign
+    if value_str.startswith('-'):
+        sign = -1.0
+        value_str = value_str[1:]
+    else:
+        sign = 1.0
+    
+    try:
+        mantissa_str, exponent_str = value_str.split('E')
+        # OLGA format has decimal at start (.123456)
+        mantissa = float("0" + mantissa_str)  # Add leading zero
+        exponent = int(exponent_str)
+        
+        # CRITICAL FIX: OLGA format has exponent +1 compared to standard
+        # To convert back, we need to subtract 1
+        standard_exponent = exponent - 1
+        
+        return sign * mantissa * (10 ** standard_exponent)
+    except Exception as e:
+        print(f"Error parsing OLGA value '{value_str}': {e}")
+        return 0.0
+
+
 # In olga_formatter.py, find the format_grid_values function and update it:
 
 def format_grid_values(values: np.ndarray, values_per_line: int = 5, indent_spaces: int = 5) -> str:
     """
     Format grid values for OLGA TAB format with the correct notation.
+    
+    OLGA uses a non-standard scientific notation where:
+    - Standard: 1.23456E+02 (for 123.456)
+    - OLGA:     .123456E+03 (exponent is incremented by 1)
     """
     try:
         formatted = ""
@@ -724,32 +794,28 @@ def format_grid_values(values: np.ndarray, values_per_line: int = 5, indent_spac
             line_strings = []
             
             for value in line_values:
-                if value == 0:
+                if abs(value) < 1e-15:
                     line_strings.append(".000000E+00")
                     continue
                 
-                # Check if value is negative
+                # Get standard scientific notation
                 is_negative = value < 0
                 abs_value = abs(value)
-                
-                # Get standard scientific notation for absolute value
                 sci_notation = f"{abs_value:.6E}"
                 
                 # Extract mantissa and exponent parts
                 mantissa_str, exponent_str = sci_notation.split('E')
                 exponent = int(exponent_str)
                 
-                # CRITICAL FIX: Increment exponent by 1 to compensate for decimal point shift
-                # This ensures: 123.456 → .123456E+03 (not .123456E+02)
-                mantissa_without_point = mantissa_str.replace('.', '')
-                exponent += 1
-                exponent_str = f"{exponent:+03d}"
+                # OLGA requires the decimal point at start and exponent adjusted by +1
+                # This is the OLGA standard format requirement
+                mantissa_digits = mantissa_str.replace('.', '')
+                olga_exponent = exponent + 1  # Increment for OLGA format
+                exponent_str = f"{olga_exponent:+03d}"
                 
-                # Add negative sign before decimal if needed
-                if is_negative:
-                    olga_formatted = f"-.{mantissa_without_point}E{exponent_str}"
-                else:
-                    olga_formatted = f".{mantissa_without_point}E{exponent_str}"
+                # Format with sign if negative
+                prefix = "-." if is_negative else "."
+                olga_formatted = f"{prefix}{mantissa_digits}E{exponent_str}"
                 
                 line_strings.append(olga_formatted)
             
@@ -759,4 +825,3 @@ def format_grid_values(values: np.ndarray, values_per_line: int = 5, indent_spac
     except Exception as e:
         print(f"Error formatting grid values: {e}")
         return " " * indent_spaces + ".000000E+00\n"
-    

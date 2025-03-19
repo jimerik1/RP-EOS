@@ -18,7 +18,7 @@ OLGA_PROPERTY_MAPPINGS = [
         'name': 'GAS DENSITY (KG/M3)',
         'key': 'vapor_density',
         'fallbacks': ['density'],
-        'condition': lambda phase: phase in ['vapor', 'two-phase'],
+        'condition': lambda phase: phase in ['vapor', 'two-phase', 'supercritical'],
         'converter': lambda x, wmm: x * wmm if x is not None else 0.0,  # mol/L * g/mol = g/L = kg/m³
         'description': 'Density of the vapor phase'
     },
