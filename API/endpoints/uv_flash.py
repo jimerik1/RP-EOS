@@ -1,7 +1,7 @@
 """
-VT-Flash JSON endpoint for the REFPROP API.
+UV-Flash JSON endpoint for the REFPROP API.
 
-This endpoint calculates fluid properties at given specific volume and temperature
+This endpoint calculates fluid properties at given internal energy and specific volume
 conditions and returns the results in JSON format.
 """
 
@@ -12,11 +12,11 @@ import logging
 from typing import Dict, List, Any, Optional, Union
 
 # Import the endpoint blueprint
-from API.endpoints import vt_flash_bp
+from API.endpoints import uv_flash_bp
 
 # Import from the new core modules
 from API.core.property_system import PropertyRegistry
-from API.core.flash_calculators import VTFlashCalculator
+from API.core.flash_calculators import UVFlashCalculator
 from API.core.formatters.json_formatter import format_json_response, filter_properties
 from API.core.formatters.olga_formatter import format_olga_response
 
@@ -30,10 +30,10 @@ from API.utils.olga_config import OLGA_REQUIRED_PROPERTIES
 # Configure logging
 logger = logging.getLogger(__name__)
 
-@vt_flash_bp.route('/vt_flash', methods=['POST'])
-def vt_flash() -> Union[Response, Any]:
+@uv_flash_bp.route('/uv_flash', methods=['POST'])
+def uv_flash() -> Union[Response, Any]:
     """
-    Calculate properties using VT flash.
+    Calculate properties using UV flash.
     
     Request Format:
     {
@@ -42,13 +42,13 @@ def vt_flash() -> Union[Response, Any]:
             {"fluid": "FLUID_NAME2", "fraction": X2}
         ],
         "variables": {
+            "internal_energy": {
+                "range": {"from": U_MIN, "to": U_MAX},
+                "resolution": U_STEP
+            },
             "specific_volume": {
                 "range": {"from": V_MIN, "to": V_MAX},
                 "resolution": V_STEP
-            },
-            "temperature": {
-                "range": {"from": T_MIN, "to": T_MAX},
-                "resolution": T_STEP
             }
         },
         "calculation": {
@@ -79,13 +79,16 @@ def vt_flash() -> Union[Response, Any]:
         # Get requested properties
         requested_properties = calculation.get('properties', [])
         
+        # Get unit system
+        units_system = calculation.get('units_system', 'SI')
+        
         # Get response format (for backward compatibility)
         response_format = calculation.get('response_format', 'json').lower()
         
         # If OLGA TAB format is requested, use the new dedicated endpoint (with deprecation warning)
         if response_format == 'olga_tab':
             logger.warning("Using 'response_format': 'olga_tab' is deprecated. "
-                          "Use the /vt_flash_olga endpoint instead.")
+                          "Use the /uv_flash_olga endpoint instead.")
             
             # Ensure we have all required OLGA properties
             all_properties = list(set(requested_properties).union(set(OLGA_REQUIRED_PROPERTIES)))
@@ -102,21 +105,21 @@ def vt_flash() -> Union[Response, Any]:
         
         # Initialize the property registry and calculator
         registry = PropertyRegistry()
-        calculator = VTFlashCalculator(RP, registry)
+        calculator = UVFlashCalculator(RP, registry)
         
         # Calculate the flash
-        logger.info(f"Starting VT flash calculation with {len(all_properties)} properties")
+        logger.info(f"Starting UV flash calculation with {len(all_properties)} properties")
         results, grid_info, grids = calculator.calculate_flash_grid(
             composition, variables, all_properties, **grid_options
         )
         
-        logger.info(f"VT flash calculation complete: {len(results)} points calculated")
+        logger.info(f"UV flash calculation complete: {len(results)} points calculated")
         
         # Format the response according to requested format
         if response_format == 'olga_tab':
             return format_olga_response(
                 results, grids, composition, 
-                endpoint_type='vt_flash',
+                endpoint_type='uv_flash',
                 requested_properties=requested_properties
             )
         else:
@@ -159,23 +162,23 @@ def _validate_request(data: Dict[str, Any]) -> None:
     
     # Check variables
     variables = data.get('variables', {})
-    if 'specific_volume' not in variables or 'temperature' not in variables:
-        raise ValueError('Missing specific_volume or temperature variables')
+    if 'internal_energy' not in variables or 'specific_volume' not in variables:
+        raise ValueError('Missing internal_energy or specific_volume variables')
     
     # Check ranges
+    energy_range = variables['internal_energy'].get('range', {})
     volume_range = variables['specific_volume'].get('range', {})
-    temperature_range = variables['temperature'].get('range', {})
     
     if not all([
-        'from' in volume_range, 'to' in volume_range,
-        'from' in temperature_range, 'to' in temperature_range
+        'from' in energy_range, 'to' in energy_range,
+        'from' in volume_range, 'to' in volume_range
     ]):
         raise ValueError('Missing range parameters (from/to)')
     
     # Check resolutions
     if not all([
-        'resolution' in variables['specific_volume'],
-        'resolution' in variables['temperature']
+        'resolution' in variables['internal_energy'],
+        'resolution' in variables['specific_volume']
     ]):
         raise ValueError('Missing resolution parameters')
     
