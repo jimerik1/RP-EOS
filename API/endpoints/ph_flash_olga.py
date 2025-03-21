@@ -84,6 +84,14 @@ def ph_flash_olga():
             'boundary_zone_width': calculation.get('boundary_zone_width')
         }
         
+        # Add parallel processing options
+        parallel_options = calculation.get('parallel_options', {})
+        grid_options.update({
+            'use_parallel': parallel_options.get('use_parallel', True),
+            'num_processes': parallel_options.get('num_processes'),
+            'chunk_size': parallel_options.get('chunk_size')
+        })
+        
         # Initialize the property registry and calculator
         registry = PropertyRegistry()
         calculator = PHFlashCalculator(RP, registry)

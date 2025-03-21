@@ -50,7 +50,13 @@ class FlashCalculator:
             composition: List of fluid components and fractions
             variables: Dictionary of variables and their ranges
             properties: List of properties to calculate
-            options: Additional options (grid_type, etc.)
+            options: Additional options including:
+                grid_type: Grid generation strategy
+                enhancement_factor: For adaptive grids
+                boundary_zone_width: For adaptive grids 
+                use_parallel: Whether to use parallel processing (default: True)
+                num_processes: Number of processes to use (default: auto)
+                chunk_size: Number of grid points per chunk (default: auto)
             
         Returns:
             results: List of calculated property points
@@ -64,17 +70,39 @@ class FlashCalculator:
         # Generate grids based on flash type
         grids = self._generate_grids(z, variables, options)
         
-        # Calculate at each grid point
-        results = []
-        
         # Store progress information
         total_points = self._get_total_grid_points(grids)
-        completed = 0
-        error_count = 0
         
         logger.info(f"Starting {self.__class__.__name__} calculation with {total_points} grid points")
         
-        # Use a try-except block to ensure we return partial results on error
+        # Extract parallel processing options
+        use_parallel = options.get('use_parallel', True)
+        num_processes = options.get('num_processes', None)  # None means auto
+        chunk_size = options.get('chunk_size', None)  # None means auto
+        
+        # Determine if parallelization is appropriate
+        if use_parallel and total_points > 100:  # Only parallelize for larger grids
+            results = self._calculate_grid_parallel(z, grids, properties, molar_mass, 
+                                                  num_processes, chunk_size)
+        else:
+            # Use original sequential calculation
+            results = self._calculate_grid_sequential(z, grids, properties, molar_mass)
+        
+        # Prepare grid info
+        grid_info = self._prepare_grid_info(grids, options, len(results))
+        
+        return results, grid_info, grids
+    
+    def _calculate_grid_sequential(self, z: List[float], grids: Dict[str, np.ndarray],
+                                 properties: List[str], molar_mass: float) -> List[Dict[str, Any]]:
+        """
+        Calculate grid points sequentially (original implementation).
+        """
+        results = []
+        completed = 0
+        error_count = 0
+        total_points = self._get_total_grid_points(grids)
+        
         try:
             for point_idx, grid_point in enumerate(self._grid_iterator(grids)):
                 try:
@@ -115,14 +143,154 @@ class FlashCalculator:
             # Handle unexpected errors in the iteration itself
             logger.error(f"Error during grid calculation: {str(e)}")
         
-        # Log final statistics
-        logger.info(f"Calculation complete: {completed}/{total_points} points calculated "
+        logger.info(f"Sequential calculation complete: {completed}/{total_points} points "
                     f"({completed/total_points*100:.1f}%), {error_count} errors")
         
-        # Prepare grid info
-        grid_info = self._prepare_grid_info(grids, options, len(results))
+        return results
+    
+    def _calculate_grid_parallel(self, z: List[float], grids: Dict[str, np.ndarray], 
+                                properties: List[str], molar_mass: float, 
+                                num_processes: Optional[int] = None, 
+                                chunk_size: Optional[int] = None) -> List[Dict[str, Any]]:
+        """
+        Calculate grid points in parallel using multiple processes.
         
-        return results, grid_info, grids
+        Args:
+            z: Composition array
+            grids: Dictionary of grid arrays
+            properties: List of properties to calculate
+            molar_mass: Molecular weight
+            num_processes: Number of processes to use (None = auto)
+            chunk_size: Number of grid points per chunk (None = auto)
+            
+        Returns:
+            List of calculated property points
+        """
+        # Determine number of processes
+        if num_processes is None:
+            # Use available CPUs but cap at a reasonable number
+            num_processes = min(multiprocessing.cpu_count(), 8)  
+        
+        # Create a list of all grid points
+        grid_points = list(self._grid_iterator(grids))
+        total_points = len(grid_points)
+        
+        # Determine chunk size if not specified
+        if chunk_size is None:
+            # Aim for each process to handle ~4 chunks
+            chunk_size = max(1, total_points // (num_processes * 4))
+        
+        # Create batches of grid points
+        batches = []
+        for i in range(0, total_points, chunk_size):
+            batches.append(grid_points[i:min(i + chunk_size, total_points)])
+        
+        logger.info(f"Running parallel calculation with {num_processes} processes, "
+                   f"{len(batches)} batches of ~{chunk_size} points each")
+        
+        # Prepare parameters for batch processing
+        batch_args = []
+        for batch_idx, batch in enumerate(batches):
+            # Package everything the worker needs
+            batch_args.append((
+                batch_idx,
+                batch,
+                z,
+                properties,
+                molar_mass,
+                grids,
+                self.__class__.__name__
+            ))
+        
+        # Initialize results list
+        all_results = []
+        
+        # Execute in parallel using ProcessPoolExecutor
+        with ProcessPoolExecutor(max_workers=num_processes) as executor:
+            future_results = list(executor.map(self._process_batch_wrapper, batch_args))
+            
+            # Collect results
+            for batch_results in future_results:
+                if batch_results:
+                    all_results.extend(batch_results)
+        
+        # Sort results by index to maintain consistency
+        all_results.sort(key=lambda r: r.get('index', 0))
+        
+        logger.info(f"Parallel calculation complete: {len(all_results)}/{total_points} points "
+                  f"({len(all_results)/total_points*100:.1f}%)")
+        
+        return all_results
+    
+    @staticmethod
+    def _process_batch_wrapper(args):
+        """
+        Static wrapper for batch processing to be used with multiprocessing.
+        Each worker process needs its own REFPROP instance.
+        """
+        try:
+            batch_idx, batch, z, properties, molar_mass, grids, calculator_class = args
+            
+            # Initialize REFPROP in this worker process
+            from API.refprop_setup import initialize_refprop
+            rp = initialize_refprop()
+            
+            # Create a new property registry in this worker process
+            from API.core.property_system import PropertyRegistry
+            registry = PropertyRegistry()
+            
+            # Dynamically create the appropriate calculator type
+            import importlib
+            module = importlib.import_module('API.core.flash_calculators')
+            calculator_class = getattr(module, calculator_class)
+            calculator = calculator_class(rp, registry)
+            
+            # Process the batch
+            return calculator._process_batch(batch_idx, batch, z, properties, molar_mass, grids)
+        
+        except Exception as e:
+            import traceback
+            logger.error(f"Error in process_batch_wrapper: {str(e)}")
+            logger.error(traceback.format_exc())
+            return []
+    
+    def _process_batch(self, batch_idx: int, batch: List, z: List[float], 
+                     properties: List[str], molar_mass: float, 
+                     grids: Dict[str, np.ndarray]) -> List[Dict[str, Any]]:
+        """
+        Process a batch of grid points in a worker process.
+        """
+        batch_results = []
+        start_idx = batch_idx * len(batch)
+        
+        for i, grid_point in enumerate(batch):
+            try:
+                # Calculate base properties at this point
+                base_props = self._calculate_base_properties(z, grid_point)
+                
+                # Add molar mass for convenience
+                base_props['molar_mass'] = molar_mass
+                
+                # Calculate all requested properties
+                calculated_props = self._calculate_all_properties(
+                    base_props, properties, z, molar_mass
+                )
+                
+                # Add grid indices
+                grid_indices = self._get_grid_indices(grid_point, grids)
+                
+                # Add to results with global index
+                batch_results.append({
+                    'index': start_idx + i,
+                    **grid_indices,
+                    **calculated_props
+                })
+                
+            except Exception as e:
+                logger.warning(f"Batch {batch_idx}, point {i} error: {str(e)}")
+                continue
+        
+        return batch_results
     
     def _setup_mixture(self, composition: List[Dict[str, Any]]) -> List[float]:
         """

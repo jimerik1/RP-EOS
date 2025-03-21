@@ -7,6 +7,9 @@ import traceback
 BASE_DIR = Path(__file__).resolve().parent.parent
 REFPROP_ROOT = BASE_DIR
 
+# Default parallel processing settings
+DEFAULT_MAX_PROCESSES = int(os.environ.get('REFPROP_MAX_PROCESSES', os.cpu_count() or 4))
+
 # Initialize REFPROP
 def initialize_refprop():
     try:

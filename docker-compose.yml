@@ -5,11 +5,12 @@ services:
     build: .
     container_name: refprop-app
     ports:
-      - "5051:5000"   # Maps host port 5051 to container port 5000
+      - "5051:5000"
     environment:
       - LD_LIBRARY_PATH=/app
       - REFPROP_ROOT=/app
       - PYTHONPATH=/app
+      - REFPROP_MAX_PROCESSES=4  # Default max processes to use
     volumes:
       - ./API:/app/API
     restart: unless-stopped
