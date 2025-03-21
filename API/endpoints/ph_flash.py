@@ -1,325 +1,185 @@
+"""
+PH-Flash JSON endpoint for the REFPROP API.
+
+This endpoint calculates fluid properties at given pressure and enthalpy
+conditions and returns the results in JSON format.
+"""
+
 from flask import request, jsonify, Response
-import numpy as np
 import sys
 import traceback
-from typing import List, Dict, Any
+import logging
+from typing import Dict, List, Any, Optional, Union
 
+# Import the endpoint blueprint
 from API.endpoints import ph_flash_bp
+
+# Import from the new core modules
+from API.core.property_system import PropertyRegistry
+from API.core.flash_calculators import PHFlashCalculator
+from API.core.formatters.json_formatter import format_json_response, filter_properties
+from API.core.formatters.olga_formatter import format_olga_response
+
+# Import REFPROP instance
 from API.refprop_setup import RP
-from API.unit_converter import UnitConverter
-from API.utils.helpers import get_phase
-from API.utils.grid_generator import generate_grid, get_phase_boundaries_ph
 
-def validate_composition(composition: List[Dict[str, Any]]) -> bool:
-    """Validate composition data"""
-    total = sum(comp['fraction'] for comp in composition)
-    return abs(total - 1.0) < 1e-6
+# Import utility functions
+from API.utils.helpers import validate_composition
+from API.utils.olga_config import OLGA_REQUIRED_PROPERTIES
 
-def setup_mixture(composition: List[Dict[str, Any]]) -> List[float]:
-    """Setup REFPROP mixture"""
-    fluid_string = '|'.join(f"{comp['fluid']}.FLD" for comp in composition)
-    z = [comp['fraction'] for comp in composition] + [0] * (20 - len(composition))
-    
-    ierr, herr = RP.SETUPdll(len(composition), fluid_string, 'HMX.BNC', 'DEF')
-    if ierr > 0:
-        raise ValueError(f"Error setting up mixture: {herr}")
-    return z
-
-def calculate_properties_ph(z: List[float], P: float, h: float, units_system: str = 'SI') -> Dict[str, Any]:
-    """
-    Calculate fluid properties at given pressure and enthalpy with specified unit system.
-    
-    Args:
-        z: Composition array
-        P: Pressure in bar
-        h: Enthalpy in J/mol
-        units_system: Unit system to use ('SI' or 'CGS')
-    
-    Returns:
-        Dictionary of calculated properties with values and units
-    """
-    # Initialize unit converter
-    converter = UnitConverter()
-    
-    # Get molecular weight for unit conversions
-    wmm = RP.WMOLdll(z)
-    
-    # Convert pressure to kPa for REFPROP
-    P_kpa = P * 100  # bar to kPa
-    
-    # Get basic thermodynamic properties using PH flash
-    T, D, Dl, Dv, x, y, q, e, s, Cv, Cp, w, ierr, herr = RP.PHFLSHdll(P_kpa, h, z)
-    if ierr > 0:
-        raise ValueError(f"Error in PHFLSHdll: {herr}")
-    
-    # Get transport properties
-    eta, tcx, ierr, herr = RP.TRNPRPdll(T, D, z)
-    if ierr > 0:
-        raise ValueError(f"Error in TRNPRPdll: {herr}")
-        
-    # Get surface tension if in two-phase region
-    if 0 < q < 1:
-        sigma, ierr, herr = RP.SURTENdll(T, Dl, Dv, x, y)
-        surface_tension = float(sigma) if ierr == 0 else None
-    else:
-        surface_tension = None
-        
-    # Get critical properties
-    Tc, Pc, Dc, ierr, herr = RP.CRITPdll(z)
-    if ierr > 0:
-        Tc = Pc = Dc = None
-        
-    # Get additional thermodynamic derivatives
-    dPdD, dPdT, d2PdD2, d2PdT2, d2PdTD, dDdP, dDdT, d2DdP2, d2DdT2, d2DdPT, \
-    dTdP, dTdD, d2TdP2, d2TdD2, d2TdPD = RP.DERVPVTdll(T, D, z)
-    
-    # Calculate compressibility factor
-    Z = P_kpa / (D * 8.31446261815324 * T)
-    
-    wmm_kg = wmm / 1000  # Convert g/mol to kg/mol
-
-    # Build raw properties dictionary
-    raw_properties = {
-        'density': D,
-        'liquid_density': Dl,
-        'vapor_density': Dv,
-        'vapor_fraction': q,
-        'internal_energy': e,
-        'enthalpy': h,
-        'entropy': s,
-        'cv': Cv,
-        'cp': Cp,
-        'sound_speed': w,
-        'viscosity': eta,
-        'thermal_conductivity': tcx,
-        'surface_tension': surface_tension,
-        'critical_temperature': Tc,
-        'critical_pressure': Pc / 100 if Pc is not None else None,  # Convert from kPa to bar
-        'critical_density': Dc,
-        'compressibility_factor': Z,
-        'isothermal_compressibility': -1/D * dDdP,
-        'volume_expansivity': 1/D * dDdT,
-        'dp_dt_saturation': dPdT,
-        'joule_thomson_coefficient': (T*dDdT/dDdP - 1)/(Cp * 100),  # Convert to K/bar
-        'kinematic_viscosity': (eta * 1e-6) / (D * wmm / 1000) * 10000,
-        'thermal_diffusivity': tcx / (D * Cp) * 10000,  # Convert to cm²/s
-        'prandtl_number': (Cp / wmm_kg) * (eta * 1e-6) / tcx,
-        'temperature': T - 273.15,  # Convert to Celsius
-        'pressure': P,
-        'x': list(x[:len(z)]),  # Liquid composition
-        'y': list(y[:len(z)]),  # Vapor composition
-        'dDdP': dDdP,          # Add pressure derivative of density
-        'dDdT': dDdT           # Add temperature derivative of density
-    }
-    
-    # Convert properties to requested unit system
-    properties = {}
-    for prop_id, value in raw_properties.items():
-        if value is not None:  # Skip undefined properties
-            try:
-                if prop_id in ['x', 'y']:
-                    # Composition vectors
-                    properties[prop_id] = {'value': value, 'unit': 'mole fraction'}
-                else:
-                    properties[prop_id] = converter.convert_property(
-                        prop_id, float(value), wmm, 'SI', units_system
-                    )
-            except Exception as e:
-                print(f"Warning: Could not convert property {prop_id}: {str(e)}")
-                properties[prop_id] = {'value': float(value) if value is not None else None, 'unit': 'unknown'}
-    
-    # Add phase information
-    properties['phase'] = {
-        'value': get_phase(q),
-        'unit': None
-    }
-    
-    return properties
+# Configure logging
+logger = logging.getLogger(__name__)
 
 @ph_flash_bp.route('/ph_flash', methods=['POST'])
-def ph_flash():
+def ph_flash() -> Union[Response, Any]:
+    """
+    Calculate properties using PH flash.
+    
+    Request Format:
+    {
+        "composition": [
+            {"fluid": "FLUID_NAME1", "fraction": X1},
+            {"fluid": "FLUID_NAME2", "fraction": X2}
+        ],
+        "variables": {
+            "pressure": {
+                "range": {"from": P_MIN, "to": P_MAX},
+                "resolution": P_STEP
+            },
+            "enthalpy": {
+                "range": {"from": H_MIN, "to": H_MAX},
+                "resolution": H_STEP
+            }
+        },
+        "calculation": {
+            "properties": ["property1", "property2", ...],
+            "units_system": "SI" or "CGS",
+            "response_format": "json" or "olga_tab",  # For backward compatibility
+            "grid_type": "equidistant" or "adaptive" or "logarithmic" or "exponential",
+            "enhancement_factor": 5.0,
+            "boundary_zone_width": null
+        }
+    }
+    
+    Returns:
+        JSON response with results or OLGA TAB formatted text for backward compatibility
+    """
     try:
+        # Parse the request
         data = request.get_json(force=True)
         
-        # Validate the structure
-        required_fields = ['composition', 'variables']
-        for field in required_fields:
-            if field not in data:
-                return jsonify({'error': f'Missing field: {field}'}), 400
-                
-        # Check if required variables exist
-        variables = data.get('variables', {})
-        if 'pressure' not in variables or 'enthalpy' not in variables:
-            return jsonify({'error': 'Missing pressure or enthalpy variables'}), 400
-
-        # Extract calculation settings
+        # Validate the request structure
+        _validate_request(data)
+        
+        # Extract calculation options
+        composition = data['composition']
+        variables = data['variables']
         calculation = data.get('calculation', {})
-        properties = calculation.get('properties', [])
-        units_system = calculation.get('units_system', 'SI')  # Default to SI
-        response_format = calculation.get('response_format', 'json')  # Default to JSON
         
-        # Extract grid_type parameter and related options
-        grid_type = calculation.get('grid_type', 'equidistant')  # Default to equidistant grid
-        enhancement_factor = calculation.get('enhancement_factor', 5.0)  
-        boundary_zone_width = calculation.get('boundary_zone_width', None)
+        # Get requested properties
+        requested_properties = calculation.get('properties', [])
         
-        if not properties:
-            return jsonify({'error': 'No properties specified for calculation'}), 400
-
-        # Validate composition
-        if not validate_composition(data['composition']):
-            return jsonify({'error': 'Invalid composition - fractions must sum to 1'}), 400
-
-        # Setup mixture
-        z = setup_mixture(data['composition'])
+        # Get response format (for backward compatibility)
+        response_format = calculation.get('response_format', 'json').lower()
         
-        # Get molecular weight for unit conversions
-        wmm = RP.WMOLdll(z)
-
-        # Extract range and resolution parameters with robust error handling
-        try:
-            pressure_range = variables['pressure'].get('range', {})
-            enthalpy_range = variables['enthalpy'].get('range', {})
+        # If OLGA TAB format is requested, use the new dedicated endpoint (with deprecation warning)
+        if response_format == 'olga_tab':
+            logger.warning("Using 'response_format': 'olga_tab' is deprecated. "
+                          "Use the /ph_flash_olga endpoint instead.")
             
-            # Ensure all necessary values exist with defaults if not
-            p_from = float(pressure_range.get('from', 1.0))
-            p_to = float(pressure_range.get('to', 100.0))
-            h_from = float(enthalpy_range.get('from', 100.0))
-            h_to = float(enthalpy_range.get('to', 1000.0))
-            
-            pressure_resolution = float(variables['pressure'].get('resolution', 10.0))
-            enthalpy_resolution = float(variables['enthalpy'].get('resolution', 100.0))
-            
-            # Ensure to > from
-            if p_to <= p_from:
-                p_to = p_from + pressure_resolution
-            if h_to <= h_from:
-                h_to = h_from + enthalpy_resolution
-                
-            # Update the ranges for later use
-            pressure_range = {'from': p_from, 'to': p_to}
-            enthalpy_range = {'from': h_from, 'to': h_to}
-            
-        except (ValueError, TypeError) as ve:
-            return jsonify({'error': f'Invalid range or resolution parameters: {str(ve)}'}), 400
-
-        # Debug log
-        print(f"Calculating PH flash for pressure range: {pressure_range['from']} to {pressure_range['to']} bar, "
-              f"enthalpy range: {enthalpy_range['from']} to {enthalpy_range['to']} J/mol, grid_type: {grid_type}")
-
-        # Generate grids based on grid_type
-        if grid_type.lower() != 'equidistant':
-            # If we're using an adaptive grid, determine phase boundaries first
-            if grid_type.lower() == 'adaptive':
-                try:
-                    # Get phase boundaries in P-H space
-                    p_boundaries, h_boundaries = get_phase_boundaries_ph(
-                        RP, z, pressure_range, enthalpy_range
-                    )
-                    
-                    print(f"Identified phase boundaries: {len(p_boundaries)} pressure points, "
-                          f"{len(h_boundaries)} enthalpy points")
-                except Exception as e:
-                    print(f"Error determining phase boundaries: {e}")
-                    p_boundaries, h_boundaries = [], []
-            else:
-                p_boundaries, h_boundaries = [], []
-            
-            # Generate grids using the utility function
-            P_range = generate_grid(
-                p_from, p_to, pressure_resolution, 
-                grid_type, p_boundaries, 
-                enhancement_factor, boundary_zone_width
-            )
-            
-            h_range = generate_grid(
-                h_from, h_to, enthalpy_resolution,
-                grid_type, h_boundaries,
-                enhancement_factor, boundary_zone_width
-            )
-            
-            # Debug info about the grid
-            print(f"Generated {len(P_range)} pressure points and {len(h_range)} enthalpy points")
-            
+            # Ensure we have all required OLGA properties
+            all_properties = list(set(requested_properties).union(set(OLGA_REQUIRED_PROPERTIES)))
+            calculation['properties'] = all_properties
         else:
-            # Create regular (equidistant) grids as before
-            P_range = np.arange(
-                p_from,
-                p_to + pressure_resolution,
-                pressure_resolution
+            all_properties = requested_properties
+        
+        # Get grid options
+        grid_options = {
+            'grid_type': calculation.get('grid_type', 'equidistant'),
+            'enhancement_factor': calculation.get('enhancement_factor', 5.0),
+            'boundary_zone_width': calculation.get('boundary_zone_width')
+        }
+        
+        # Initialize the property registry and calculator
+        registry = PropertyRegistry()
+        calculator = PHFlashCalculator(RP, registry)
+        
+        # Calculate the flash
+        logger.info(f"Starting PH flash calculation with {len(all_properties)} properties")
+        results, grid_info, grids = calculator.calculate_flash_grid(
+            composition, variables, all_properties, **grid_options
+        )
+        
+        logger.info(f"PH flash calculation complete: {len(results)} points calculated")
+        
+        # Format the response according to requested format
+        if response_format == 'olga_tab':
+            return format_olga_response(
+                results, grids, composition, 
+                endpoint_type='ph_flash',
+                requested_properties=requested_properties
             )
-            
-            h_range = np.arange(
-                h_from,
-                h_to + enthalpy_resolution,
-                enthalpy_resolution
-            )
-
-        # Calculate properties
-        results = []
-        idx = 0
-        for p_idx, P in enumerate(P_range):
-            for h_idx, h in enumerate(h_range):
-                try:
-                    props = calculate_properties_ph(z, float(P), float(h), units_system)
-                    filtered_props = {k: v for k, v in props.items() 
-                                   if k in properties or k in ['temperature', 'pressure', 'enthalpy', 'phase']}
-                    
-                    # Add grid indices for OLGA TAB formatting
-                    results.append({
-                        'index': idx,
-                        'p_idx': p_idx,
-                        'h_idx': h_idx,
-                        **filtered_props
-                    })
-                    idx += 1
-                except Exception as fe:
-                    print(f"Error processing P={P} bar, h={h} J/mol: {fe}", file=sys.stderr)
-                    continue
-
-        # Return response in the requested format
-        if response_format.lower() == 'olga_tab':
-            from API.utils.olga_formatter import format_olga_tab
-            try:
-                # Create structured variable dictionaries for formatter
-                pressure_vars = {
-                    'range': {'from': P_range.min(), 'to': P_range.max()},
-                    'resolution': pressure_resolution,
-                    'values': P_range  # Pass the actual grid values
-                }
-                
-                enthalpy_vars = {
-                    'range': {'from': h_range.min(), 'to': h_range.max()},
-                    'resolution': enthalpy_resolution,
-                    'values': h_range  # Pass the actual grid values
-                }
-                
-                response = format_olga_tab(
-                    pressure_vars,  # x-axis (pressure)
-                    enthalpy_vars,  # y-axis (enthalpy)
-                    results,
-                    data['composition'],
-                    wmm,
-                    endpoint_type='ph_flash'
-                )
-                return response  # Return the Response object directly
-            except Exception as e:
-                print(f"Error formatting OLGA TAB: {e}", file=sys.stderr)
-                traceback.print_exc()
-                return jsonify({'error': f'Error formatting OLGA TAB response: {str(e)}'}), 500
         else:
-            # For JSON responses, include grid information
-            return jsonify({
-                'results': results,
-                'grid_info': {
-                    'type': grid_type,
-                    'pressure_points': len(P_range),
-                    'enthalpy_points': len(h_range),
-                    'total_points': len(results)
-                }
-            })
+            # Filter to include only originally requested properties
+            filtered_results = filter_properties(results, requested_properties)
+            
+            # Return JSON response
+            return format_json_response(filtered_results, grid_info)
+        
+    except ValueError as ve:
+        # Handle validation errors
+        logger.error(f"Validation error: {str(ve)}")
+        return jsonify({'error': str(ve)}), 400
         
     except Exception as e:
-        print("Error processing request:", file=sys.stderr)
-        traceback.print_exc()
+        # Handle unexpected errors
+        logger.error("Error processing request:", exc_info=True)
         return jsonify({'error': str(e)}), 500
+
+
+def _validate_request(data: Dict[str, Any]) -> None:
+    """
+    Validate the request data.
+    
+    Args:
+        data: Request data dictionary
+        
+    Raises:
+        ValueError: If validation fails
+    """
+    # Check for required fields
+    required_fields = ['composition', 'variables']
+    for field in required_fields:
+        if field not in data:
+            raise ValueError(f'Missing field: {field}')
+    
+    # Check composition
+    if not validate_composition(data['composition']):
+        raise ValueError('Invalid composition - fractions must sum to 1')
+    
+    # Check variables
+    variables = data.get('variables', {})
+    if 'pressure' not in variables or 'enthalpy' not in variables:
+        raise ValueError('Missing pressure or enthalpy variables')
+    
+    # Check ranges
+    pressure_range = variables['pressure'].get('range', {})
+    enthalpy_range = variables['enthalpy'].get('range', {})
+    
+    if not all([
+        'from' in pressure_range, 'to' in pressure_range,
+        'from' in enthalpy_range, 'to' in enthalpy_range
+    ]):
+        raise ValueError('Missing range parameters (from/to)')
+    
+    # Check resolutions
+    if not all([
+        'resolution' in variables['pressure'],
+        'resolution' in variables['enthalpy']
+    ]):
+        raise ValueError('Missing resolution parameters')
+    
+    # Check that requested properties are specified
+    calculation = data.get('calculation', {})
+    if 'properties' not in calculation or not calculation['properties']:
+        raise ValueError('No properties specified for calculation')

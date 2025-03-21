@@ -1423,9 +1423,192 @@ class PropertyRegistry:
         
         # Reference state (ambient) properties
         T0 = 298.15  # K (25°C)
+        P0 = 101.325  # kPa (1 atm)
         
-        # Ideally, we'd calculate h0 and s0 at reference state
-        # But for simplicity, we'll use an approximation
+        # A comprehensive exergy calculation would determine h0 and s0 at the reference state
+        # but for simplicity, we use a physical exergy approximation
         
-        # Approximation: exergy ≈ h - T0*s
+        # Physical exergy approximation: ex_ph ≈ h - h0 - T0*(s - s0) ≈ h - T0*s
         return h - T0 * s  # J/mol
+    
+    def _calculate_exergy_loss(self, base_props: Dict[str, Any], rp: Any, z: List[float]) -> float:
+        """Calculate exergy loss or destruction based on entropy generation."""
+        # Reference temperature
+        T0 = 298.15  # K (25°C)
+        
+        # If entropy generation data is available, use it
+        if "entropy_generation" in base_props:
+            return T0 * base_props["entropy_generation"]  # J/mol
+        
+        # Estimate entropy generation from current state vs. reference
+        try:
+            # Try to compute reference state properties
+            P0 = 101.325  # kPa
+            D0, Dl0, Dv0, x0, y0, q0, e0, h0, s0, Cv0, Cp0, w0, ierr, herr = rp.TPFLSHdll(T0, P0, z)
+            
+            if ierr == 0:
+                # Entropy generation is increase from reference state
+                s_generation = base_props["entropy"] - s0
+                return T0 * max(0, s_generation)  # J/mol
+        except Exception:
+            pass
+            
+        # Without sufficient data, return zero
+        return 0.0  # J/mol
+    
+    def _calculate_thermodynamic_efficiency(self, base_props: Dict[str, Any], rp: Any, z: List[float]) -> float:
+        """Calculate theoretical thermodynamic efficiency."""
+        # For power cycles, efficiency relates to temperature
+        T_hot = base_props["temperature"] + 273.15  # °C to K
+        T_cold = 298.15  # K (25°C reference)
+        
+        # Carnot efficiency is the theoretical maximum 
+        if T_hot > T_cold:
+            return 1.0 - T_cold / T_hot  # dimensionless
+        return 0.0
+    
+    def _calculate_available_energy(self, base_props: Dict[str, Any], rp: Any, z: List[float]) -> float:
+        """Calculate available energy for work extraction."""
+        # Similar to exergy but focused on energy transformation potential
+        exergy = self._calculate_exergy(base_props, rp, z)
+        
+        # Account for any process inefficiencies (simplified)
+        process_efficiency = 0.75  # Typical process efficiency factor
+        
+        return exergy * process_efficiency  # J/mol
+    
+    def _calculate_second_law_efficiency(self, base_props: Dict[str, Any], rp: Any, z: List[float]) -> float:
+        """Calculate second law efficiency."""
+        # Second law efficiency = actual work / maximum theoretical work
+        # Without actual work data, estimate from state properties
+        
+        exergy = self._calculate_exergy(base_props, rp, z)
+        
+        # Theoretical maximum work from Carnot cycle
+        T = base_props["temperature"] + 273.15  # °C to K
+        T0 = 298.15  # K (25°C)
+        
+        if "enthalpy" in base_props and T > T0:
+            carnot_work = base_props["enthalpy"] * (1 - T0/T)
+            
+            if abs(carnot_work) > 1e-10:
+                return min(exergy / carnot_work, 1.0)
+        
+        # Default fallback
+        return 0.8  # Typical value for well-designed systems
+    
+    # ========================================================
+    # ADDITIONAL UTILITY METHODS
+    # ========================================================
+    
+    def get_available_properties(self) -> List[str]:
+        """Get list of all available properties."""
+        return list(self.properties.keys())
+    
+    def get_property_groups(self) -> Dict[str, List[str]]:
+        """Get properties organized by category groups."""
+        groups = {
+            "basic": [],
+            "energy": [],
+            "transport": [],
+            "derivative": [],
+            "critical": [],
+            "phase": [],
+            "virial": [],
+            "combustion": [],
+            "miscellaneous": []
+        }
+        
+        # Categorize properties
+        for prop in self.properties:
+            # Skip aliases
+            if self.properties[prop].get('is_alias', False):
+                continue
+                
+            if prop in ["temperature", "pressure", "density", "vapor_fraction", "enthalpy", "entropy"]:
+                groups["basic"].append(prop)
+            elif prop in ["internal_energy", "helmholtz_energy", "gibbs_energy", "heat_of_vaporization", "cp", "cv"]:
+                groups["energy"].append(prop)
+            elif prop in ["viscosity", "thermal_conductivity", "surface_tension", "kinematic_viscosity"]:
+                groups["transport"].append(prop)
+            elif prop in ["dDdP", "dDdT", "isothermal_compressibility", "volume_expansivity"]:
+                groups["derivative"].append(prop)
+            elif prop.startswith("critical_"):
+                groups["critical"].append(prop)
+            elif prop in ["phase", "compressibility_factor", "vapor_fraction"]:
+                groups["phase"].append(prop)
+            elif "virial" in prop:
+                groups["virial"].append(prop)
+            elif "heating_value" in prop:
+                groups["combustion"].append(prop)
+            elif prop in ["exergy", "exergy_loss", "thermodynamic_efficiency", "second_law_efficiency"]:
+                groups["miscellaneous"].append(prop)
+            else:
+                # Categorize based on dependency patterns
+                deps = self.properties[prop].get("dependencies", [])
+                if "viscosity" in deps or "thermal_conductivity" in deps:
+                    groups["transport"].append(prop)
+                elif "enthalpy" in deps or "entropy" in deps:
+                    groups["energy"].append(prop)
+                elif "dDdP" in deps or "dDdT" in deps:
+                    groups["derivative"].append(prop)
+                else:
+                    groups["miscellaneous"].append(prop)
+        
+        return groups
+    
+    def get_property_dependencies(self, property_name: str) -> List[str]:
+        """Get all dependencies for a property, including nested dependencies."""
+        if property_name not in self.properties:
+            raise ValueError(f"Unknown property: {property_name}")
+            
+        # Get direct dependencies
+        direct_deps = self.properties[property_name].get("dependencies", [])
+        
+        # Handle aliases
+        if self.properties[property_name].get('is_alias', False):
+            canonical_name = self.properties[property_name]['alias_of']
+            direct_deps = self.properties[canonical_name].get("dependencies", [])
+        
+        # No dependencies or base property
+        if not direct_deps or self.properties[property_name].get("calculation_method") is None:
+            return []
+            
+        # Get all nested dependencies recursively
+        all_deps = set(direct_deps)
+        for dep in direct_deps:
+            nested_deps = self.get_property_dependencies(dep)
+            all_deps.update(nested_deps)
+            
+        return list(all_deps)
+    
+    def get_base_property_requirements(self, properties: List[str]) -> List[str]:
+        """
+        Determine which base properties need to be calculated for a set of requested properties.
+        This helps optimize calculations by only computing necessary base properties.
+        
+        Args:
+            properties: List of property names to calculate
+            
+        Returns:
+            List of base property names needed
+        """
+        base_props = set()
+        
+        for prop in properties:
+            # Add the property if it's a base property
+            if prop in self.properties and self.properties[prop].get("calculation_method") is None:
+                base_props.add(prop)
+                
+            # Add all dependencies recursively
+            deps = self.get_property_dependencies(prop)
+            for dep in deps:
+                if dep in self.properties and self.properties[dep].get("calculation_method") is None:
+                    base_props.add(dep)
+        
+        # Always include critical base properties
+        essential_props = ["temperature", "pressure", "density", "vapor_fraction"]
+        for prop in essential_props:
+            base_props.add(prop)
+            
+        return list(base_props)
