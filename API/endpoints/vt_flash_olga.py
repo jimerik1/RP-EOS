@@ -1,23 +1,22 @@
 """
-PT-Flash JSON endpoint for the REFPROP API.
+VT-Flash OLGA TAB endpoint for the REFPROP API.
 
-This endpoint calculates fluid properties at given pressure and temperature
-conditions and returns the results in JSON format.
+This endpoint calculates fluid properties at given volume and temperature
+conditions and returns the results in OLGA TAB format.
 """
 
-from flask import request, jsonify, Response
+from flask import request, jsonify
 import sys
 import traceback
 import logging
-from typing import Dict, List, Any, Optional, Union
+from typing import Dict, List, Any, Optional
 
 # Import the endpoint blueprint
-from API.endpoints import pt_flash_bp
+from API.endpoints import vt_flash_olga_bp
 
 # Import from the new core modules
 from API.core.property_system import PropertyRegistry
-from API.core.flash_calculators import PTFlashCalculator
-from API.core.formatters.json_formatter import format_json_response, filter_properties
+from API.core.flash_calculators import VTFlashCalculator
 from API.core.formatters.olga_formatter import format_olga_response
 
 # Import REFPROP instance
@@ -30,10 +29,10 @@ from API.utils.olga_config import OLGA_REQUIRED_PROPERTIES
 # Configure logging
 logger = logging.getLogger(__name__)
 
-@pt_flash_bp.route('/pt_flash', methods=['POST'])
-def pt_flash() -> Union[Response, Any]:
+@vt_flash_olga_bp.route('/vt_flash_olga', methods=['POST'])
+def vt_flash_olga():
     """
-    Calculate properties using PT flash.
+    Calculate properties using VT flash and return in OLGA TAB format.
     
     Request Format:
     {
@@ -42,9 +41,9 @@ def pt_flash() -> Union[Response, Any]:
             {"fluid": "FLUID_NAME2", "fraction": X2}
         ],
         "variables": {
-            "pressure": {
-                "range": {"from": P_MIN, "to": P_MAX},
-                "resolution": P_STEP
+            "specific_volume": {
+                "range": {"from": V_MIN, "to": V_MAX},
+                "resolution": V_STEP
             },
             "temperature": {
                 "range": {"from": T_MIN, "to": T_MAX},
@@ -53,16 +52,14 @@ def pt_flash() -> Union[Response, Any]:
         },
         "calculation": {
             "properties": ["property1", "property2", ...],
-            "units_system": "SI" or "CGS",
-            "response_format": "json" or "olga_tab",  # For backward compatibility
-            "grid_type": "equidistant" or "adaptive" or "logarithmic" or "exponential",
+            "grid_type": "equidistant" | "adaptive" | "logarithmic" | "exponential",
             "enhancement_factor": 5.0,
             "boundary_zone_width": null
         }
     }
     
     Returns:
-        JSON response with results or OLGA TAB formatted text for backward compatibility
+        OLGA TAB formatted text response
     """
     try:
         # Parse the request
@@ -76,22 +73,9 @@ def pt_flash() -> Union[Response, Any]:
         variables = data['variables']
         calculation = data.get('calculation', {})
         
-        # Get requested properties
+        # Get requested properties, ensuring we include all OLGA required properties
         requested_properties = calculation.get('properties', [])
-        
-        # Get response format (for backward compatibility)
-        response_format = calculation.get('response_format', 'json').lower()
-        
-        # If OLGA TAB format is requested, use the new dedicated endpoint (with deprecation warning)
-        if response_format == 'olga_tab':
-            logger.warning("Using 'response_format': 'olga_tab' is deprecated. "
-                          "Use the /pt_flash_olga endpoint instead.")
-            
-            # Ensure we have all required OLGA properties
-            all_properties = list(set(requested_properties).union(set(OLGA_REQUIRED_PROPERTIES)))
-            calculation['properties'] = all_properties
-        else:
-            all_properties = requested_properties
+        all_properties = list(set(requested_properties).union(set(OLGA_REQUIRED_PROPERTIES)))
         
         # Get grid options
         grid_options = {
@@ -102,29 +86,22 @@ def pt_flash() -> Union[Response, Any]:
         
         # Initialize the property registry and calculator
         registry = PropertyRegistry()
-        calculator = PTFlashCalculator(RP, registry)
+        calculator = VTFlashCalculator(RP, registry)
         
         # Calculate the flash
-        logger.info(f"Starting PT flash calculation with {len(all_properties)} properties")
+        logger.info(f"Starting VT flash calculation for OLGA TAB format with {len(all_properties)} properties")
         results, grid_info, grids = calculator.calculate_flash_grid(
             composition, variables, all_properties, **grid_options
         )
         
-        logger.info(f"PT flash calculation complete: {len(results)} points calculated")
+        logger.info(f"VT flash calculation complete: {len(results)} points calculated")
         
-        # Format the response according to requested format
-        if response_format == 'olga_tab':
-            return format_olga_response(
-                results, grids, composition, 
-                endpoint_type='pt_flash',
-                requested_properties=requested_properties
-            )
-        else:
-            # Filter to include only originally requested properties
-            filtered_results = filter_properties(results, requested_properties)
-            
-            # Return JSON response
-            return format_json_response(filtered_results, grid_info)
+        # Format as OLGA TAB
+        return format_olga_response(
+            results, grids, composition, 
+            endpoint_type='vt_flash',
+            requested_properties=requested_properties
+        )
         
     except ValueError as ve:
         # Handle validation errors
@@ -159,27 +136,22 @@ def _validate_request(data: Dict[str, Any]) -> None:
     
     # Check variables
     variables = data.get('variables', {})
-    if 'pressure' not in variables or 'temperature' not in variables:
-        raise ValueError('Missing pressure or temperature variables')
+    if 'specific_volume' not in variables or 'temperature' not in variables:
+        raise ValueError('Missing specific_volume or temperature variables')
     
     # Check ranges
-    pressure_range = variables['pressure'].get('range', {})
+    volume_range = variables['specific_volume'].get('range', {})
     temperature_range = variables['temperature'].get('range', {})
     
     if not all([
-        'from' in pressure_range, 'to' in pressure_range,
+        'from' in volume_range, 'to' in volume_range,
         'from' in temperature_range, 'to' in temperature_range
     ]):
         raise ValueError('Missing range parameters (from/to)')
     
     # Check resolutions
     if not all([
-        'resolution' in variables['pressure'],
+        'resolution' in variables['specific_volume'],
         'resolution' in variables['temperature']
     ]):
         raise ValueError('Missing resolution parameters')
-    
-    # Check that requested properties are specified
-    calculation = data.get('calculation', {})
-    if 'properties' not in calculation or not calculation['properties']:
-        raise ValueError('No properties specified for calculation')
