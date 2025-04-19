@@ -12,6 +12,7 @@ phase_boundaries_bp = Blueprint('phase_boundaries', __name__)
 vt_flash_bp = Blueprint('vt_flash', __name__)  
 uv_flash_bp = Blueprint('uv_flash', __name__)  
 models_info_bp = Blueprint('models_info', __name__)  
+enthalpy_range_from_temp_bp = Blueprint('enthalpy_range_from_temp', __name__) # <-- Add this
 
 # New dedicated OLGA TAB format endpoints
 pt_flash_olga_bp = Blueprint('pt_flash_olga', __name__)
@@ -34,6 +35,7 @@ blueprints = [
     vt_flash_bp,    
     uv_flash_bp,
     models_info_bp,
+    enthalpy_range_from_temp_bp,
     
     # OLGA TAB format endpoints
     pt_flash_olga_bp,
@@ -55,6 +57,7 @@ from API.endpoints import phase_boundaries
 from API.endpoints import vt_flash
 from API.endpoints import uv_flash
 from API.endpoints import models_info
+from API.endpoints import enthalpy_range_from_temp
 
 # Import the new OLGA TAB format endpoints
 from API.endpoints import pt_flash_olga
